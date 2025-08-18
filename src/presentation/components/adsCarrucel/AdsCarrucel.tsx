@@ -1,10 +1,16 @@
-import { FlatList, Image, NativeScrollEvent, NativeSyntheticEvent, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native'
+import { FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, useWindowDimensions, View } from 'react-native'
 import { globalColors } from '../../../config/global.styles';
 import { useState } from 'react';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
+import { AdsCarrucelSkeletor } from './AdsCarrucelSkeletor';
+import { Ads } from './Ads';
 
-export const AdsCarrucel = () => {
+interface Props {
+    isLoading?: boolean;
+}
+
+export const AdsCarrucel = ({isLoading=false}:Props) => {
     const [ currentSliceIndex, setCurrentSliceIndex ] = useState(0);
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const width = useWindowDimensions().width;
@@ -15,6 +21,11 @@ export const AdsCarrucel = () => {
         const currentIndex = Math.floor(contentOffset.x / layoutMeasurement.width);
         setCurrentSliceIndex(currentIndex);
     }
+
+    if(isLoading) {
+        return <AdsCarrucelSkeletor />
+    }
+
     return (
         <>
             <View style={{...styles.container, height: height*0.4}}>
@@ -25,12 +36,11 @@ export const AdsCarrucel = () => {
                     pagingEnabled
                     showsHorizontalScrollIndicator={false}
                     renderItem={({item, index}) => (   
-                        <Pressable key={index} onPress={() => navigation.navigate('Register')}>
-                            <Image
-                                source={require('../../../assets/home/imgRegister.jpg')} 
-                                style={{...styles.img, width:width,}}
-                            />
-                        </Pressable>
+                        <Ads 
+                            key={index}
+                            width={width} 
+                            action={() => navigation.navigate('Register')} 
+                        />
                     )}
                     onScroll={doScroll}
                 />
@@ -55,10 +65,6 @@ export const AdsCarrucel = () => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-    },
-    img: {
-        height: '100%',
-        objectFit:'contain',
     },
     boxPoints: {
         flexDirection: 'row',

@@ -1,5 +1,4 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 interface Props {
     username: string;
@@ -8,23 +7,14 @@ interface Props {
 
 export const UserAvatar = ({username, userImage}:Props) => {
     return (
-        <SkeletonPlaceholder speed={1500}>
-          
-            <SkeletonPlaceholder.Item 
-                width={70} 
-                height={60} 
-                borderRadius={35} 
-            />
-            
-        </SkeletonPlaceholder>
-        // <View style={styles.container}>
-        //     {userImage 
-        //         ?   <Image
-        //                 source={require('../../../assets/user/userImg.jpg')}
-        //                 style={styles.img}
-        //             />
-        //         :   <Text style={styles.text}>{username[0].toUpperCase()}</Text>}
-        // </View>
+        <View style={styles.container}>
+            {userImage 
+                ?   <Image
+                        source={require('../../../assets/user/userImg.jpg')}
+                        style={styles.img}
+                    />
+                :   <Text style={styles.text}>{username[0].toUpperCase()}</Text>}
+        </View>
     );
 }
 

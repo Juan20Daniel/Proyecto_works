@@ -1,15 +1,56 @@
-import { Button, Modal, View } from 'react-native';
+import { Modal, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { HeaderApp } from '../headerApp/HeaderApp';
+import { globalColors, globalStyles } from '../../../config/global.styles';
+import { ItemLocation } from './components/ItemLocation';
+import { ListBtnLocations } from './components/ListBtnLocations';
 interface Props {
     visible: boolean;
-
     closeModal:() => void;
 }
 export const ListLocationModal = ({visible, closeModal}:Props) => {
+    const width = useWindowDimensions().width;
+    const isTable = width < 500;
     return (
         <Modal visible={visible} transparent={false} animationType='slide'>
-            <View>
-                <Button onPress={() => closeModal()} title='Cerrar modal' />
+            <View style={styles.container}>
+                <HeaderApp 
+                    subText='Ubicaciónes'
+                    actionBtnClose={() => closeModal()} 
+                />
+                <Text style={{...styles.textDescriptión, fontSize: isTable ? 15 : 20, width: isTable ? 300 : 450}}>
+                    Seleccióna una las ubicaciones para ver las ofertas de trabajo disponibles
+                </Text>
+                <ListBtnLocations />
+                <ScrollView style={styles.boxAvailableUbications}>
+                    <View style={{width:'100%', height: 30}} />
+                    <ItemLocation id={1} state='Colima' city='Colima' />
+                    <ItemLocation id={2} state='Colima' city='Manzanillo' />
+                    <ItemLocation id={3} state='Colima' city='Tecoman' />
+                    <ItemLocation id={4} state='Colima' city='Armeria' />
+                    <ItemLocation id={5} state='Colima' city='Comala' />
+                    <ItemLocation id={6} state='Colima' city='Minatitlan' />
+                    <ItemLocation id={7} state='Jalisco' city='Guadalajara' />
+                    <ItemLocation id={8} state='Jalisco' city='Molines' />
+                    <ItemLocation id={9} state='Jalisco' city='Calcoman' />
+                    <ItemLocation id={10} state='Jalisco' city='Mazatlan' />
+                    <View style={{width:'100%', height: 30}} />
+                </ScrollView>          
             </View>
         </Modal>
-    )
+    );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex:1,
+    },
+    textDescriptión: {
+        marginLeft:globalStyles.marginHorizontal,
+        fontFamily: globalStyles.fontMonserratMedium,
+        color: globalColors.darkGray,
+        paddingTop:10
+    },
+    boxAvailableUbications: {
+        flex:1,
+    }
+});

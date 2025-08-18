@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { Container, Navbar, AdsCarrucel, ListPublications, BtnLocationSelecter, ListLocationModal } from '../../components';
 import { globalStyles } from '../../../config/global.styles';
+import { 
+    Container,
+    Navbar,
+    AdsCarrucel,
+    ListOffers,
+    BtnLocationSelecter,
+    ListLocationModal
+} from '../../components';
 
 export const Home = () => {
     const [ listLocationsModal, setListLocationModal ] = useState(false);
@@ -15,9 +22,9 @@ export const Home = () => {
                     <Text style={[styles.note, width > 500 && styles.noteTable]}>
                         Mira las ofertas de trabajo que tiene tu localidad
                     </Text>
-                    <BtnLocationSelecter action={() => setListLocationModal(true)} />
+                    <BtnLocationSelecter action={() => setListLocationModal(true)}/>
                 </View>
-                <ListPublications />
+                <ListOffers />
             </ScrollView>
             <ListLocationModal 
                 visible={listLocationsModal}
@@ -40,8 +47,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginHorizontal: 'auto',
         color: 'black',
-        fontSize: 20,
-        width: 320
+        fontSize: 16,
+        width: 320,
     },
     noteTable: {
         width: 420,

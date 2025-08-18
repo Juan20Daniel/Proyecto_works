@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from "react-native"
 import { globalColors, globalStyles } from "../../../config/global.styles";
 import { Ionicons } from "../icon/Ionicons";
+import { useState } from "react";
 
 interface Props {
     action: () => void;
@@ -11,11 +12,12 @@ export const BtnLocationSelecter = ({action}:Props) => {
     return (
         <View style={{...styles.container, width:width}}>
             <Pressable 
-                onPress={() => action()}
-                style={({pressed}) => [
+                onPressOut={() => action()}
+                style={({pressed}) => {
+                    return [
                     styles.boxBtn,
                     {opacity: pressed ? 0.5 : 1}
-                ]}
+                ]}}
             >
                 <Text style={styles.btnText}>Selecciona una opción</Text>
                 <Ionicons name='chevron-down-outline' size={20} color="black" />

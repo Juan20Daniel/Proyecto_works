@@ -1,18 +1,15 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import { globalColors } from '../../../config/global.styles';
-import { OfferInImg } from '../offers/OfferInImg';
-export const ListPublications = () => {
+import { OfferSkeletor } from '../offers/OfferSkeletor';
+
+export const ListOffersSkeletor = () => {
     const width = useWindowDimensions().width;
     return (
         <View style={[styles.container, width > 500 && styles.containerTable]}>
-            <OfferInImg />
-            <OfferInImg />
-            <OfferInImg />
-            <OfferInImg />
-            <OfferInImg />
-            <OfferInImg />
-            <OfferInImg />
-            <OfferInImg />
+            <OfferSkeletor />
+            <OfferSkeletor />
+            <OfferSkeletor />
+            <OfferSkeletor />
         </View>
     );
 }

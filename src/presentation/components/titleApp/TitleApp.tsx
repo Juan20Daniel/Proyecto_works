@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, useWindowDimensions } from 'react-native';
+import { Text } from 'react-native';
 import { globalColors } from '../../../config/global.styles';
 
 export const TitleApp = () => {

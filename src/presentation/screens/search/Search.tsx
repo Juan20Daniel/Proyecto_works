@@ -3,6 +3,7 @@ import { BtnClose, Container, TitleApp } from '../../components'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '../../navigators/StackNavigator'
+import { HeaderApp } from '../../components/headerApp/HeaderApp'
 
 export const Search = () => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -15,10 +16,10 @@ export const Search = () => {
     return (
         <Container customStyles={styles.container}>
             <Pressable style={{width: '100%', height: '100%'}} onPress={presset}>
-                <View style={styles.header}>
-                    <TitleApp />
-                    <BtnClose backTo={() => navigation.goBack()} />
-                </View>
+                <HeaderApp 
+                    alignTitle='center'
+                    actionBtnClose={() => navigation.goBack()}
+                />
                 <Pressable style={{width: 100, height: 100, backgroundColor: 'green'}} onPress={select}>
 
                 </Pressable>

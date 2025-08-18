@@ -1,20 +1,15 @@
-import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
-import { UserInfo } from './UserInfo';
+import { Image, StyleSheet } from 'react-native';
+import { globalStyles } from '../../../config/global.styles';
+import { Container } from './Container';
 
 export const OfferInImg = () => {
-    const width = useWindowDimensions().width;
-
     return (
-        <View style={{...styles.container, width:width < 500 ? '100%' : '50%'}}>
-            <View style={styles.boxContent}>
-                <Image 
-                    source={require('../../../assets/publications/imgOffer.jpg')}
-                    style={styles.imgOffer}
-                />
-                <UserInfo />
-            </View>
-        </View>
+        <Container>
+            <Image 
+                source={require('../../../assets/publications/imgOffer.jpg')}
+                style={styles.imgOffer}
+            />
+        </Container>
     );
 }
 
@@ -22,13 +17,13 @@ const styles = StyleSheet.create({
     container: {
         padding: 10
     },
+    boxContent: {
+        marginBottom: 50,
+    },
     imgOffer: {
         width: '100%',
         backgroundColor: 'white',
         borderRadius: 30,
         ...globalStyles.shadow
     },
-    boxContent: {
-        marginBottom: 50,
-    }
-})
+});

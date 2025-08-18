@@ -4,7 +4,7 @@ export const globalColors = {
     azureBlue: '#4084C3',
     fontColor: '#ffffff',
     lightGray: '#f0f0f0ff',
-    darkGray: '#4E4E4E'
+    darkGray: '#4E4E4E',
 }
 
 export const globalStyles = {

@@ -2,8 +2,11 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { Ionicons } from '../icon/Ionicons'
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { UserAvatar } from '../userAvatar/UserAvatar';
+import { OfferOptionsContext } from '../../context/OfferOptionsContext';
+import { useContext, useState } from 'react';
 
 export const UserInfo = () => {
+  const toggleOptios = useContext(OfferOptionsContext)?.toggleOptios;
   return (
     <View style={styles.container}>
       <UserAvatar username='Carlos Manuel Hernandes Chavez' />
@@ -14,7 +17,11 @@ export const UserInfo = () => {
           </Text>
           <Text style={styles.textDate}>Fecha de publicación: 02/09/2023</Text>
         </View>
-        <Pressable>
+        <Pressable 
+          onPress={() => {
+            toggleOptios && toggleOptios()
+          }}
+        >
           <Ionicons name='ellipsis-vertical' size={20} color='gray' />
         </Pressable>
       </View>

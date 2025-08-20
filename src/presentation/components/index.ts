@@ -9,3 +9,5 @@ export { ListOffers } from "./listOffers/ListOffers";
 export { BtnLocationSelecter } from "./locationSelecters/BtnLocationSelecter";
 export { ListLocationModal } from "./listLocationModal/ListLocationModal";
 export { UserAvatar } from "./userAvatar/UserAvatar";
+export { OfferOptionsModal } from "./offerOptionsModal/OfferOptionsModal";
+// export { OfferDetailsModal } from "./offerDetailsModal/OfferDetailsModal";

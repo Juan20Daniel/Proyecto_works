@@ -1,14 +1,15 @@
 import { Pressable, StyleSheet } from 'react-native';
 import { Ionicons } from '../../icon/Ionicons';
 interface Props {
+    top?: number;
     backTo: () => void; 
 }
-export const BtnClose = ({backTo}:Props) => {
+export const BtnClose = ({top,backTo}:Props) => {
     return (
         <Pressable 
             style={({pressed}) => [
                 styles.container,
-                {opacity: pressed ? 0.5 : 1}
+                {opacity: pressed ? 0.5 : 1, top:top??'auto'}
             ]} 
             onPress={() => backTo()}
         >
@@ -19,7 +20,8 @@ export const BtnClose = ({backTo}:Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        position:'absolute', 
+        position:'absolute',
+        top: 30,
         right: 0,
         bottom: 5,
         backgroundColor: 'black',
@@ -28,6 +30,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10
+        borderBottomLeftRadius: 10,
+        zIndex:2,
     }
 })

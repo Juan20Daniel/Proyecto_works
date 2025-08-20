@@ -1,7 +1,9 @@
-import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
-import { UserInfo } from './UserInfo';
 import { useState } from 'react';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { globalColors } from '../../../config/global.styles';
+import { UserInfo } from './UserInfo';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../navigators/StackNavigator';
 
 interface Props {
     children:React.ReactNode;
@@ -9,13 +11,18 @@ interface Props {
 
 export const Container = ({children}:Props) => {
     const [ wasPressed, setWasPressed ] = useState(false);
+
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     return (
         <View style={{...styles.container, width:'100%'}}>
             <View style={styles.boxContent}>
                 <Pressable 
                     onPress={() => {
                         setWasPressed(true);
-                        setTimeout(() =>  setWasPressed(false),100);
+                        setTimeout(() =>  {
+                            navigation.navigate('Offer');
+                            setWasPressed(false)
+                        },100);
                     }}
                     style={{
                         borderWidth:2, 

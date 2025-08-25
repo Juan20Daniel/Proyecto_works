@@ -1,8 +1,8 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import { globalColors } from '../../../config/global.styles';
-import { OfferInImg } from '../offers/OfferInImg';
+import { OfferInImg } from '../offer/OfferInImg';
 import { ListOffersSkeletor } from './ListOffersSkeletor';
-import { OfferPersonalized } from '../offers/OfferPersonalized';
+import { OfferPersonalized } from '../offer/OfferPersonalized';
 interface Props {
     isLoading?: boolean;
 }

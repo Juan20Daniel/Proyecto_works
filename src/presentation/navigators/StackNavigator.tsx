@@ -12,7 +12,7 @@ export type RootStackParamList = {
     Profile: undefined;
     Login: undefined;
     Register: undefined;
-    Offer: undefined;
+    Offer: {typeUser: "user"|"owner"};
 }
 
 const Stack = createStackNavigator<RootStackParamList>();

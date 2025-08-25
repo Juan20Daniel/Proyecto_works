@@ -1,41 +1,38 @@
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { globalStyles } from '../../../config/global.styles';
-import { OfferoptionsProvider } from '../../context/OfferOptionsContext';
 import { 
     Container,
     Navbar,
     AdsCarrucel,
     ListOffers,
     BtnLocationSelecter,
-    ListLocationModal,
-    OfferOptionsModal
+    ModalSelectLocation,
+    ModalOfferOptions
 } from '../../components';
 
 export const Home = () => {
     const [ listLocationsModal, setListLocationModal ] = useState(false);
     const width = useWindowDimensions().width;
     return (
-        <OfferoptionsProvider>
-            <Container marginTop={0}>
-                <Navbar />
-                <ScrollView style={{flex:1}} stickyHeaderIndices={[1]}>
-                    <AdsCarrucel />
-                    <View style={{...styles.boxNote}}>
-                        <Text style={[styles.note, width > 500 && styles.noteTable]}>
-                            Mira las ofertas de trabajo que tiene tu localidad
-                        </Text>
-                        <BtnLocationSelecter action={() => setListLocationModal(true)}/>
-                    </View>
-                    <ListOffers />
-                </ScrollView>
-                <ListLocationModal 
-                    visible={listLocationsModal}
-                    closeModal={() => setListLocationModal(false)}
-                />
-                <OfferOptionsModal />
-            </Container>
-        </OfferoptionsProvider>
+        <Container marginTop={0}>
+            <Navbar />
+            <ScrollView style={{flex:1}} stickyHeaderIndices={[1]}>
+                <AdsCarrucel />
+                <View style={{...styles.boxNote}}>
+                    <Text style={[styles.note, width > 500 && styles.noteTable]}>
+                        Mira las ofertas de trabajo que tiene tu localidad
+                    </Text>
+                    <BtnLocationSelecter action={() => setListLocationModal(true)}/>
+                </View>
+                <ListOffers />
+            </ScrollView>
+            <ModalSelectLocation
+                visible={listLocationsModal}
+                closeModal={() => setListLocationModal(false)}
+            />
+            <ModalOfferOptions />
+        </Container>
     );
 }
 

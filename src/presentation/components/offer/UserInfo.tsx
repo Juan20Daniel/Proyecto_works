@@ -1,9 +1,9 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { Ionicons } from '../icon/Ionicons'
+import { StyleSheet, Text, View } from 'react-native';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { UserAvatar } from '../userAvatar/UserAvatar';
 import { OfferOptionsContext } from '../../context/OfferOptionsContext';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { BtnIcon } from '../btns/btnIcon/BtnIcon';
 
 export const UserInfo = () => {
   const toggleOptios = useContext(OfferOptionsContext)?.toggleOptios;
@@ -17,13 +17,14 @@ export const UserInfo = () => {
           </Text>
           <Text style={styles.textDate}>Fecha de publicación: 02/09/2023</Text>
         </View>
-        <Pressable 
-          onPress={() => {
+        <BtnIcon 
+          iconName='ellipsis-vertical'
+          iconColor='#767676'
+          borderColor={globalColors.lightGray}
+          action={() => {
             toggleOptios && toggleOptios()
           }}
-        >
-          <Ionicons name='ellipsis-vertical' size={20} color='gray' />
-        </Pressable>
+        />
       </View>
     </View>
   );
@@ -55,4 +56,4 @@ const styles = StyleSheet.create({
     color: globalColors.darkGray,
     fontFamily: globalStyles.fontMonserratMedium
   }
-})
+});

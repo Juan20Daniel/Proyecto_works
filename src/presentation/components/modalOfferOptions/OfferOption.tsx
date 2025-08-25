@@ -12,7 +12,7 @@ export const OfferOption = ({ iconName, text }:Props) => {
         <Pressable 
             style={({pressed}) => [
                 styles.container,
-                {backgroundColor: pressed ? globalColors.lightGray : 'white'}
+                {backgroundColor: pressed ? globalColors.lightGray : globalColors.white}
             ]}
         >
             <Ionicons name={iconName} size={30} />

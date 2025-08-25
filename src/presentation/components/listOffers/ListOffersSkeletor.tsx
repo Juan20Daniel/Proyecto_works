@@ -1,6 +1,6 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import { globalColors } from '../../../config/global.styles';
-import { OfferSkeletor } from '../offers/OfferSkeletor';
+import { OfferSkeletor } from '../offer/OfferSkeletor';
 
 export const ListOffersSkeletor = () => {
     const width = useWindowDimensions().width;

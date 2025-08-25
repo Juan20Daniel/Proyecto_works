@@ -11,8 +11,8 @@ interface Props {
 
 export const Container = ({children}:Props) => {
     const [ wasPressed, setWasPressed ] = useState(false);
-
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    
     return (
         <View style={{...styles.container, width:'100%'}}>
             <View style={styles.boxContent}>
@@ -20,7 +20,7 @@ export const Container = ({children}:Props) => {
                     onPress={() => {
                         setWasPressed(true);
                         setTimeout(() =>  {
-                            navigation.navigate('Offer');
+                            navigation.navigate('Offer', {typeUser:'owner'});
                             setWasPressed(false)
                         },100);
                     }}

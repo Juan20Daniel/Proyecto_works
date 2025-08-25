@@ -3,11 +3,12 @@ import { HeaderApp } from '../headerApp/HeaderApp';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { ItemLocation } from './components/ItemLocation';
 import { ListBtnLocations } from './components/ListBtnLocations';
+import { BtnFilter } from './components/BtnFilter';
 interface Props {
     visible: boolean;
     closeModal:() => void;
 }
-export const ListLocationModal = ({visible, closeModal}:Props) => {
+export const ModalSelectLocation = ({visible, closeModal}:Props) => {
     const width = useWindowDimensions().width;
     const isTable = width < 500;
     return (
@@ -21,7 +22,7 @@ export const ListLocationModal = ({visible, closeModal}:Props) => {
                     Seleccióna una las ubicaciones para ver las ofertas de trabajo disponibles
                 </Text>
                 <ListBtnLocations />
-                <ScrollView style={styles.boxAvailableUbications}>
+                <ScrollView style={styles.listItemLocations}>
                     <View style={{width:'100%', height: 30}} />
                     <ItemLocation id={1} state='Colima' city='Colima' />
                     <ItemLocation id={2} state='Colima' city='Manzanillo' />
@@ -33,8 +34,9 @@ export const ListLocationModal = ({visible, closeModal}:Props) => {
                     <ItemLocation id={8} state='Jalisco' city='Molines' />
                     <ItemLocation id={9} state='Jalisco' city='Calcoman' />
                     <ItemLocation id={10} state='Jalisco' city='Mazatlan' />
-                    <View style={{width:'100%', height: 30}} />
-                </ScrollView>          
+                    <View style={{width:'100%', height: 100}} />
+                </ScrollView>
+                <BtnFilter />
             </View>
         </Modal>
     );
@@ -42,6 +44,7 @@ export const ListLocationModal = ({visible, closeModal}:Props) => {
 
 const styles = StyleSheet.create({
     container: {
+        position: 'relative',
         flex:1,
     },
     textDescriptión: {
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
         color: globalColors.darkGray,
         paddingTop:10
     },
-    boxAvailableUbications: {
+    listItemLocations: {
         flex:1,
     }
 });

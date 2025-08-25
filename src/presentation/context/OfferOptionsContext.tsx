@@ -8,7 +8,7 @@ interface InitialState {
 
 export const OfferOptionsContext = createContext<InitialState|null>(null);
 
-export const OfferoptionsProvider = ({children}:PropsWithChildren) => {
+export const OfferOptionsProvider = ({children}:PropsWithChildren) => {
     const [ showOptions, setShowOptions ] = useState(false);
     const toggleOptios = () => {
         setShowOptions(!showOptions)

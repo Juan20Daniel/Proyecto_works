@@ -30,6 +30,6 @@ export const Container = ({marginTop, children, customStyles}:Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: globalColors.fontColor
+        backgroundColor: globalColors.white
     }
 });

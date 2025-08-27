@@ -3,7 +3,7 @@ import { HeaderApp } from '../headerApp/HeaderApp';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { ItemLocation } from './components/ItemLocation';
 import { ListBtnLocations } from './components/ListBtnLocations';
-import { BtnFilter } from './components/BtnFilter';
+import { BtnFooter } from '../btns/btnFooter/BtnFooter';
 interface Props {
     visible: boolean;
     closeModal:() => void;
@@ -36,7 +36,11 @@ export const ModalSelectLocation = ({visible, closeModal}:Props) => {
                     <ItemLocation id={10} state='Jalisco' city='Mazatlan' />
                     <View style={{width:'100%', height: 100}} />
                 </ScrollView>
-                <BtnFilter />
+                <BtnFooter 
+                    value='Filtrar'
+                    iconName='funnel-outline'
+                    action={() => {}}
+                />
             </View>
         </Modal>
     );

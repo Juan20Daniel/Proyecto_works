@@ -1,37 +1,84 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
-import { AvailableJobSelector, Container, HeaderApp } from '../../components';
-import { globalColors, globalStyles } from '../../../config/global.styles';
+import { InputSelect, BtnFooter, Container, HeaderApp, IlustrationSearch } from '../../components';
+import { globalColors } from '../../../config/global.styles';
+import type { SelectOption } from '../../../infrestructure/interfaces/select-option';
 
+const initialState:SelectOption[] = [
+    {id:1, name:'Camionero', isSelected: false},
+    {id:2, name:'Asistente', isSelected: false},
+    {id:3, name:'Montacargas', isSelected: false},
+    {id:4, name:'Mesero', isSelected: false},
+    {id:5, name:'Cajero', isSelected: false}
+]
+const initialLocationa:SelectOption[] = [
+    {id:1, name:'Colima', isSelected: false},
+    {id:2, name:'Manzanillo', isSelected: false},
+    {id:3, name:'Armeria', isSelected: false},
+    {id:4, name:'Tecoman', isSelected: false},
+    {id:5, name:'Minatitlan', isSelected: false},
+    {id:6, name:'Calcoman', isSelected: false},
+    {id:7, name:'México', isSelected: false},
+    {id:8, name:'Lazaro', isSelected: false},
+    {id:9, name:'Lazaro', isSelected: false},
+    {id:10, name:'Zapotitlan', isSelected: false},
+]
 export const Search = () => {
     const [ showAvailableJob, setShowAvailableJob ] = useState(false);
+    const [ showAvailableLocations, setShowAvailableLocations ] = useState(false);
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-    const presset = () => {
-        if(!showAvailableJob) return;
+    const closeAll = () => {
+        if(!showAvailableJob && !showAvailableLocations) return;
         setShowAvailableJob(false);
-        console.log('clear')
+        setShowAvailableLocations(false)
     }
+    //Reutilizar componentes en el offer
     return (
         <Container customStyles={styles.container}>
-            <Pressable style={styles.content} onPress={presset}>
-                <HeaderApp 
-                    alignTitle='center'
-                    actionBtnClose={() => navigation.goBack()}
-                />
-                <View style={styles.boxAvailableJobSelector}>
-                    <Text style={styles.titleAvailableJobSelector}>Selecciona el tipo de trabajo</Text>
-                    <AvailableJobSelector action={() => setShowAvailableJob(!showAvailableJob)} />
-                    {showAvailableJob && 
-                        <Pressable style={{width: 400, height: 400, backgroundColor:'red'}}>
-                            <Pressable onPress={() => console.log('select this')} style={{width: 400, height: 50, backgroundColor:'green'}}>
-                                <Text>Camionero vale vrg</Text>
-                            </Pressable>
-                        </Pressable>
-                    }
+            <TouchableWithoutFeedback onPress={closeAll}>
+                <View style={styles.content}>
+                    <HeaderApp 
+                        alignTitle='center'
+                        actionBtnClose={() => navigation.goBack()}
+                    />
+                    <View style={{width:'100%', height: 30}} />
+                    <InputSelect 
+                        label='Selecciona el tipo de trabajo'
+                        placeholder='Trabajos disponibles'
+                        showIconLeft={true}
+                        iconName='search-outline'
+                        showOption={showAvailableJob}
+                        listOptions={initialState}
+                        toggleOptions={() => {
+                            setShowAvailableLocations(false);
+                            setShowAvailableJob(!showAvailableJob);
+                        }}
+                    />
+                    <View style={{width:'100%', height: 20}} />
+                    <InputSelect 
+                        label='Selecciona un lugar'
+                        placeholder='Trabajos disponibles'
+                        showIconLeft={true}
+                        iconName='search-outline'
+                        showOption={showAvailableLocations}
+                        listOptions={initialLocationa}
+                        toggleOptions={() => {
+                            setShowAvailableJob(false);
+                            setShowAvailableLocations(!showAvailableLocations)
+                        }}
+                    />
+                    <IlustrationSearch />
+                    <BtnFooter 
+                        value='Buscar'
+                        iconName='search-outline'
+                        height={80}
+                        sizeIcon={25}
+                        action={() => {}}
+                    />
                 </View>
-            </Pressable>
+            </TouchableWithoutFeedback>
         </Container>  
     );
 }
@@ -41,31 +88,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     content: {
+        position: 'relative',
         width: '100%', 
         height: '100%', 
         backgroundColor: globalColors.white
     },
-    header: {
-        position: 'relative',
-        width: '100%',
-        height: 80,
-        alignItems: 'flex-end',
-        justifyContent: 'center',
-        flexDirection: 'row'
-    },
-    boxAvailableJobSelector: {
-        position: 'relative',
-        width: '100%',
-        marginTop:30,
-        alignItems:'center',
-        paddingHorizontal:10,
-    },
-    titleAvailableJobSelector: {
-        fontFamily: globalStyles.fontMonserratMedium,
-        fontSize: 18,
-        width: '100%',
-        maxWidth: 500,
-        paddingLeft: 20,
-        paddingBottom: 10,
-    }
-})
+});

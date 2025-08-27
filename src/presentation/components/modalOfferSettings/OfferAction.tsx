@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { globalColors, globalStyles } from "../../../config/global.styles";
 
 interface Props {
@@ -8,6 +8,8 @@ interface Props {
   action: () => void;
 }
 export const OfferAction = ({title, label, children, action}:Props) => {
+  const width = useWindowDimensions().width;
+  const isTable = width>500;
   return (
     <Pressable
       style={({pressed}) => [
@@ -19,8 +21,8 @@ export const OfferAction = ({title, label, children, action}:Props) => {
       }}
     >
       <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text>{label}</Text>
+        <Text style={{...styles.title, fontSize:isTable?18:15}}>{title}</Text>
+        <Text style={styles.label}>{label}</Text>
       </View>
       {children}
     </Pressable>
@@ -42,5 +44,8 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: globalStyles.fontMonserratSemiBold,
     fontSize: 18
+  },
+  label: {
+    fontSize: 14,
   }
 });

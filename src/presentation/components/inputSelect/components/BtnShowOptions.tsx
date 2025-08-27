@@ -1,26 +1,38 @@
-import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '../icon/Ionicons';
-import { globalColors, globalStyles } from '../../../config/global.styles';
+import { Ionicons } from '../../icon/Ionicons';
+import { globalColors, globalStyles } from '../../../../config/global.styles';
 
 interface Props {
+    placeholder: string;
+    showIconLeft?: boolean;
+    iconName?:string;
+    maxWidth?:number,
     action:() => void;
 }
 
-export const AvailableJobSelector = ({action}:Props) => {
+export const BtnShowOptions = ({
+    placeholder, 
+    showIconLeft=false, 
+    iconName='help-outline', 
+    maxWidth=500, 
+    action
+}:Props) => {
     return (
         <Pressable 
             style={({pressed}) => [
                 styles.container,
-                {opacity: pressed ? 0.6 : 1}
+                {
+                    maxWidth,
+                    opacity: pressed ? 0.6 : 1
+                }
             ]}
             onPress={() => {
                 action && action();
             }}
         >
             <View style={styles.boxLabel}>
-                <Ionicons name='search-outline' color={globalColors.softGray} size={25} />
-                <Text style={styles.label}>Trabajos disponibles</Text>
+                {showIconLeft && <Ionicons name={iconName} color={globalColors.softGray} size={25} />}
+                <Text style={styles.label}>{placeholder}</Text>
             </View>
             <Ionicons name='chevron-down-outline' />
         </Pressable>
@@ -34,7 +46,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 20,
         width: '100%',
-        maxWidth: 500,
         height: 60,
         borderRadius: 20,
         backgroundColor: globalColors.white,
@@ -49,4 +60,4 @@ const styles = StyleSheet.create({
         fontFamily: globalStyles.fontMonserratMedium,
         fontSize: 16
     }
-})
+});

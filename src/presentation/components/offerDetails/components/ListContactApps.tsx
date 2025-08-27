@@ -21,12 +21,11 @@ export const ListContactApps = ({ typeUser }:Props) => {
             >
                 Apps de contacto
             </Text>
-           
             <View style={{...styles.boxApps, width: 320, height: 100}}>
                 <ItemApp icon='logo-whatsapp' name='WhatsApp' />
                 <ItemApp icon='logo-facebook' name='Facebook' />
                 <ItemApp icon='mail-outline' name='Email' />
-                <ItemApp icon='logo-instagram' name='Instagram' />
+                {typeUser === 'user' && <ItemApp icon='logo-instagram' name='Instagram' />}
                 {typeUser === 'owner' &&
                     <Pressable style={styles.btnAddNewApp}>
                         <View style={styles.fontIcon}>

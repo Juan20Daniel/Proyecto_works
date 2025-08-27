@@ -1,12 +1,14 @@
 export { AdsCarrucel } from "./adsCarrucel/AdsCarrucel";
-export { AvailableJobSelector } from "./availableJobSelector/AvailableJobSelector";
+export { InputSelect } from "./inputSelect/InputSelect";
 export { BtnGoToSearch } from "./btnGoToSearcher/BtnGoToSearcher";
 export { BtnClose } from './btns/btnClose/BtnClose';
+export { BtnFooter } from "./btns/btnFooter/BtnFooter";
 export { BtnLocationSelecter } from "./locationSelecters/BtnLocationSelecter";
 export { BtnIcon } from './btns/btnIcon/BtnIcon';
 export { Container } from "./container/Container";
 export { GoogleMap } from "./googleMap/GoogleMap";
 export { Ionicons } from "./icon/Ionicons";
+export { IlustrationSearch } from "./ilustrationSearch/IlustrationSearch";
 export { ListOffers } from "./listOffers/ListOffers";
 export { ModalOfferOptions } from "./modalOfferOptions/ModalOfferOptions";
 export { ModalSelectLocation } from "./modalSelectLocation/ModalSelectLocation";

@@ -2,7 +2,6 @@ import { StyleProp, StyleSheet, useWindowDimensions, View, ViewStyle } from 'rea
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { globalColors } from '../../../config/global.styles';
 
-
 interface Props {
     marginTop?: number;
     children: React.ReactNode;

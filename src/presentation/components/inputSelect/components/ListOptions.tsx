@@ -1,26 +1,54 @@
-import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet } from 'react-native'
+import { SetStateAction, useState, useEffect } from 'react';
+import { Pressable, ScrollView, StyleSheet, useWindowDimensions } from 'react-native'
 import { globalColors, globalStyles } from '../../../../config/global.styles';
 import { SelectOption } from './SelectOption';
 import type { SelectOption as Option } from '../../../../infrestructure/interfaces/select-option';
 
 interface Props {
+    defaultOp:string;
     listOptions:Option[];
+    setValue: React.Dispatch<SetStateAction<string>>;
+    closeOptions:() => void;
 }
 
-export const ListOptions = ({listOptions:inicialState}:Props) => {
+export const ListOptions = ({defaultOp,listOptions:inicialState,setValue,closeOptions}:Props) => {
     const [listOptions, setListOptions] = useState(inicialState);
+    const height = useWindowDimensions().height;
+    useEffect(() => {
+        if(defaultOp !== '') selectDefaultOption();
+    },[]);
+    const orderOptions = (options:Option[]):Option[] => {
+        const result = options.sort((a,b) => {
+            if(a.isSelected < b.isSelected) return 1
+            if(a.isSelected > b.isSelected) return -1
+            return 0
+        })
+        return result;
+    }
+    const selectDefaultOption = () => {
+        const listOptions_copy = [...listOptions];
+        const result = listOptions_copy.map(option => {
+            return option.name === defaultOp
+                ?   {...option, isSelected:true}
+                :   {...option, isSelected:false}
+        });
+        setListOptions(orderOptions(result));
+    }
     const optionSelector = (id:number) => {
         const listOptions_copy = [...listOptions];
         const result = listOptions_copy.map(option => {
-            return option.id === id 
-                ? {...option, isSelected:true}
-                : {...option, isSelected:false}
+            if(option.id === id) {
+                setValue(option.name);
+                return {...option, isSelected:true}
+            } else {
+                return {...option, isSelected:false}
+            }
         });
+        setTimeout(() => closeOptions(), 100);
         setListOptions(result);
     }
     return (
-        <Pressable style={styles.container}>
+        <Pressable style={{...styles.container,maxHeight: height > 800 ? 410 : 250,}}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 {listOptions.map(option => (
                     <SelectOption 
@@ -40,7 +68,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: '100%', 
         maxWidth: 500,
-        maxHeight: 410,
         zIndex: 100, 
         backgroundColor:globalColors.white,
         ...globalStyles.shadow

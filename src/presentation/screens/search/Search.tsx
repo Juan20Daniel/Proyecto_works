@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { InputSelect, BtnFooter, Container, HeaderApp, IlustrationSearch } from '../../components';
 import { globalColors } from '../../../config/global.styles';
 import type { SelectOption } from '../../../infrestructure/interfaces/select-option';
 
-const initialState:SelectOption[] = [
+const availableJobs:SelectOption[] = [
     {id:1, name:'Camionero', isSelected: false},
     {id:2, name:'Asistente', isSelected: false},
     {id:3, name:'Montacargas', isSelected: false},
     {id:4, name:'Mesero', isSelected: false},
     {id:5, name:'Cajero', isSelected: false}
 ]
-const initialLocationa:SelectOption[] = [
+const availableLocations:SelectOption[] = [
     {id:1, name:'Colima', isSelected: false},
     {id:2, name:'Manzanillo', isSelected: false},
     {id:3, name:'Armeria', isSelected: false},
@@ -22,10 +22,13 @@ const initialLocationa:SelectOption[] = [
     {id:6, name:'Calcoman', isSelected: false},
     {id:7, name:'México', isSelected: false},
     {id:8, name:'Lazaro', isSelected: false},
-    {id:9, name:'Lazaro', isSelected: false},
+    {id:9, name:'La corona', isSelected: false},
     {id:10, name:'Zapotitlan', isSelected: false},
 ]
 export const Search = () => {
+    const [ jobSelected, setJobSelected ] = useState('');
+    const [ locationSelected, setLocationSelected ] = useState('');
+
     const [ showAvailableJob, setShowAvailableJob ] = useState(false);
     const [ showAvailableLocations, setShowAvailableLocations ] = useState(false);
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -47,10 +50,12 @@ export const Search = () => {
                     <InputSelect 
                         label='Selecciona el tipo de trabajo'
                         placeholder='Trabajos disponibles'
+                        value={jobSelected}
+                        setValue={setJobSelected}
                         showIconLeft={true}
                         iconName='search-outline'
                         showOption={showAvailableJob}
-                        listOptions={initialState}
+                        listOptions={availableJobs}
                         toggleOptions={() => {
                             setShowAvailableLocations(false);
                             setShowAvailableJob(!showAvailableJob);
@@ -60,17 +65,19 @@ export const Search = () => {
                     <InputSelect 
                         label='Selecciona un lugar'
                         placeholder='Trabajos disponibles'
+                        value={locationSelected}
+                        setValue={setLocationSelected}
                         showIconLeft={true}
-                        iconName='search-outline'
+                        iconName='location-outline'
                         showOption={showAvailableLocations}
-                        listOptions={initialLocationa}
+                        listOptions={availableLocations}
                         toggleOptions={() => {
                             setShowAvailableJob(false);
                             setShowAvailableLocations(!showAvailableLocations)
                         }}
                     />
                     <IlustrationSearch />
-                    <BtnFooter 
+                    <BtnFooter
                         value='Buscar'
                         iconName='search-outline'
                         height={80}

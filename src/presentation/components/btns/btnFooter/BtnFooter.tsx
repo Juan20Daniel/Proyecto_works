@@ -3,6 +3,7 @@ import { Ionicons } from '../../icon/Ionicons';
 import { globalColors, globalStyles } from '../../../../config/global.styles';
 
 interface Props {
+    disable:boolean;
     value: string;
     iconName: string;
     height?: number;
@@ -10,15 +11,20 @@ interface Props {
     action: () => void;
 }
 
-export const BtnFooter = ({value, iconName, height=60, sizeIcon=20, action}:Props) => {
+export const BtnFooter = ({disable=false,value, iconName, height=60, sizeIcon=20, action}:Props) => {
     return (
         <View style={{...styles.container, height:height}}>
             <View style={styles.boxBtnFilter}>
                 <Pressable 
-                    onPress={() => action()}
+                    onPress={() => {
+                        if(disable) return;
+                        action()
+                    }}
                     style={({pressed}) => [
                         styles.btnFilter,
-                        {backgroundColor:pressed ? globalColors.cornflowerBlue : globalColors.azureBlue}
+                        {backgroundColor:disable
+                            ?   globalColors.softGray
+                            :   pressed ? globalColors.cornflowerBlue : globalColors.azureBlue}
                     ]}
                 >
                     <Text style={styles.textBtnFlter}>{value}</Text>

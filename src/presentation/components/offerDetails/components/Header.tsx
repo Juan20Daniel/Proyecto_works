@@ -15,9 +15,10 @@ export const Header = ({typeUser}:Props) => {
   const width = useWindowDimensions().width;
   const isTable = width>500;
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, alignItems:isTable ?'center':'flex-start'}}>
       <View style={{
-        ...styles.boxTitle,flexDirection:isTable ? 'row' : 'column', 
+        ...styles.boxTitle,
+        flexDirection:isTable ? 'row' : 'column', 
         alignItems:isTable ? 'center' : 'flex-start'
       }}>
         <Image
@@ -30,7 +31,7 @@ export const Header = ({typeUser}:Props) => {
         </View>
       </View>
       {typeUser === 'user' 
-        ?  <BtnIcon 
+        ? <BtnIcon 
             iconName='ellipsis-vertical' 
             marginRight={isTable ? 10 : 5} action={() => {
               toggleOptios && toggleOptios()
@@ -52,7 +53,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     paddingBottom: 10,
   },
   boxTitle: {

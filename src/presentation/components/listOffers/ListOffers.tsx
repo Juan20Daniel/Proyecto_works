@@ -8,9 +8,7 @@ interface Props {
 }
 export const ListOffers = ({ isLoading=false }:Props) => {
     const width = useWindowDimensions().width;
-
     if(isLoading) return <ListOffersSkeletor />
-    
     return (
         <View style={[styles.container, width > 500 && styles.containerTable]}>
             {width > 500 
@@ -18,7 +16,7 @@ export const ListOffers = ({ isLoading=false }:Props) => {
                     <>
                         <View style={{width:'50%'}}>
                             <OfferInImg />
-                            <OfferPersonalized />
+                            <OfferPersonalized hasSeen={true} />
                             <OfferInImg />
                             <OfferInImg />
                             <OfferInImg />
@@ -29,12 +27,12 @@ export const ListOffers = ({ isLoading=false }:Props) => {
                             <OfferPersonalized />
                             <OfferInImg />
                             <OfferInImg />
-                            <OfferPersonalized />
+                            <OfferPersonalized hasSeen={true}/>
                         </View>
                     </>
                 :   <View style={{width:'100%'}}>
                         <OfferInImg />
-                        <OfferPersonalized />
+                        <OfferPersonalized hasSeen={true} />
                         <OfferInImg />
                         <OfferInImg />
                         <OfferInImg />

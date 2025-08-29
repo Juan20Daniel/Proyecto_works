@@ -18,3 +18,4 @@ export { OfferDetails } from "./offerDetails/OfferDetails";
 export { TitleApp } from "./titleApp/TitleApp";
 export { UserAvatar } from "./userAvatar/UserAvatar";
 export { HeaderApp } from "./headerApp/HeaderApp";
+import { SearchResultsModal } from "./searchResultsModal/SearchResultsModal";

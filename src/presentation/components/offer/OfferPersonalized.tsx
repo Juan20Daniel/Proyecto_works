@@ -2,13 +2,17 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { Container } from './Container';
 
-export const OfferPersonalized = () => {
+interface Props {
+    hasSeen?:boolean;
+}
+
+export const OfferPersonalized = ({hasSeen=false}:Props) => {
     return (
        <Container>
-            <View style={styles.boxOffer}>
+            <View style={{...styles.boxOffer, opacity:hasSeen ? 0.7 : 1,}}>
                 <Image 
                     source={require('../../../assets/publications/logoIndustry.png')}
-                    style={styles.companyLogo}
+                    style={{...styles.companyLogo, opacity:hasSeen ? 0.1 : 1}}
                 />
                 <Text style={styles.titleJop}>Chofer de camión</Text>
                 <Text style={styles.descriptionJop}>
@@ -19,7 +23,13 @@ export const OfferPersonalized = () => {
                 
                 <Text style={styles.titleSalary}>Sueldo</Text>
                 <Text style={styles.salary}>$4000 a 6000 mensual</Text>
-                <Text style={styles.publicationDate}>Fecha de publicación: 10/08/2025</Text>
+                {true &&
+                    <View style={styles.boxMarker}>
+                        <Text style={styles.textMarker}>Visto</Text>
+                        <View style={{width: 5, height: 5, borderRadius: 5, backgroundColor: globalColors.black, marginTop: 37,}} />
+                        <Text style={styles.textMarker}>Disponible</Text>
+                    </View>
+                }
             </View>
        </Container>
     );
@@ -71,8 +81,12 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         fontSize: 18,
     },
-    publicationDate: {
-        fontSize: 10,
+    boxMarker: {
+        flexDirection: 'row',
+        gap: 10,
+    },
+    textMarker: {
+        fontSize: 12,
         marginTop: 30,
         color: globalColors.darkGray
     }

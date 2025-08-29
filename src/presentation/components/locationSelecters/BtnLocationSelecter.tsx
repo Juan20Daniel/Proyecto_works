@@ -16,7 +16,7 @@ export const BtnLocationSelecter = ({action}:Props) => {
                 style={({pressed}) => {
                     return [
                     styles.boxBtn,
-                    {opacity: pressed ? 0.5 : 1}
+                    {backgroundColor:pressed ? globalColors.softGray : globalColors.lightGray,}
                 ]}}
             >
                 <Text style={styles.btnText}>Selecciona una opción</Text>
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     boxBtn: {
-        backgroundColor: globalColors.lightGray,
         paddingVertical: 15,
         paddingHorizontal: 20,
         gap: 30,

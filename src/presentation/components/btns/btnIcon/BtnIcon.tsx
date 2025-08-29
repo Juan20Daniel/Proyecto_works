@@ -22,7 +22,7 @@ export const BtnIcon = ({iconName, iconColor, marginRight, borderColor='white', 
                     marginRight:marginRight??0,
                     borderColor: pressed 
                         ? globalColors.softGray 
-                        : borderColor
+                        : 'rgba(0,0,0,0.0)'
                 }
                 
             ]}

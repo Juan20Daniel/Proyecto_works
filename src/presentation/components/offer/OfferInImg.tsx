@@ -1,14 +1,22 @@
-import { Image, StyleSheet } from 'react-native';
-import { globalStyles } from '../../../config/global.styles';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { globalColors, globalStyles } from '../../../config/global.styles';
 import { Container } from './Container';
 
-export const OfferInImg = () => {
+interface Props {
+    hasSeen:boolean;
+}
+
+export const OfferInImg = ({hasSeen=false}:Props) => {
     return (
         <Container>
-            <Image 
+            <Image
                 source={require('../../../assets/publications/imgOffer.jpg')}
-                style={styles.imgOffer}
+                style={{...styles.imgOffer, opacity: hasSeen ? 0.4 : 1}}
             />
+            <View style={styles.marker}>
+                <Text style={{color: globalColors.gray, fontSize: 10}}>Visto</Text>
+                <Text style={{color: globalColors.gray, fontSize: 10}}>Disponible</Text>
+            </View>
         </Container>
     );
 }
@@ -22,8 +30,14 @@ const styles = StyleSheet.create({
     },
     imgOffer: {
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: globalColors.white,
         borderRadius: 30,
+        borderBottomLeftRadius: 160,
         ...globalStyles.shadow
     },
+    marker: {
+        position: 'absolute',
+        bottom: 15,
+        left: 15,
+    }
 });

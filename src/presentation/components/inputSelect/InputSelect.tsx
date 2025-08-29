@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, StyleProp, ViewStyle } from 'react-native';
 import { globalStyles } from '../../../config/global.styles';
 import { BtnShowOptions } from './components/BtnShowOptions';
 import { ListOptions } from './components/ListOptions';
@@ -9,6 +9,7 @@ interface Props {
     label?:string;
     placeholder: string;
     value: string;
+    customStyles?:StyleProp<ViewStyle>;
     showIconLeft?:boolean;
     iconName:string;
     listOptions: SelectOption[];
@@ -26,12 +27,17 @@ export const InputSelect = ({
     showIconLeft, 
     iconName,
     paddingHorizontal=10,
-    listOptions, 
+    listOptions,
+    customStyles, 
     setValue,
     toggleOptions
 }:Props) => {
     return (
-        <View style={{...styles.container, paddingHorizontal}}>
+        <View 
+            style={[styles.container, 
+            customStyles,
+            {paddingHorizontal}, 
+        ]}>
             {label && <Text style={styles.title}>{label}</Text>}
             <BtnShowOptions 
                 showIconLeft={showIconLeft}

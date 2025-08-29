@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../../navigators/StackNavigator';
 import { InputSelect, BtnFooter, Container, HeaderApp, IlustrationSearch } from '../../components';
 import { globalColors } from '../../../config/global.styles';
 import type { SelectOption } from '../../../infrestructure/interfaces/select-option';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../navigators/StackNavigator';
+import { SearchResultsModal } from '../../components/searchResultsModal/SearchResultsModal';
 
 const availableJobs:SelectOption[] = [
     {id:1, name:'Camionero', isSelected: false},
@@ -28,65 +29,72 @@ const availableLocations:SelectOption[] = [
 export const Search = () => {
     const [ jobSelected, setJobSelected ] = useState('');
     const [ locationSelected, setLocationSelected ] = useState('');
-
     const [ showAvailableJob, setShowAvailableJob ] = useState(false);
     const [ showAvailableLocations, setShowAvailableLocations ] = useState(false);
+    const [ showModalResults, setShowModalResults ] = useState(false); 
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const closeAll = () => {
         if(!showAvailableJob && !showAvailableLocations) return;
         setShowAvailableJob(false);
-        setShowAvailableLocations(false)
+        setShowAvailableLocations(false);
     }
-    //Reutilizar componentes en el offer
     return (
-        <Container customStyles={styles.container}>
-            <TouchableWithoutFeedback onPress={closeAll}>
-                <View style={styles.content}>
-                    <HeaderApp 
-                        alignTitle='center'
-                        actionBtnClose={() => navigation.goBack()}
-                    />
-                    <View style={{width:'100%', height: 30}} />
-                    <InputSelect 
-                        label='Selecciona el tipo de trabajo'
-                        placeholder='Trabajos disponibles'
-                        value={jobSelected}
-                        setValue={setJobSelected}
-                        showIconLeft={true}
-                        iconName='search-outline'
-                        showOption={showAvailableJob}
-                        listOptions={availableJobs}
-                        toggleOptions={() => {
-                            setShowAvailableLocations(false);
-                            setShowAvailableJob(!showAvailableJob);
-                        }}
-                    />
-                    <View style={{width:'100%', height: 20}} />
-                    <InputSelect 
-                        label='Selecciona un lugar'
-                        placeholder='Trabajos disponibles'
-                        value={locationSelected}
-                        setValue={setLocationSelected}
-                        showIconLeft={true}
-                        iconName='location-outline'
-                        showOption={showAvailableLocations}
-                        listOptions={availableLocations}
-                        toggleOptions={() => {
-                            setShowAvailableJob(false);
-                            setShowAvailableLocations(!showAvailableLocations)
-                        }}
-                    />
-                    <IlustrationSearch />
-                    <BtnFooter
-                        value='Buscar'
-                        iconName='search-outline'
-                        height={80}
-                        sizeIcon={25}
-                        action={() => {}}
-                    />
-                </View>
-            </TouchableWithoutFeedback>
-        </Container>  
+        <>
+            <Container customStyles={styles.container}>
+                <TouchableWithoutFeedback onPress={closeAll}>
+                    <View style={styles.content}>
+                        <HeaderApp 
+                            alignTitle='center'
+                            actionBtnClose={() => navigation.goBack()}
+                        />
+                        <View style={{width:'100%', height: 30}} />
+                        <InputSelect
+                            label='Selecciona el tipo de trabajo'
+                            placeholder='Trabajos disponibles'
+                            value={jobSelected}
+                            setValue={setJobSelected}
+                            showIconLeft={true}
+                            iconName='search-outline'
+                            showOption={showAvailableJob}
+                            listOptions={availableJobs}
+                            toggleOptions={() => {
+                                setShowAvailableLocations(false);
+                                setShowAvailableJob(!showAvailableJob);
+                            }}
+                        />
+                        <View style={{width:'100%', height: 20}} />
+                        <InputSelect
+                            customStyles={{opacity: jobSelected !== '' ? 1 : 0}} 
+                            label='Selecciona un lugar'
+                            placeholder='Trabajos disponibles'
+                            value={locationSelected}
+                            setValue={setLocationSelected}
+                            showIconLeft={true}
+                            iconName='location-outline'
+                            showOption={showAvailableLocations}
+                            listOptions={availableLocations}
+                            toggleOptions={() => {
+                                setShowAvailableJob(false);
+                                setShowAvailableLocations(!showAvailableLocations)
+                            }}
+                        />
+                        <IlustrationSearch />
+                        <BtnFooter
+                            disable={!(jobSelected !== '' && locationSelected !== '')}
+                            value='Buscar'
+                            iconName='search-outline'
+                            height={80}
+                            sizeIcon={25}
+                            action={() => setShowModalResults(!showModalResults)}
+                        />
+                    </View>
+                </TouchableWithoutFeedback>
+            </Container>
+            <SearchResultsModal 
+                visible={showModalResults} 
+                closeModal={() => setShowModalResults(!showModalResults)} 
+            /> 
+        </>
     );
 }
 

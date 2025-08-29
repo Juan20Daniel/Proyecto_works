@@ -1,11 +1,14 @@
-import { Image, View } from "react-native";
+import { Image, useWindowDimensions, View } from "react-native";
 
 export const IlustrationSearch = () => {
+    const width = useWindowDimensions().width;
+    const isTable = width>500;
+    const maxWidth = isTable ? width-250 : width-100;
     return (
-        <View style={{width: '100%', alignItems: 'center', paddingTop: 100}}>
+        <View style={{width: '100%', alignItems: 'center', marginTop:40}}>
             <Image
                 source={require('../../../assets/search/ilustration.png')}
-                style={{width: '70%', objectFit:'contain'}}  
+                style={{width:maxWidth, height:maxWidth, objectFit:'contain', marginTop:30}}  
             />
         </View>
     );

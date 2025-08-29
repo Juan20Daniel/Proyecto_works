@@ -1,4 +1,4 @@
-import { SetStateAction, useState, useEffect } from 'react';
+import { SetStateAction, useState, useEffect, memo } from 'react';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions } from 'react-native'
 import { globalColors, globalStyles } from '../../../../config/global.styles';
 import { SelectOption } from './SelectOption';
@@ -11,7 +11,8 @@ interface Props {
     closeOptions:() => void;
 }
 
-export const ListOptions = ({defaultOp,listOptions:inicialState,setValue,closeOptions}:Props) => {
+export const ListOptions = ({defaultOp, listOptions:inicialState, setValue, closeOptions}:Props) => {
+    console.log('exce')
     const [listOptions, setListOptions] = useState(inicialState);
     const height = useWindowDimensions().height;
     useEffect(() => {

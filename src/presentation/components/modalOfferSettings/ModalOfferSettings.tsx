@@ -33,7 +33,7 @@ export const ModalOfferSettings = () => {
                     </View>
                     <OfferAction 
                         title='Estado de la publicación' 
-                        label='En línea'
+                        label={switchState ? 'En línea' : 'Fuera de línea' }
                         action={() => setSwitchState(!switchState)}
                     >
                         <Switch state={switchState} />

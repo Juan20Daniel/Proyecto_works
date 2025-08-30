@@ -8,6 +8,7 @@ export { BtnIcon } from './btns/btnIcon/BtnIcon';
 export { Container } from "./container/Container";
 export { GoogleMap } from "./googleMap/GoogleMap";
 export { Ionicons } from "./icon/Ionicons";
+export { Input } from "./input/Input";
 export { IlustrationSearch } from "./ilustrationSearch/IlustrationSearch";
 export { ListOffers } from "./listOffers/ListOffers";
 export { ModalOfferOptions } from "./modalOfferOptions/ModalOfferOptions";

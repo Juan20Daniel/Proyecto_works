@@ -1,8 +1,9 @@
-import React from 'react';
-import { Modal, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Modal, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
 import { HeaderApp } from '../headerApp/HeaderApp';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { ListOffers } from '../listOffers/ListOffers';
+import { ActiveAlert } from '../activeAlert/ActiveAlert';
+import { BtnIcon } from '../btns/btnIcon/BtnIcon';
 
 interface Props {
     visible:boolean;
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export const SearchResultsModal = ({visible, closeModal}:Props) => {
+    const width = useWindowDimensions().width;
+    const isTable = width>500;
     return (
         <Modal visible={visible} transparent={false} animationType='slide'>
             <View style={styles.container}>
@@ -18,8 +21,20 @@ export const SearchResultsModal = ({visible, closeModal}:Props) => {
                     subText='Chofer en tecoman' 
                     actionBtnClose={() => closeModal()}
                 />
-                <Text style={styles.searchData}>30 Resultados</Text>
-                <ScrollView style={{flex:1}}>
+                <View style={styles.boxPosition}>
+                    <View style={styles.boxAling}>
+                        <View style={styles.boxSubTitle}>
+                            <Text style={{...styles.subTitle, fontSize:isTable ? 20 : 14}}>
+                                Se encontraron <Text style={{color:globalColors.black}}>30</Text> Resultados
+                            </Text>
+                        </View>
+                        <Pressable>
+                            <BtnIcon iconName='options-outline' action={() => {}} />
+                        </Pressable>
+                    </View>
+                    <ActiveAlert />        
+                </View>
+                <ScrollView style={styles.container}>
                     <ListOffers />
                 </ScrollView>
             </View>
@@ -31,13 +46,23 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
     },
-    searchData: {
+    boxPosition: {
+        position: 'relative'
+    },
+    boxAling: {
+        flexDirection: 'row', 
+        alignItems:'center',
+        gap: 30, 
+    },
+    boxSubTitle: {
         paddingLeft: 10, 
         borderBottomWidth:1, 
-        borderBottomColor: globalColors.lightGray, 
-        fontSize: 14, 
-        paddingBottom: 10,
+        borderBottomColor: globalColors.lightGray,  
+        height: 40,
+        justifyContent:'center'
+    },
+    subTitle: {
         fontFamily: globalStyles.fontMonserratMedium, 
         color:globalColors.gray
-    }
-})
+    },
+});

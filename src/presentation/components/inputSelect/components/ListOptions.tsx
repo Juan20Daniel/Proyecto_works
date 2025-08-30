@@ -12,7 +12,6 @@ interface Props {
 }
 
 export const ListOptions = ({defaultOp, listOptions:inicialState, setValue, closeOptions}:Props) => {
-    console.log('exce')
     const [listOptions, setListOptions] = useState(inicialState);
     const height = useWindowDimensions().height;
     useEffect(() => {

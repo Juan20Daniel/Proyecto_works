@@ -21,7 +21,6 @@ export const BtnClose = ({top,backTo}:Props) => {
 const styles = StyleSheet.create({
     container: {
         position:'absolute',
-        top: 30,
         right: 0,
         bottom: 5,
         backgroundColor: 'black',

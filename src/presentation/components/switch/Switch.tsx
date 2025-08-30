@@ -3,33 +3,45 @@ import { globalColors } from '../../../config/global.styles';
 
 interface Props {
     state:boolean;
+    size?: 'big'|'small'
 }
 
-export const Switch = ({state}:Props) => {
+export const Switch = ({state, size='big'}:Props) => {
     return (
         <View 
             style={{
-                ...styles.container, 
+                padding: 4,
+                borderRadius: 50,
+                ...styles[size === 'big' ? 'containerBig' : 'containerSmall'], 
                 backgroundColor:state ? globalColors.limeGreen : globalColors.softGray, 
                 alignItems:state? 'flex-end' : 'flex-start'
             }}
         >
-            <View style={styles.ball} />
+            <View style={{
+                borderRadius:15,
+                backgroundColor: globalColors.white,
+                ...styles[size === 'big' ? 'ballBig' : 'ballSmall']
+            }} />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        borderRadius: 50,
-        padding: 4,
+    containerBig: {
         width:50, 
         height:25,
     },
-    ball: {
-        backgroundColor: globalColors.white,
+    ballBig: {
         width: 17,
         height: 17,
-        borderRadius:15
+    
+    },
+    containerSmall: {
+        width:40, 
+        height:18,
+    },
+    ballSmall: {
+        width: 10,
+        height: 10,
     }
 });

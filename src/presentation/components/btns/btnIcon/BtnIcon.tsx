@@ -6,11 +6,10 @@ interface Props {
     iconName: string;
     iconColor?: string;
     marginRight?: number;
-    borderColor?: string;
     action: () => void;
 }
 
-export const BtnIcon = ({iconName, iconColor, marginRight, borderColor='white', action}:Props) => {
+export const BtnIcon = ({iconName, iconColor, marginRight, action}:Props) => {
     return (
         <Pressable 
             onPress={() => {

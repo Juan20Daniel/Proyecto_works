@@ -39,7 +39,7 @@ export const AdsCarrucel = ({isLoading=false}:Props) => {
                         <Ads 
                             key={index}
                             width={width} 
-                            action={() => navigation.navigate('Register')} 
+                            action={() => navigation.navigate('Login')} 
                         />
                     )}
                     onScroll={doScroll}

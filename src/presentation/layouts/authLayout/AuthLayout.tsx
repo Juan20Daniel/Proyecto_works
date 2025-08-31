@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { BtnClose, Container } from '../../components';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
@@ -15,15 +15,17 @@ export const AuthLayout = ({subTitle, children}:Props) => {
     const width = useWindowDimensions().width;
     const isTable = width>500;
     return (
-        <Container customStyles={{justifyContent: 'center'}}>
-            <View style={{position: 'relative', alignItems: 'center'}}>
-                <BtnClose backTo={() => navigation.goBack()} top={40} />
-                <View style={{...styles.content,  padding:isTable ? 30:10}}>
-                    <Text style={{...styles.title, fontSize: isTable?40:25,}}>Bienvenido a Nuestra App</Text>
-                    <Text style={styles.subTitle}>{subTitle}</Text>
-                    {children}
+        <Container>
+            <ScrollView>
+                <View style={{position: 'relative', alignItems: 'center', marginTop:30}}>
+                    <BtnClose backTo={() => navigation.goBack()} top={20} />
+                    <View style={{...styles.content,  padding:isTable ? 30:10}}>
+                        <Text style={{...styles.title, fontSize: isTable?40:35,width:isTable?400:300}}>Bienvenido a Nuestra App</Text>
+                        <Text style={{...styles.subTitle, width:isTable ? 250 : 230}}>{subTitle}</Text>
+                        {children}
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         </Container>
     );
 }

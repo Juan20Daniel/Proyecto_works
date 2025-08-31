@@ -6,31 +6,43 @@ import { Ionicons } from '../icon/Ionicons';
 interface Props {
     label: string;
     placeholder: string;
+    value: string;
     type: KeyboardTypeOptions;
+    name: string;
     showPassword?: string;
+    isFocus:boolean;
+    onChange:(value:string, field:string) => void;
+    onFocus:(field:string) => void;
 }
 
-export const Input = ({label, placeholder, type, showPassword}:Props) => {
-    const [ value, setValue ] = useState('');
-    const [ isFocus, setIsFocus ] = useState(false);
+export const Input = ({
+    label, 
+    placeholder, 
+    name, 
+    type, 
+    value,
+    isFocus, 
+    onChange,
+    onFocus,
+showPassword}:Props) => {
     return (
         <View style={{...styles.container, borderColor: isFocus ? globalColors.azureBlue : globalColors.softGray,}}>
-            <View style={{...styles.boxLabel, transform: [{translateY:isFocus? -33 : 0}]}}>
+            <View style={{...styles.boxLabel, transform: [{translateY:(isFocus || value!=='')? -33 : 0}]}}>
                 <Text style={{...styles.label, color:isFocus ? globalColors.azureBlue : globalColors.gray,}}>
-                    {isFocus ? label : placeholder}
+                    {(isFocus || value!=='') ? label : placeholder}
                 </Text>
             </View>
             <TextInput
                 style={styles.textInput}
                 keyboardType={type}
                 value={value}
-                onChangeText={setValue}
+                onChangeText={textValue => onChange(textValue, name)}
                 onFocus={() => {
-                    setIsFocus(true);
+                    onFocus(name);
                 }}
             />
             {value !== '' &&
-                <Pressable style={styles.btnClear} onPress={() => setValue('')}>
+                <Pressable style={styles.btnClear} onPress={() => {}}>
                     <Ionicons name='close-outline' color={globalColors.white}/>
                 </Pressable>
             }

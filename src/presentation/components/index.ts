@@ -1,10 +1,12 @@
 export { AdsCarrucel } from "./adsCarrucel/AdsCarrucel";
+export { AuthSwitchLink } from "./authSwitchLink/AuthSwitchLink";
 export { InputSelect } from "./inputSelect/InputSelect";
 export { BtnGoToSearch } from "./btnGoToSearcher/BtnGoToSearcher";
 export { BtnClose } from './btns/btnClose/BtnClose';
 export { BtnFooter } from "./btns/btnFooter/BtnFooter";
 export { BtnLocationSelecter } from "./locationSelecters/BtnLocationSelecter";
 export { BtnIcon } from './btns/btnIcon/BtnIcon';
+export { BtnBasic } from "./btns/btnBasic.tsx/BtnBasic";
 export { Container } from "./container/Container";
 export { GoogleMap } from "./googleMap/GoogleMap";
 export { Ionicons } from "./icon/Ionicons";
@@ -19,4 +21,4 @@ export { OfferDetails } from "./offerDetails/OfferDetails";
 export { TitleApp } from "./titleApp/TitleApp";
 export { UserAvatar } from "./userAvatar/UserAvatar";
 export { HeaderApp } from "./headerApp/HeaderApp";
-import { SearchResultsModal } from "./searchResultsModal/SearchResultsModal";
+export { SocialAuthButton } from "./socialAuthButton/SocialAuthButton";

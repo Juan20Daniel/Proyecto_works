@@ -1,11 +1,10 @@
-import { useCallback, useEffect,useReducer } from 'react';
-import { Keyboard, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { BtnClose, Container, Input } from '../../components';
-import { simpleFormReducer } from '../../reducers/simpleForm/simpleForm';
-import { globalStyles } from '../../../config/global.styles';
+import { useCallback, useEffect, useReducer, useState } from 'react';
+import { Keyboard, View } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AuthSwitchLink, BtnBasic, Input, SocialAuthButton } from '../../components';
+import { simpleFormReducer } from '../../reducers/simpleForm/simpleForm';
+import { AuthLayout } from '../../layouts';
 
 export const initialStateSimpleForm = {
     values: {
@@ -17,25 +16,17 @@ export const initialStateSimpleForm = {
 
 export const Login = () => {
     const [form, dispatch] = useReducer(simpleFormReducer, initialStateSimpleForm);
+    const [ showPass, setShowPass ] = useState(false);
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-    const {top} = useSafeAreaInsets();
-    const width = useWindowDimensions().width;
-    const height = useWindowDimensions().height;
-    const isTable = width>500;
     useEffect(() => {
-        const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-            console.log('teclado visible')
-        });
         const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
             handlePress();
         });
-
         return () => {
-            showSubscription.remove();
             hideSubscription.remove();
         }; 
     },[]);
-    const handleCange = (field:string, value:string) => {
+    const handleChange = (field:string, value:string) => {
         dispatch({
             type:'CHANGE_INPUT',
             field:field,
@@ -54,54 +45,66 @@ export const Login = () => {
         })
         Keyboard.dismiss();
     },[]);
+     const inputClear = (field:string) => {
+        dispatch({
+            type:'CLEAR_INPUT',
+            field
+        });
+    }
     return (
-        <Container>
-            <ScrollView>
-                <View style={{position: 'relative', alignItems: 'center', minHeight:500, marginTop:30}}>
-                    <BtnClose backTo={() => navigation.goBack()} top={20} />
-                    <View style={{...styles.content,  padding:isTable ? 30:10}}>
-                        <Text style={{...styles.title, fontSize: isTable?40:35,width:isTable?400:300}}>Bienvenido a Nuestra App</Text>
-                        <Text style={{...styles.subTitle, width:isTable ? 250 : 230}}>Inicia sesión con tu cuenta o crea una</Text>
-                        <View style={{width:'100%', height: 40}} />
-                        <Input
-                            label='Correo electrónico'
-                            placeholder='Ingresa tu correo electrónico'
-                            name='email'
-                            type='email-address'
-                            value={form.values.email.value}
-                            isFocus={form.values.email.isFocus}
-                            onChange={(value:string, field:string) => handleCange(field, value)}
-                            onFocus={(field:string) => putFocusInput(field)}
-                        />
-                        <View style={{width:'100%', height: 30}} />
-                        <Input
-                            label='Contraseña'
-                            placeholder='Ingresa tu contraseña'
-                            name='password'
-                            type='email-address'
-                            value={form.values.password.value}
-                            isFocus={form.values.password.isFocus}
-                            onChange={(value:string, field:string) => handleCange(field, value)}
-                            onFocus={(field:string) => putFocusInput(field)}
-                        />
-                    </View>
-                </View>
-            </ScrollView>
-        </Container>
+       <AuthLayout subTitle='Inicia sesión con tu cuenta o crea una'>
+            <View style={{width:'100%', height: 40}} />
+            <Input
+               label='Correo electrónico'
+               placeholder='Ingresa tu correo electrónico'
+               name='email'
+               type='email-address'
+               value={form.values.email.value}
+               isFocus={form.values.email.isFocus}
+               inputPassword={false}
+               onChange={(value:string, field:string) => handleChange(field, value)}
+               onFocus={(field:string) => putFocusInput(field)}
+               clearInput={inputClear}
+            />
+            <View style={{width:'100%', height: 30}} />
+            <Input
+                label='Contraseña'
+                placeholder='Ingresa tu contraseña'
+                name='password'
+                type='default'
+                value={form.values.password.value}
+                isFocus={form.values.password.isFocus}
+                secureTextEntry={showPass}
+                inputPassword
+                onChange={(value:string, field:string) => handleChange(field, value)}
+                onFocus={(field:string) => putFocusInput(field)}
+                clearInput={inputClear}
+                togglePasswordVisibility={() => setShowPass(!showPass)}
+            />
+            <BtnBasic 
+                value='INICIAR SESIÓN'
+                customStylesBox={{marginTop:40}}
+                disable={true}
+                action={() => {}}
+            />
+            <AuthSwitchLink 
+                textQuestion='¿Aún no tienes una cuenta?'
+                textLink='crea una aquí'
+                navigateTo={() => navigation.navigate('Register')}
+            />
+            <View style={{width:'100%', height: 40}} />
+            <SocialAuthButton 
+                value='Iniciar con google'
+                image={require('../../../assets/auth/imgGoogle.png')}
+                action={() => {}}
+            />
+            <View style={{width:'100%', height: 30}} />
+             <SocialAuthButton 
+                value='Iniciar con facebook'
+                image={require('../../../assets/auth/ImgFacebook.png')}
+                action={() => {}}
+            />
+            {/* <View style={{width:'100%', height: 30, backgroundColor:'red'}} /> */}
+        </AuthLayout>
     );
 }
-
-const styles = StyleSheet.create({
-    content: {
-        width: '100%',
-        maxWidth: 500,
-    },
-    title: {
-        fontFamily: globalStyles.fontMonserratSemiBold,
-    },
-    subTitle: {
-        fontSize: 16,
-        fontFamily: globalStyles.fontMonserratMedium,
-        width: 330,
-    }
-});

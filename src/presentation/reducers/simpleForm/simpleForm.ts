@@ -58,6 +58,8 @@ export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes
                     [action.field]:{...state.values[action.field], value:''}
                 }
             }
+        case 'CLEAR_INPUTS':
+            return {...action.form}
         default:
             return state;
     }

@@ -1,6 +1,7 @@
 import { KeyboardTypeOptions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { Ionicons } from '../icon/Ionicons';
+import { InputStatus } from '../../../infrestructure/interfaces/simple-form';
 
 interface Props {
     label: string;
@@ -11,6 +12,9 @@ interface Props {
     isFocus:boolean;
     secureTextEntry?:boolean;
     inputPassword?:boolean;
+    errorFieldEmpty?: string;
+    errorFieldInvalid?: string;
+    statusError?: InputStatus;
     onChange:(value:string, field:string) => void;
     onFocus:(field:string) => void;
     clearInput:(field:string) => void;
@@ -26,15 +30,23 @@ export const Input = ({
     isFocus, 
     secureTextEntry=false,
     inputPassword=false,
+    errorFieldEmpty,
+    errorFieldInvalid,
+    statusError,
     onChange,
     onFocus,
     clearInput,
     togglePasswordVisibility
 }:Props) => {
+    console.log(statusError)
     return (
         <View style={{
             ...styles.container, 
-            borderColor: isFocus ? globalColors.azureBlue : globalColors.softGray,
+            borderColor: isFocus 
+                ? globalColors.azureBlue 
+                : (statusError !== null && statusError !== 'valid') 
+                    ?   globalColors.darkRed
+                    :   globalColors.softGray,
         }}>
             <View style={{
                 ...styles.boxLabel, 
@@ -42,7 +54,11 @@ export const Input = ({
             }>
                 <Text style={{
                     ...styles.label, 
-                    color:isFocus ? globalColors.azureBlue : globalColors.gray
+                    color:isFocus 
+                        ?   globalColors.azureBlue 
+                        :   (statusError !== null && statusError !== 'valid') 
+                            ?   globalColors.darkRed
+                            :   globalColors.gray
                 }}>
                     {(isFocus || value!=='') ? label : placeholder}
                 </Text>
@@ -57,24 +73,42 @@ export const Input = ({
                     onFocus(name);
                 }}
             />
-            {value !== '' &&
-                <Pressable 
-                    style={{...styles.btnRight, ...styles.btnClear,  right:inputPassword ? 60:15}} 
-                    onPress={() => clearInput(name)}
-                >
-                    <Ionicons name='close-outline' color={globalColors.gray}/>
-                </Pressable>
-            }
             {inputPassword &&
-                <Pressable style={{...styles.btnRight,...styles.btnShowPassword}} onPress={() => {
-                    togglePasswordVisibility && togglePasswordVisibility();
-                }}>
+                <Pressable 
+                    style={{
+                        ...styles.btnRight,
+                        ...styles.btnShowPassword, 
+                        right:inputPassword 
+                            ?   value !== ''   
+                                ?   60
+                                :   15
+                            :   15
+                    }} 
+                    onPress={() => {
+                        togglePasswordVisibility && togglePasswordVisibility();
+                    }}
+                >
                     <Ionicons 
                         name={secureTextEntry? 'eye-off-outline' : 'eye-outline'} 
                         color={globalColors.gray} 
                         size={26}
                     />
                 </Pressable>
+            }
+            {value !== '' &&
+                <Pressable 
+                    style={{...styles.btnRight, ...styles.btnClear }} 
+                    onPress={() => clearInput(name)}
+                >
+                    <Ionicons name='close-outline' color={globalColors.gray}/>
+                </Pressable>
+            }
+            {(statusError !== null && statusError !== 'valid') &&
+                <View style={styles.boxMessageError}>
+                    <Text style={styles.messageError}>
+                        {statusError === 'empty' ? errorFieldEmpty : errorFieldInvalid}
+                    </Text>
+                </View>
             }
         </View>
     );
@@ -87,6 +121,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         justifyContent: 'center',
         borderWidth: 1,
+        marginBottom: 40
     },
     boxLabel: {
         position: 'relative',
@@ -118,9 +153,17 @@ const styles = StyleSheet.create({
     btnClear: {
         backgroundColor: globalColors.lightGray,
         borderRadius: 15,
+        right: 15,
     },
     btnShowPassword: {
-        right: 15,
         backgroundColor: globalColors.white,
+    },
+    boxMessageError: {
+        position: 'absolute',
+        bottom: -20,
+        left: 20,
+    },
+    messageError: {
+        color: globalColors.darkRed
     }
 });

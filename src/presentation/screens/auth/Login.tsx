@@ -11,13 +11,17 @@ export const initialStateSimpleForm = {
         email: { value:'', isFocus:false },
         password: { value: '', isFocus:false }
     },
-    errors: {}
+    errors: {
+        email: { status:null, valid:null },
+        password: { status:null, valid:null },
+    }
 }
 
 export const Login = () => {
     const [form, dispatch] = useReducer(simpleFormReducer, initialStateSimpleForm);
     const [ showPass, setShowPass ] = useState(false);
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
     useEffect(() => {
         const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
             handlePress();
@@ -51,22 +55,29 @@ export const Login = () => {
             field
         });
     }
+    const submitForm = () => {
+        dispatch({
+            type:'VALIDATE_FORM'
+        });
+    }
     return (
        <AuthLayout subTitle='Inicia sesión con tu cuenta o crea una'>
             <View style={{width:'100%', height: 40}} />
             <Input
-               label='Correo electrónico'
-               placeholder='Ingresa tu correo electrónico'
-               name='email'
-               type='email-address'
-               value={form.values.email.value}
-               isFocus={form.values.email.isFocus}
-               inputPassword={false}
-               onChange={(value:string, field:string) => handleChange(field, value)}
-               onFocus={(field:string) => putFocusInput(field)}
-               clearInput={inputClear}
+                label='Correo electrónico'
+                placeholder='Ingresa tu correo electrónico'
+                name='email'
+                type='email-address'
+                value={form.values.email.value}
+                isFocus={form.values.email.isFocus}
+                inputPassword={false}
+                errorFieldEmpty='El correo es obligatorio'
+                errorFieldInvalid='El correo no es válido'
+                statusError={form.errors.email.status}
+                onChange={(value:string, field:string) => handleChange(field, value)}
+                onFocus={(field:string) => putFocusInput(field)}
+                clearInput={inputClear}
             />
-            <View style={{width:'100%', height: 30}} />
             <Input
                 label='Contraseña'
                 placeholder='Ingresa tu contraseña'
@@ -76,16 +87,17 @@ export const Login = () => {
                 isFocus={form.values.password.isFocus}
                 secureTextEntry={showPass}
                 inputPassword
+                errorFieldEmpty='La contraseña obligatoria'
+                errorFieldInvalid='La contraseña no es válida'
+                statusError={form.errors.password.status}
                 onChange={(value:string, field:string) => handleChange(field, value)}
                 onFocus={(field:string) => putFocusInput(field)}
                 clearInput={inputClear}
                 togglePasswordVisibility={() => setShowPass(!showPass)}
             />
-            <BtnBasic 
+            <BtnBasic
                 value='INICIAR SESIÓN'
-                customStylesBox={{marginTop:40}}
-                disable={true}
-                action={() => {}}
+                action={() => submitForm()}
             />
             <AuthSwitchLink 
                 textQuestion='¿Aún no tienes una cuenta?'
@@ -99,12 +111,11 @@ export const Login = () => {
                 action={() => {}}
             />
             <View style={{width:'100%', height: 30}} />
-             <SocialAuthButton 
+            <SocialAuthButton 
                 value='Iniciar con facebook'
                 image={require('../../../assets/auth/ImgFacebook.png')}
                 action={() => {}}
             />
-            {/* <View style={{width:'100%', height: 30, backgroundColor:'red'}} /> */}
         </AuthLayout>
     );
 }

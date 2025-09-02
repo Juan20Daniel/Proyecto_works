@@ -14,7 +14,9 @@ interface Props {
 export const AuthLayout = ({subTitle, children,marginTop}:Props) => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const width = useWindowDimensions().width;
+    const height = useWindowDimensions().height;
     const isTable = width>500;
+
     return (
         <Container>
             <ScrollView keyboardShouldPersistTaps='handled'>
@@ -24,6 +26,12 @@ export const AuthLayout = ({subTitle, children,marginTop}:Props) => {
                         <Text style={{...styles.title, fontSize: isTable?40:35,width:isTable?400:300}}>Bienvenido a Nuestra App</Text>
                         <Text style={{...styles.subTitle, width:isTable ? 250 : 230}}>{subTitle}</Text>
                         {children}
+                        {(height <= 790 && height >= 700) &&
+                            <View style={{width:'100%', height: 100}} />
+                        } 
+                        {(height <= 700) &&
+                            <View style={{width:'100%', height: 200}} />
+                        } 
                     </View>
                 </View>
             </ScrollView>

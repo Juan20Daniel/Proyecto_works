@@ -7,7 +7,8 @@ export const globalColors = {
     lightGray: '#f0f0f0ff',
     softGray: '#cececeff',
     darkGray: '#4E4E4E',
-    limeGreen: '#1CC048'
+    limeGreen: '#1CC048',
+    darkRed: '#B80000',
 }
 
 export const globalStyles = {

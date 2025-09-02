@@ -9,8 +9,8 @@ export interface InputValue {
 }
 
 export interface InputError {
-    status: InputStatusError;
-    valid: boolean;
+    status: InputStatus;
+    valid: boolean|null;
 }
 
-export type InputStatusError = null|'empty'|'valid'|'invalid';
+export type InputStatus = null|'empty'|'valid'|'invalid';

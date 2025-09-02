@@ -1,4 +1,5 @@
 import type { SimpleForm } from "../../../infrestructure/interfaces/simple-form";
+import { expretions } from "../../../shared/regex";
 import { SimpleFormActionTypes } from "./simpleFormActionTypes";
 
 const getFieldWithFocus = (state:SimpleForm):string|null => {
@@ -15,10 +16,18 @@ export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes
     switch (action.type) {
         case 'CHANGE_INPUT':
             return {
-                ...state,
                 values: {
                     ...state.values,
                     [action.field]:{...state.values[action.field], value:action.value}
+                },
+                errors: {
+                    ...state.errors,
+                    [action.field]:{
+                        ...state.errors[action.field],
+                        valid: action.value === ''
+                            ? null
+                            : expretions[action.field].test(action.value) 
+                    }
                 }
             }
         case 'PUT_FOCUS_INPUT':
@@ -52,14 +61,30 @@ export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes
             }
         case 'CLEAR_INPUT': 
             return {
-                ...state,
                 values: {
                     ...state.values,
                     [action.field]:{...state.values[action.field], value:''}
+                },
+                errors: {
+                    ...state.errors,
+                    [action.field]:{status:null, valid:null}
                 }
             }
         case 'CLEAR_INPUTS':
             return {...action.form}
+        case 'VALIDATE_FORM':
+            const errors = state.errors;
+            for(let camp in errors) {
+                if(errors[camp].valid === null) {
+                    errors[camp] = {...errors[camp], status:'empty'}
+                } else if(!errors[camp].valid) {
+                    errors[camp] = {...errors[camp], status:'invalid'}
+                } else {
+                    errors[camp] = {...errors[camp], status:'valid'}
+                }
+            }
+            console.log(errors);
+            return {...state ,...errors}
         default:
             return state;
     }

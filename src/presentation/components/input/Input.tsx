@@ -38,7 +38,6 @@ export const Input = ({
     clearInput,
     togglePasswordVisibility
 }:Props) => {
-    console.log(statusError)
     return (
         <View style={{
             ...styles.container, 
@@ -121,7 +120,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         justifyContent: 'center',
         borderWidth: 1,
-        marginBottom: 40
+        marginBottom: 30
     },
     boxLabel: {
         position: 'relative',
@@ -164,6 +163,7 @@ const styles = StyleSheet.create({
         left: 20,
     },
     messageError: {
-        color: globalColors.darkRed
+        color: globalColors.darkRed,
+        fontSize: 11,
     }
 });

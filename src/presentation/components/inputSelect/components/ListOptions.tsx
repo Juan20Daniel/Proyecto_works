@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
         maxWidth: 500,
         zIndex: 100, 
         backgroundColor:globalColors.white,
-        ...globalStyles.shadow
+        borderWidth: 1,
+        borderColor:globalColors.lightGray
     }
 });

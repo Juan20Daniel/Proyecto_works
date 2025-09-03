@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 
         globalColors.lightGray, 
-        paddingTop: 60, 
+        // paddingTop: 60, 
+        paddingTop: 20, 
         paddingBottom:50,  
     },
     containerTable: {

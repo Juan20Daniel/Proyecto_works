@@ -3,7 +3,7 @@ import { Ionicons } from '../../icon/Ionicons';
 import { globalColors, globalStyles } from '../../../../config/global.styles';
 
 interface Props {
-    disable:boolean;
+    disable?:boolean;
     value: string;
     iconName: string;
     height?: number;

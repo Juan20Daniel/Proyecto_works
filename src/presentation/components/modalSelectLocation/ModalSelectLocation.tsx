@@ -19,7 +19,7 @@ export const ModalSelectLocation = ({visible, closeModal}:Props) => {
                     actionBtnClose={() => closeModal()} 
                 />
                 <Text style={{...styles.textDescriptión, fontSize: isTable ? 15 : 20, width: isTable ? 300 : 450}}>
-                    Seleccióna una las ubicaciones para ver las ofertas de trabajo disponibles
+                    Seleccióna las ciudades para ver las ofertas de trabajo disponibles
                 </Text>
                 <ListBtnLocations />
                 <ScrollView style={styles.listItemLocations}>

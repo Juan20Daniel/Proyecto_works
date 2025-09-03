@@ -22,3 +22,4 @@ export { TitleApp } from "./titleApp/TitleApp";
 export { UserAvatar } from "./userAvatar/UserAvatar";
 export { HeaderApp } from "./headerApp/HeaderApp";
 export { SocialAuthButton } from "./socialAuthButton/SocialAuthButton";
+export { Filter } from "./filter/Filter";

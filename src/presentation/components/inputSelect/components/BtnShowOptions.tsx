@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
         height: 60,
         borderRadius: 20,
         backgroundColor: globalColors.white,
-        ...globalStyles.shadow,
+        borderWidth: 1,
+        borderColor:globalColors.lightGray
     },
     boxLabel: {
         flexDirection: 'row',

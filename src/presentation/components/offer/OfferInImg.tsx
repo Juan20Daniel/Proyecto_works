@@ -1,9 +1,9 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
+import { globalColors } from '../../../config/global.styles';
 import { Container } from './Container';
 
 interface Props {
-    hasSeen:boolean;
+    hasSeen?:boolean;
 }
 
 export const OfferInImg = ({hasSeen=false}:Props) => {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         backgroundColor: globalColors.white,
         borderRadius: 30,
         borderBottomLeftRadius: 160,
-        ...globalStyles.shadow
+       
     },
     marker: {
         position: 'absolute',

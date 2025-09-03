@@ -4,6 +4,7 @@ import { BtnClose, Container } from '../../components';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { globalStyles } from '../../../config/global.styles';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface Props {
     subTitle:string;
@@ -13,6 +14,7 @@ interface Props {
 
 export const AuthLayout = ({subTitle, children,marginTop}:Props) => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const { top } = useSafeAreaInsets();
     const width = useWindowDimensions().width;
     const height = useWindowDimensions().height;
     const isTable = width>500;
@@ -20,18 +22,24 @@ export const AuthLayout = ({subTitle, children,marginTop}:Props) => {
     return (
         <Container>
             <ScrollView keyboardShouldPersistTaps='handled'>
-                <View style={{position: 'relative', alignItems: 'center', minHeight:500, marginTop:marginTop??30}}>
-                    <BtnClose backTo={() => navigation.goBack()} top={20} />
+                <View style={{...styles.container, minHeight:height-top}}>
                     <View style={{...styles.content,  padding:isTable ? 30:10}}>
-                        <Text style={{...styles.title, fontSize: isTable?40:35,width:isTable?400:300}}>Bienvenido a Nuestra App</Text>
-                        <Text style={{...styles.subTitle, width:isTable ? 250 : 230}}>{subTitle}</Text>
-                        {children}
-                        {(height <= 790 && height >= 700) &&
-                            <View style={{width:'100%', height: 100}} />
-                        } 
-                        {(height <= 700) &&
-                            <View style={{width:'100%', height: 200}} />
-                        } 
+                        <BtnClose backTo={() => navigation.navigate('Home')} top={20} />
+                        <View style={{width:'100%', maxWidth: 500}}>
+                            <Text style={{...styles.title, fontSize: isTable?40:35,width:isTable?400:300}}>
+                                Bienvenido a Nuestra App
+                            </Text>
+                            <Text style={{...styles.subTitle, width:isTable ? 250 : 230}}>
+                                {subTitle}
+                            </Text>
+                            {children}
+                            {(height <= 790 && height >= 700) &&
+                                <View style={{width:'100%', height: 100}} />
+                            } 
+                            {(height <= 700) &&
+                                <View style={{width:'100%', height: 200}} />
+                            } 
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -40,9 +48,14 @@ export const AuthLayout = ({subTitle, children,marginTop}:Props) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        justifyContent:'center', 
+        height:'100%',
+    },
     content: {
+        position: 'relative',
         width: '100%',
-        maxWidth: 500,
+        alignItems: 'center'
     },
     title: {
         fontFamily: globalStyles.fontMonserratSemiBold,

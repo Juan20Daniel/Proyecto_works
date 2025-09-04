@@ -1,7 +1,7 @@
 import { FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, useWindowDimensions, View } from 'react-native'
 import { globalColors } from '../../../config/global.styles';
 import { useState } from 'react';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { NavigationProp, RouteProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { AdsCarrucelSkeletor } from './AdsCarrucelSkeletor';
 import { Ads } from './Ads';
@@ -39,7 +39,7 @@ export const AdsCarrucel = ({isLoading=false}:Props) => {
                         <Ads 
                             key={index}
                             width={width} 
-                            action={() => navigation.navigate('Login')} 
+                            action={() => navigation.navigate('Login',{animationType:'fade'})} 
                         />
                     )}
                     onScroll={doScroll}

@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useReducer, useState } from 'react';
 import { Keyboard, View } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { AuthSwitchLink, BtnBasic, Input, SocialAuthButton } from '../../components';
 import { simpleFormReducer } from '../../reducers/simpleForm/simpleForm';
 import { AuthLayout } from '../../layouts';
+import { StackScreenProps } from '@react-navigation/stack';
+
+interface Props extends StackScreenProps<RootStackParamList, 'Login'>{}
 
 export const initialStateSimpleForm = {
     values: {
@@ -17,10 +19,9 @@ export const initialStateSimpleForm = {
     }
 }
 
-export const Login = () => {
+export const Login = ({navigation}:Props) => {
     const [form, dispatch] = useReducer(simpleFormReducer, initialStateSimpleForm);
     const [ showPass, setShowPass ] = useState(false);
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
     useEffect(() => {
         const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
@@ -61,7 +62,10 @@ export const Login = () => {
         });
     }
     return (
-       <AuthLayout subTitle='Inicia sesión con tu cuenta o crea una'>
+       <AuthLayout 
+            navigation={navigation}
+            subTitle='Inicia sesión con tu cuenta o crea una'
+        >
             <View style={{width:'100%', height: 40}} />
             <Input
                 label='Correo electrónico'
@@ -102,7 +106,7 @@ export const Login = () => {
             <AuthSwitchLink 
                 textQuestion='¿Aún no tienes una cuenta?'
                 textLink='crea una aquí'
-                navigateTo={() => navigation.navigate('Register')}
+                navigateTo={() => navigation.replace('Register', {animationType:'slide_from_right'})}
             />
             <View style={{width:'100%', height: 40}} />
             <SocialAuthButton 

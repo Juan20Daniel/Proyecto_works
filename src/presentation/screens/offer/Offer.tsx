@@ -35,15 +35,17 @@ export const Offer = ({route}:Props) => {
           <OfferDetails typeUser={typeUser} />
         </BottomSheet>
       </View>
-      {typeUser === 'user' &&
+      {/* {typeUser === 'user' &&
         <ModalOfferOptions />
-      }
-      {typeUser === 'owner' &&
+      } */}
+      {/* {typeUser === 'owner' &&
         <ModalOfferSettings />
-      }
+      } */}
     </>
   );
 }
+
+//Arreglar el bug del modal de opciones
 
 const styles = StyleSheet.create({
   container: {

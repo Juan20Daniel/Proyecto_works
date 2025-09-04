@@ -12,7 +12,7 @@ export const Navbar = () => {
             <TitleApp />
             <View style={styles.boxButtons}>
                 <NavLink iconName='search-outline' redirect='Search' />
-                <NavLink iconName='notifications-outline' redirect='Search' />
+                <NavLink iconName='notifications-outline' redirect='Notifications' />
                 <NavLink iconName='person-circle' redirect='Profile' />
             </View>
         </View>

@@ -9,14 +9,16 @@ import {
     ModalOfferOptions,
     Filter
 } from '../../components';
-
-export const Home = () => {
+import { RootStackParamList } from '../../navigators/StackNavigator';
+import { StackScreenProps } from '@react-navigation/stack';
+interface Props extends StackScreenProps<RootStackParamList, 'Home'>{}
+export const Home = ({route}:Props) => {
     const [ listLocationsModal, setListLocationModal ] = useState(false);
    
     return (
         <Container marginTop={0}>
             <Navbar />
-            <ScrollView style={{flex:1}} stickyHeaderIndices={[1]}>
+            <ScrollView style={{flex:1}} stickyHeaderIndices={[1]} showsVerticalScrollIndicator={false}>
                 <AdsCarrucel />
                 <Filter setListLocationModal={setListLocationModal} />
                 <ListOffers />

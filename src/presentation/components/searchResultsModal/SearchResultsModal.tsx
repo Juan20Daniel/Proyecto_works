@@ -34,7 +34,7 @@ export const SearchResultsModal = ({visible, closeModal}:Props) => {
                     </View>
                     <ActiveAlert />        
                 </View>
-                <ScrollView style={styles.container}>
+                <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
                     <ListOffers />
                 </ScrollView>
             </View>

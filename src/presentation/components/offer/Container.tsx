@@ -21,7 +21,7 @@ export const Container = ({width='100%', children}:Props) => {
                     onPress={() => {
                         setWasPressed(true);
                         setTimeout(() =>  {
-                            navigation.navigate('Offer', {typeUser:'owner'});
+                            navigation.navigate('Offer', {typeUser:'user'});
                             setWasPressed(false)
                         },100);
                     }}

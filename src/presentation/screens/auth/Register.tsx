@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useReducer, useState } from 'react';
 import { Keyboard, View } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { AuthSwitchLink, BtnBasic, Input, SocialAuthButton } from '../../components';
 import { simpleFormReducer } from '../../reducers/simpleForm/simpleForm';
 import { AuthLayout } from '../../layouts';
+import { StackScreenProps } from '@react-navigation/stack';
+
+interface Props extends StackScreenProps<RootStackParamList, 'Register'>{}
 
 export const initialStateSimpleForm = {
     values: {
@@ -23,12 +25,10 @@ export const initialStateSimpleForm = {
     }
 }
 
-export const Register = () => {
+export const Register = ({navigation}:Props) => {
     const [form, dispatch] = useReducer(simpleFormReducer, initialStateSimpleForm);
     const [ keyboardVisible, setKeyboarVisible ] = useState(false);
     const [ showPass, setShowPass ] = useState(false);
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-
     useEffect(() => {
         const showSubsciption = Keyboard.addListener("keyboardDidShow", () => {
             setKeyboarVisible(true);
@@ -73,7 +73,10 @@ export const Register = () => {
         });
     }
     return (
-       <AuthLayout subTitle='Crea una cuenta en nuestra app con tus datos personales'>
+       <AuthLayout 
+            navigation={navigation}
+            subTitle='Crea una cuenta en nuestra app con tus datos personales'
+        >
             <View style={{width:'100%', height: 40}} />
             <Input
                 label='Nombre'
@@ -159,7 +162,7 @@ export const Register = () => {
             <AuthSwitchLink 
                 textQuestion='¿Ya tienes una cuenta?'
                 textLink='inicia sesión'
-                navigateTo={() => navigation.navigate('Login')}
+                navigateTo={() => navigation.replace('Login', {animationType:'slide_from_left'})}
             />
             <View style={{width:'100%', height: 40}} />
             <SocialAuthButton 

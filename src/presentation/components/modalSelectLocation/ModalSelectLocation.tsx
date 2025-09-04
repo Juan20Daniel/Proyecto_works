@@ -22,7 +22,7 @@ export const ModalSelectLocation = ({visible, closeModal}:Props) => {
                     Seleccióna las ciudades para ver las ofertas de trabajo disponibles
                 </Text>
                 <ListBtnLocations />
-                <ScrollView style={styles.listItemLocations}>
+                <ScrollView style={styles.listItemLocations} showsVerticalScrollIndicator={false}>
                     <View style={{width:'100%', height: 30}} />
                     <ItemLocation id={1} state='Colima' city='Colima' />
                     <ItemLocation id={2} state='Colima' city='Manzanillo' />

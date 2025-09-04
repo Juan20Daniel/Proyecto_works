@@ -17,6 +17,7 @@ export { ModalOfferOptions } from "./modalOfferOptions/ModalOfferOptions";
 export { ModalSelectLocation } from "./modalSelectLocation/ModalSelectLocation";
 export { ModalOfferSettings } from "./modalOfferSettings/ModalOfferSettings";
 export { Navbar } from "./navbar/Navbar";
+export { Notification } from "./notification/Notification";
 export { OfferDetails } from "./offerDetails/OfferDetails";
 export { TitleApp } from "./titleApp/TitleApp";
 export { UserAvatar } from "./userAvatar/UserAvatar";

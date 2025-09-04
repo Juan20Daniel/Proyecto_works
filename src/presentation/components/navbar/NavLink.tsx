@@ -6,7 +6,7 @@ import { RootStackParamList } from '../../navigators/StackNavigator';
 
 interface Props {
     iconName: string;
-    redirect: 'Home'|'Search'|'Profile';
+    redirect: 'Search'|'Profile'|'Notifications';
 }
 
 export const NavLink = ({iconName, redirect}:Props) => {

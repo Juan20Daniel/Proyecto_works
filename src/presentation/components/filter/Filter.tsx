@@ -9,10 +9,11 @@ interface Props {
 
 export const Filter = ({setListLocationModal}:Props) => {
     const width = useWindowDimensions().width;
+    const isTable = width > 500;
     return (
         <>
-            <View style={styles.container}>
-                <Text style={[styles.note, width > 500 && styles.noteTable]}>
+            <View style={{...styles.container, height:isTable? 120 : 90,}}>
+                <Text style={[styles.note, isTable && styles.noteTable]}>
                     Mira las ofertas de trabajo que tiene tu ciudad
                 </Text>
                 <BtnLocationSelecter action={() => setListLocationModal(true)}/>
@@ -45,20 +46,20 @@ export const Filter = ({setListLocationModal}:Props) => {
 const styles = StyleSheet.create({
     container: {
         position: 'relative',
-        height: 120,
         backgroundColor: 'rgba(255, 255, 255, 0.9)',  
     },
     note: {
         fontFamily:globalStyles.fontMonserratMedium, 
         paddingHorizontal: 10, 
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 10,
         marginHorizontal: 'auto',
         color: 'black',
         fontSize: 16,
         width: 320,
     },
     noteTable: {
+        marginTop: 20,
         width: 420,
         fontSize: 25
     },

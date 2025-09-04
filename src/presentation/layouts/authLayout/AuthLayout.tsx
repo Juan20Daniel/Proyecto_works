@@ -1,30 +1,30 @@
 import { ReactNode } from 'react';
 import { DimensionValue, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { BtnClose, Container } from '../../components';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { globalStyles } from '../../../config/global.styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 interface Props {
+    navigation: StackNavigationProp<RootStackParamList>;
     subTitle:string;
     marginTop?:DimensionValue;
     children:ReactNode;
 }
 
-export const AuthLayout = ({subTitle, children,marginTop}:Props) => {
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+export const AuthLayout = ({navigation, subTitle, children}:Props) => {
+    
     const { top } = useSafeAreaInsets();
     const width = useWindowDimensions().width;
     const height = useWindowDimensions().height;
     const isTable = width>500;
-
     return (
         <Container>
             <ScrollView keyboardShouldPersistTaps='handled'>
                 <View style={{...styles.container, minHeight:height-top}}>
                     <View style={{...styles.content,  padding:isTable ? 30:10}}>
-                        <BtnClose backTo={() => navigation.navigate('Home')} top={20} />
+                        <BtnClose backTo={() => navigation.replace('Home', {animationType:'fade'})} top={20} />
                         <View style={{width:'100%', maxWidth: 500}}>
                             <Text style={{...styles.title, fontSize: isTable?40:35,width:isTable?400:300}}>
                                 Bienvenido a Nuestra App

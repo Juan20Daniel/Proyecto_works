@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white', 
     borderRadius:30,
     marginTop: 10,
-    ...globalStyles.shadow, 
+    borderWidth: 1,
+    borderColor: globalColors.lightGray
   },
   title: {
     fontWeight: 'bold'

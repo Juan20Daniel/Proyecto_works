@@ -4,10 +4,12 @@ import { globalColors, globalStyles } from '../../../config/global.styles';
 import { ItemLocation } from './components/ItemLocation';
 import { ListBtnLocations } from './components/ListBtnLocations';
 import { BtnFooter } from '../btns/btnFooter/BtnFooter';
+
 interface Props {
     visible: boolean;
     closeModal:() => void;
 }
+
 export const ModalSelectLocation = ({visible, closeModal}:Props) => {
     const width = useWindowDimensions().width;
     const isTable = width < 500;

@@ -1,38 +1,62 @@
-import React from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { StackScreenProps } from '@react-navigation/stack';
+import { Container, HorizontalPagination, UserAvatar } from '../../components';
+import { HeaderApp } from '../../components/headerApp/HeaderApp';
+import { RootStackParamList } from '../../navigators/StackNavigator';
+import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { globalColors } from '../../../config/global.styles';
 
-export const Profile = () => {
+interface Props extends StackScreenProps<RootStackParamList, 'Profile'>{};
+
+export const Profile = ({navigation}:Props) => {
+  const width = useWindowDimensions().width;
+  const height = useWindowDimensions().height;
+  const isTable = (width > 500 && height > 900);
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Scroll Vertical</Text>
-
-      {/* Contenido normal */}
-      <View style={styles.box} />
-      <View style={styles.box} />
-
-      {/* Scroll Horizontal anidado */}
-      <Text style={styles.subtitle}>Scroll Horizontal</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={styles.card} />
-        <View style={styles.card} />
-        <View style={styles.card} />
-        <View style={styles.card} />
-        <View style={styles.card} />
-      </ScrollView>
-
-      <View style={styles.box} />
-      <View style={styles.box} />
-      <View style={styles.box} />
-      <View style={styles.box} />
-      <View style={styles.box} />
-    </ScrollView>
+    <Container>
+      <HeaderApp  
+        alignTitle='flex-start' 
+        subText='Mi cuenta' 
+        actionBtnClose={() => navigation.goBack()} 
+      />
+      <View style={styles.boxInfoUser}>
+        <UserAvatar
+          isTable={isTable}
+          username='Juan Daniel Morales Abarca'
+        />
+        <View>
+          <Text style={{...styles.username, fontSize:isTable ? 20 : 15}} numberOfLines={2}>
+            Juan Daniel Morales Abarca Abarca
+          </Text>
+          <Text style={{...styles.email, fontSize:isTable ? 18 : 14}} numberOfLines={1}>
+            carlosmanuel@gmail.com
+          </Text>
+        </View>
+      </View>
+      <View style={{...styles.line, width:width-20}} />
+      <HorizontalPagination />
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-  title: { fontSize: 22, fontWeight: "bold", margin: 10 },
-  subtitle: { fontSize: 18, margin: 10 },
-  box: { height: 200, backgroundColor: "#ccc", margin: 10, borderRadius: 10 },
-  card: { width: 150, height: 150, backgroundColor: "#4084C3", margin: 10, borderRadius: 10 },
+  boxInfoUser: {
+    paddingHorizontal: 10,
+    paddingTop: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  username: {
+    color: globalColors.black,
+    maxWidth:350
+  },
+  email: {
+    color: globalColors.gray,
+    maxWidth:350
+  },
+  line: {
+    marginVertical:30,
+    marginHorizontal:10,
+    height: 1,
+    backgroundColor: globalColors.lightGray
+  }
 });

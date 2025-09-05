@@ -7,7 +7,7 @@ interface Props {
     text:string;
 }
 
-export const OfferOption = ({ iconName, text }:Props) => {
+export const BasicModalOption = ({ iconName, text }:Props) => {
     return (
         <Pressable 
             style={({pressed}) => [
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14
     }
-})
+});

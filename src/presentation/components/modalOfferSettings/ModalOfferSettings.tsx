@@ -1,7 +1,4 @@
 import { useContext, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { BtnIcon } from '../btns/btnIcon/BtnIcon';
-import { globalColors } from '../../../config/global.styles';
 import { OfferSettingsContext } from '../../context/OfferSettingsContext';
 import { OfferAction } from './OfferAction';
 import { Switch } from '../switch/Switch';
@@ -14,16 +11,7 @@ export const ModalOfferSettings = () => {
     const toggleSettings = useContext(OfferSettingsContext)?.toggleSettings;
    
     return (    
-        <BoxModalBottom visible={showSettings!} closeModal={toggleSettings}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Configuración</Text>  
-                <BtnIcon 
-                    iconName='close-outline' 
-                    action={() => {
-                        toggleSettings && toggleSettings()
-                    }}
-                />
-            </View>
+        <BoxModalBottom title='Configuración' visible={showSettings!} closeModal={toggleSettings}>
             <OfferAction 
                 title='Estado de la publicación' 
                 label={switchState ? 'En línea' : 'Fuera de línea' }
@@ -41,29 +29,3 @@ export const ModalOfferSettings = () => {
         </BoxModalBottom>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        position: 'relative',
-        flex:1,
-        backgroundColor: 'rgba(0,0,0,0.1)'
-    },
-    content: {
-        position: 'absolute',
-        bottom: 20,
-        paddingVertical: 30,
-        borderRadius: 30,
-        backgroundColor: globalColors.white,
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 30,
-        paddingBottom: 20,
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    }
-});

@@ -1,76 +1,84 @@
-import React from 'react'
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import { globalColors, globalStyles } from '../../../config/global.styles'
-import { BtnIcon } from '../btns/btnIcon/BtnIcon'
-
-export const Notification = () => {
+import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { globalColors, globalStyles } from '../../../config/global.styles';
+import { BtnIcon } from '../btns/btnIcon/BtnIcon';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../navigators/StackNavigator';
+interface Props {
+    openNotificationOptions:() => void;
+}
+export const Notification = ({openNotificationOptions}:Props) => {
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const width = useWindowDimensions().width;
+    const isTablet = width > 500;
     return (
-        <Pressable 
+        <Pressable
+            onPress={() => navigation.navigate('Offer',{typeUser:'user'})}
             style={({pressed}) => [
                 styles.container,
                 {
                     backgroundColor: pressed ? globalColors.lightGray : undefined,
+                    height: isTablet ? 160 : 100
                     // opacity: 0.6
                 }
             ]}
         >
-            <View style={styles.content}>
-                <Image 
+            <View style={{
+                ...styles.content,
+                height: isTablet ? 150 : 90,
+            }}>
+                <Image
                     source={require('../../../assets/publications/logo2.jpg')}
-                    style={styles.imgCompany}
+                    style={{
+                        ...styles.imgCompany,
+                        width: isTablet ? 170 : 110,
+                        height: isTablet ? 140 : 80
+                    }}
                 />
                 <View style={styles.boxInfo}>
-                    <Text style={styles.title}>BRAND NAME</Text>
-                    <Text style={styles.description} numberOfLines={3}>
+                    <Text style={{...styles.title,  fontSize: isTablet ? 15 : 12}}>BRAND NAME</Text>
+                    <Text style={{...styles.description,  fontSize: isTablet ? 12 : 8}} numberOfLines={isTablet ? 3 :2}>
                         The name a company gives to one of its products, so that people can easily recognize 
                         it: popular/famous/well-known brand name It is one of the most famous brand names in world banking.
                     </Text>
-                    <Text style={styles.date}>Publicado hace 2 horas</Text>
+                    <Text style={{...styles.date, fontSize: isTablet ? 12 : 8}}>Publicado hace 2 horas</Text>
                 </View>
-                <View style={{flex:1, alignItems:'flex-end', height: 150}}>
-                    <BtnIcon 
+                <View style={{width:30, alignItems:'flex-end', height: isTablet ? 150 : 90}}>
+                    <BtnIcon
                         iconName='ellipsis-vertical'
-                        action={() => {}}
+                        action={() => openNotificationOptions()}
                     />
                 </View>
             </View>
         </Pressable>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 15,
-        width: '100%',
         justifyContent: 'center',
-        height: 160,
         marginTop: 10
     },
     content: {
         flexDirection:'row',
         alignItems:'center',
-        height: 150,
         gap: 20
     },
     imgCompany: {
-        width: 180, 
-        height:140, 
         objectFit:'cover', 
         borderRadius: 15
     },
     boxInfo: {
-        gap: 5
+        flex:1,
+        gap: 5,
     },
     title: {
         fontFamily: globalStyles.fontMonserratSemiBold,
-        fontSize: 15,
     },
     description: {
-        maxWidth: 400,
-        fontSize: 12
+        maxWidth: 400
     },
     date: {
         color: globalColors.gray,
-        fontSize: 12
     }
 })

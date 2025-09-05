@@ -1,30 +1,36 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 interface Props {
+    isTable?:boolean;
     username: string;
     userImage?:string;
 }
 
-export const UserAvatar = ({username, userImage}:Props) => {
+export const UserAvatar = ({isTable, username, userImage}:Props) => {
     return (
-        <View style={styles.container}>
+        <View style={{
+            ...styles.container,
+            width:isTable ? 100 : 70, 
+            height:isTable ? 100 : 70
+        }}>
             {userImage 
                 ?   <Image
                         source={require('../../../assets/user/userImg.jpg')}
                         style={styles.img}
                     />
-                :   <Text style={styles.text}>{username[0].toUpperCase()}</Text>}
+                :   <Text style={{...styles.text, fontSize:isTable ? 50 : 35}}>
+                        {username[0].toUpperCase()}
+                    </Text>
+            }
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
-        width: 70,
-        height: 70,
         backgroundColor: '#9A7F20',
         marginRight: 15,
-        borderRadius: 35,
+        borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center'
     },

@@ -6,6 +6,8 @@ import { BtnClose, GoogleMap, OfferDetails, ModalOfferOptions, ModalOfferSetting
 import { StackScreenProps } from "@react-navigation/stack";
 import { globalColors } from "../../../config/global.styles";
 import BottomSheet from "@gorhom/bottom-sheet";
+import { OfferOptionsProvider } from "../../context/OfferOptionsContext";
+import { OfferSettingsProvider } from "../../context/OfferSettingsContext";
 
 interface Props extends StackScreenProps<RootStackParamList, 'Offer'>{}
 
@@ -15,37 +17,37 @@ export const Offer = ({route}:Props) => {
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = ['40%', '85%'];
   return (
-    <>
-      <View style={styles.container}>
-        <BtnClose top={40}  backTo={() => navigation.goBack()} />
-        <GoogleMap 
-          location={{
-            latitude: 19.0906368,
-            longitude: -104.2972672 
-          }}
-          height='70%' 
-        />
-        <BottomSheet
-          ref={sheetRef}
-          snapPoints={snapPoints}
-          enableDynamicSizing={false}
-          enablePanDownToClose={false}
-          handleIndicatorStyle={{width:100, backgroundColor: globalColors.darkGray}}
-        >
-          <OfferDetails typeUser={typeUser} />
-        </BottomSheet>
-      </View>
-      {/* {typeUser === 'user' &&
-        <ModalOfferOptions />
-      } */}
-      {/* {typeUser === 'owner' &&
-        <ModalOfferSettings />
-      } */}
-    </>
+    <OfferSettingsProvider>
+      <OfferOptionsProvider>
+        <View style={styles.container}>
+          <BtnClose top={40}  backTo={() => navigation.goBack()} />
+          <GoogleMap 
+            location={{
+              latitude: 19.0906368,
+              longitude: -104.2972672 
+            }}
+            height='70%' 
+          />
+          <BottomSheet
+            ref={sheetRef}
+            snapPoints={snapPoints}
+            enableDynamicSizing={false}
+            enablePanDownToClose={false}
+            handleIndicatorStyle={{width:100, backgroundColor: globalColors.darkGray}}
+          >
+            <OfferDetails typeUser={typeUser} />
+          </BottomSheet>
+        </View>
+        {typeUser === 'user' &&
+          <ModalOfferOptions />
+        }
+        {typeUser === 'owner' &&
+          <ModalOfferSettings />
+        }
+      </OfferOptionsProvider>
+    </OfferSettingsProvider>
   );
 }
-
-//Arreglar el bug del modal de opciones
 
 const styles = StyleSheet.create({
   container: {

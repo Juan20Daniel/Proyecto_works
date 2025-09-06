@@ -10,8 +10,8 @@ export const UserAvatar = ({isTable, username, userImage}:Props) => {
     return (
         <View style={{
             ...styles.container,
-            width:isTable ? 100 : 70, 
-            height:isTable ? 100 : 70
+            width:isTable ? 90 : 70, 
+            height:isTable ? 90 : 70
         }}>
             {userImage 
                 ?   <Image

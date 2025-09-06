@@ -3,7 +3,6 @@ import {
     FlatList, 
     StyleProp, 
     StyleSheet, 
-    Text, 
     useWindowDimensions, 
     View, 
     ViewStyle, 
@@ -11,62 +10,52 @@ import {
     NativeScrollEvent 
 } from "react-native"
 import { globalStyles } from "../../../config/global.styles";
+import { useState } from "react";
 
 interface Props {
-    customWidth?:DimensionValue;
-    customHeight?:DimensionValue;
     list?: number[];
-    showCounter?: boolean;
     customStyleContainer?:StyleProp<ViewStyle>;
+    children:React.ReactNode;
+    pagingEnabled?:boolean;
 }
 
 export const HorizontalPagination = ({
-    customWidth, 
-    customHeight, 
     list=[1,2,3,4,5,6,7,8,9], 
-    showCounter=true,
-    customStyleContainer
+    customStyleContainer,
+    children,
+    pagingEnabled=false
 }:Props) => {
+    const [ index, setIndex ] = useState(0);
     const width = useWindowDimensions().width;
     const onScroll = (event:NativeSyntheticEvent<NativeScrollEvent>) => {
-
-        console.log('scroll');
+        const { contentOffset, layoutMeasurement } = event.nativeEvent;
+       setIndex(Math.floor(contentOffset.x / layoutMeasurement.width))
     }
     return (
-        <>
-            <View style={[{width:customWidth??width, height:customHeight??400},customStyleContainer]}>
+        <View style={[{flex:1}, customStyleContainer]}>
+            <View style={{flex:1}}>
                 <FlatList 
                     data={list}
                     keyExtractor={(item) => item.toString()}
                     horizontal
-                    pagingEnabled
+                    pagingEnabled={pagingEnabled}
                     showsHorizontalScrollIndicator={false}
-                    renderItem={({item}) => (
-                        <View style={{...styles.container, width:customWidth??width, height:customHeight??400}}>
-                            <Text>Box {item}</Text>
-                        </View>
+                    renderItem={() => (
+                        <>
+                            {children}
+                        </>
                     )}
                     onScroll={onScroll}
                 />
             </View>
-            {showCounter &&
-                <View style={styles.boxCounter}>
-                    <Text style={styles.counter}>
-                        1/23
-                    </Text>
-                </View>
-            }
-        </>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor:'red',
-    },
     boxCounter: {
         width: '100%', 
-        alignItems:'center'
+        alignItems:'center',
     },
     counter: {
         fontSize: 20,

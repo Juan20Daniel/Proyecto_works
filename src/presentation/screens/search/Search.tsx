@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { InputSelect, BtnFooter, Container, HeaderApp, IlustrationSearch } from '../../components';
+import { InputSelect, BtnFooter, Container, HeaderApp, IlustrationSearch, ModalOfferOptions } from '../../components';
 import { globalColors } from '../../../config/global.styles';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { SearchResultsModal } from '../../components/searchResultsModal/SearchResultsModal';
 import type { SelectOption } from '../../../infrestructure/interfaces/select-option';
+import { OfferOptionsProvider } from '../../context/OfferOptionsContext';
 
 const availableJobs:SelectOption[] = [
     {id:1, name:'Camionero', isSelected: false},
@@ -39,7 +40,7 @@ export const Search = () => {
         setShowAvailableLocations(false);
     }
     return (
-        <>
+        <OfferOptionsProvider>
             <Container customStyles={styles.container}>
                 <TouchableWithoutFeedback onPress={closeAll}>
                     <View style={styles.content}>
@@ -91,12 +92,15 @@ export const Search = () => {
                 </TouchableWithoutFeedback>
             </Container>
             {(jobSelected !== '' && locationSelected !== '') &&
-                <SearchResultsModal 
-                    visible={showModalResults} 
-                    closeModal={() => setShowModalResults(!showModalResults)} 
-                /> 
+                <>
+                    <SearchResultsModal 
+                        visible={showModalResults} 
+                        closeModal={() => setShowModalResults(!showModalResults)} 
+                    /> 
+                    <ModalOfferOptions />
+                </>
             }
-        </>
+        </OfferOptionsProvider>
     );
 }
 

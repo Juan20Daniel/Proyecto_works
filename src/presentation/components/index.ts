@@ -27,3 +27,5 @@ export { SocialAuthButton } from "./socialAuthButton/SocialAuthButton";
 export { Filter } from "./filter/Filter";
 export { HorizontalPagination } from "./horizontalPagination/HorizontalPagination";
 export { OfferPersonalizedSmall } from "./offer/OfferPersonalizedSmall";
+export { OfferInImgSmall } from "./offer/OfferInImgSmall";
+export { UserAccountInformation } from "./userAccountInformation/UserAccountInformation";

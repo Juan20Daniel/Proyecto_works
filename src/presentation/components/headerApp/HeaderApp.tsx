@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { TitleApp } from '../titleApp/TitleApp';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { BtnClose } from '../btns/btnClose/BtnClose';
+import { Ionicons } from '../icon/Ionicons';
 
 interface Props {
     alignTitle?: 'center'|'flex-start',
@@ -15,7 +16,7 @@ export const HeaderApp = ({alignTitle='flex-start', subText, actionBtnClose}:Pro
             <TitleApp />
             {subText &&
                 <>
-                    <View style={styles.point} />
+                    <Ionicons name='ellipse' size={7} />
                     <Text style={styles.subText}>{subText}</Text>
                 </>
             }
@@ -31,12 +32,6 @@ const styles = StyleSheet.create({
         gap:10,
         paddingTop: 20,
         marginLeft: globalStyles.marginHorizontal 
-    },
-    point: {
-        width:7, 
-        height: 7, 
-        borderRadius: 4, 
-        backgroundColor: 'black'
     },
     subText: {
         fontSize: 16, 

@@ -34,7 +34,7 @@ export const SearchResultsModal = ({visible, closeModal}:Props) => {
                     </View>
                     <ActiveAlert />        
                 </View>
-                <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+                <ScrollView style={styles.listOffers} showsVerticalScrollIndicator={false}>
                     <ListOffers />
                 </ScrollView>
             </View>
@@ -65,4 +65,8 @@ const styles = StyleSheet.create({
         fontFamily: globalStyles.fontMonserratMedium, 
         color:globalColors.gray
     },
+    listOffers: {
+        flex: 1,
+        paddingTop:20,
+    }
 });

@@ -1,9 +1,15 @@
-import { StackScreenProps } from '@react-navigation/stack';
-import { Container, HorizontalPagination, OfferPersonalizedSmall, UserAvatar } from '../../components';
-import { HeaderApp } from '../../components/headerApp/HeaderApp';
-import { RootStackParamList } from '../../navigators/StackNavigator';
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from '../../navigators/StackNavigator';
 import { globalColors, globalStyles } from '../../../config/global.styles';
+import { 
+  Container, 
+  HorizontalPagination, 
+  OfferPersonalizedSmall, 
+  UserAccountInformation, 
+  HeaderApp, 
+  OfferInImgSmall
+} from '../../components';
 
 interface Props extends StackScreenProps<RootStackParamList, 'Profile'>{};
 
@@ -18,34 +24,24 @@ export const Profile = ({navigation}:Props) => {
         subText='Mi cuenta' 
         actionBtnClose={() => navigation.goBack()} 
       />
-      <View style={styles.boxInfoUser}>
-        <UserAvatar
-          isTable={isTable}
-          username='Juan Daniel Morales Abarca'
-        />
-        <View>
-          <Text style={{...styles.username, fontSize:isTable ? 20 : 15}} numberOfLines={2}>
-            Juan Daniel Morales Abarca Abarca
-          </Text>
-          <Text style={{...styles.email, fontSize:isTable ? 18 : 14}} numberOfLines={1}>
-            carlosmanuel@gmail.com
-          </Text>
-        </View>
-      </View>
+      <UserAccountInformation 
+        username='Juan Daniel Morales Abarca Abarca Abarca Abarca' 
+        email='carlosmanuel@gmail.com'
+      />
       <View style={{...styles.line, width:width-20}} />
-      <View style={{paddingHorizontal: 20, height:40, justifyContent:'center'}}>
+      <View style={{paddingHorizontal: 20, height:isTable ? 40 : 30, justifyContent:'center'}}>
         <Text style={{fontSize:15}}>Mis postulaciones guardadas</Text>
       </View>
       <HorizontalPagination>
-        <OfferPersonalizedSmall />
+        <OfferInImgSmall />
       </HorizontalPagination>
-      <View style={{paddingHorizontal: 20, height:40, justifyContent:'center'}}>
+      <View style={{paddingHorizontal: 20, height:isTable ? 40 : 30, justifyContent:'center'}}>
         <Text style={{fontSize:15}}>Mis publicaciones</Text> 
       </View> 
       <HorizontalPagination>
         <OfferPersonalizedSmall />
       </HorizontalPagination>
-      <View style={{...styles.boxBtnCloseSession, height:isTable ? 120 : 70}}>
+      <View style={{...styles.boxBtnCloseSession, height:120, marginTop:isTable ? 40 : 0}}>
         <Pressable style={({pressed})=>[styles.btnCloseSession,{opacity:pressed? 0.3 : 1}]}>
           <Text style={{fontSize: 18, fontFamily:globalStyles.fontMonserratMedium, color:globalColors.gray}}>
             Cerrar sesión
@@ -57,20 +53,6 @@ export const Profile = ({navigation}:Props) => {
 }
 
 const styles = StyleSheet.create({
-  boxInfoUser: {
-    paddingHorizontal: 10,
-    paddingTop: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  username: {
-    color: globalColors.black,
-    maxWidth:350
-  },
-  email: {
-    color: globalColors.gray,
-    maxWidth:350
-  },
   line: {
     marginVertical:10,
     marginHorizontal:10,
@@ -81,7 +63,6 @@ const styles = StyleSheet.create({
     width:'100%', 
     alignItems:'center', 
     paddingTop:10, 
-    marginTop:40
   },
   btnCloseSession: {
     width:300, 

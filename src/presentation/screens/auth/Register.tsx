@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useReducer, useState } from 'react';
 import { Keyboard, View } from 'react-native';
+import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { AuthSwitchLink, BtnBasic, Input, SocialAuthButton } from '../../components';
 import { simpleFormReducer } from '../../reducers/simpleForm/simpleForm';
 import { AuthLayout } from '../../layouts';
-import { StackScreenProps } from '@react-navigation/stack';
 
 interface Props extends StackScreenProps<RootStackParamList, 'Register'>{}
 
@@ -93,7 +93,7 @@ export const Register = ({navigation}:Props) => {
                 onFocus={(field:string) => putFocusInput(field)}
                 clearInput={inputClear}
             />
-             <Input
+            <Input
                 label='Apellido'
                 placeholder='Ingresa tu apellido'
                 name='lastname'

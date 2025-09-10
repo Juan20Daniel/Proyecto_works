@@ -1,6 +1,6 @@
 import { Modal, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { globalColors } from '../../../config/global.styles';
-import { BtnIcon } from '../btns/btnIcon/BtnIcon';
+import { globalColors } from '../../../../config/global.styles';
+import { BtnIcon } from '../../btns/btnIcon/BtnIcon';
 
 interface Props {
     title: string;

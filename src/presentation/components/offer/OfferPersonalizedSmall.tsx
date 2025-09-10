@@ -4,6 +4,9 @@ import { BtnIcon } from '../btns/btnIcon/BtnIcon';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { Ionicons } from '../icon/Ionicons';
+import { useContext } from 'react';
+import { OfferSettingsContext } from '../../context/OfferSettingsContext';
+import { useIsTable } from '../../hooks/useIsTable';
 
 interface Props {
     hasSeen?:boolean;
@@ -11,13 +14,13 @@ interface Props {
 
 export const OfferPersonalizedSmall = ({hasSeen=false}:Props) => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const toggleSettings = useContext(OfferSettingsContext)?.toggleSettings;
     const width = useWindowDimensions().width;
-    const height = useWindowDimensions().height;
-    const isTable = (width > 500 && height > 900);
+    const isTable = useIsTable();
     return (
         <View style={{...styles.container, width:isTable ? 500 : width}}>
             <Pressable
-                onPress={() => navigation.navigate('Offer',{typeUser:'user'})}
+                onPress={() => navigation.navigate('Offer',{typeUser:'owner'})}
                 style={({pressed}) => [{
                     ...styles.content, 
                     borderRadius:isTable ? 40 : 20,
@@ -30,7 +33,9 @@ export const OfferPersonalizedSmall = ({hasSeen=false}:Props) => {
                         source={require('../../../assets/publications/logo2.jpg')}
                         style={{...styles.logoCompany, width:isTable? 120 : 100, height:isTable? 90 : 70,}}
                     />
-                    <BtnIcon iconName='ellipsis-vertical' action={() => {}} />
+                    <BtnIcon iconName='ellipsis-vertical' action={() => {
+                        toggleSettings && toggleSettings();
+                    }} />
                 </View>
                 <Text style={{...styles.title, fontSize:isTable ? 25 : 20, marginTop:isTable ? 15 : 5}}>Chofer de camiones</Text>
                 <Text style={{...styles.description,fontSize:isTable ? 18:12 }} numberOfLines={2}>

@@ -1,7 +1,7 @@
+import { Dispatch, SetStateAction } from "react";
 import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { BtnLocationSelecter } from "../locationSelecters/BtnLocationSelecter";
 import { globalColors, globalStyles } from "../../../config/global.styles";
-import { Dispatch, SetStateAction } from "react";
 
 interface Props {
     setListLocationModal: Dispatch<SetStateAction<boolean>>;

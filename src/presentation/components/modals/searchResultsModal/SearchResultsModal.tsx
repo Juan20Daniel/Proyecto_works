@@ -1,9 +1,9 @@
 import { Modal, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
-import { HeaderApp } from '../headerApp/HeaderApp';
-import { globalColors, globalStyles } from '../../../config/global.styles';
-import { ListOffers } from '../listOffers/ListOffers';
-import { ActiveAlert } from '../activeAlert/ActiveAlert';
-import { BtnIcon } from '../btns/btnIcon/BtnIcon';
+import { HeaderApp } from '../../headerApp/HeaderApp';
+import { globalColors, globalStyles } from '../../../../config/global.styles';
+import { ListOffers } from '../../listOffers/ListOffers';
+import { ActiveAlert } from '../../activeAlert/ActiveAlert';
+import { BtnIcon } from '../../btns/btnIcon/BtnIcon';
 
 interface Props {
     visible:boolean;

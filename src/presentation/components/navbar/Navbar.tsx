@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
-import { TitleApp } from '../titleApp/TitleApp';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { TitleApp } from '../titleApp/TitleApp';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { NavLink } from './NavLink';
 
@@ -27,13 +27,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: 1,
         borderColor: globalColors.lightGray,
-
         backgroundColor: '#fff',
-        shadowColor: '#000000b4',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.18,
-        shadowRadius: 8,
-        elevation: 8,
     },
     boxButtons: {
         flexDirection: 'row',

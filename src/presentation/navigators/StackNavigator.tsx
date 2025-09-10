@@ -6,6 +6,7 @@ import { Login } from '../screens/auth/Login';
 import { Register } from '../screens/auth/Register';
 import { Offer } from '../screens/offer/Offer';
 import { Notifications } from '../screens/notifications/Notifications';
+import { CreateOffer } from '../screens/createOffer/CreateOffer';
 
 export type RootStackParamList = {
     Home: {animationType?:StackAnimationName};
@@ -13,6 +14,7 @@ export type RootStackParamList = {
     Profile: undefined;
     Login: { animationType?:StackAnimationName };
     Register: { animationType?:StackAnimationName };
+    CreateOffer: undefined;
     Offer: {typeUser: "user"|"owner"};
     Notifications: undefined;
 }
@@ -34,6 +36,7 @@ const StackNavigator = () => {
             <Stack.Screen name='Search' component={Search} options={{animation:'slide_from_left'}} />
             <Stack.Screen name='Profile' component={Profile} options={{animation:'slide_from_right'}} />
             <Stack.Screen name='Offer' component={Offer} options={{animation:'slide_from_right'}} />
+            <Stack.Screen name='CreateOffer' component={CreateOffer} options={{animation:'fade'}} />
             <Stack.Screen name='Notifications' component={Notifications} />
             <Stack.Screen 
                 name='Login' 

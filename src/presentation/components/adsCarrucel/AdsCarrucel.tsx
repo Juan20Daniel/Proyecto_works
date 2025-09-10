@@ -1,7 +1,7 @@
-import { FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, useWindowDimensions, View } from 'react-native'
-import { globalColors } from '../../../config/global.styles';
 import { useState } from 'react';
-import { NavigationProp, RouteProp, useNavigation } from '@react-navigation/native';
+import { FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { globalColors } from '../../../config/global.styles';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { AdsCarrucelSkeletor } from './AdsCarrucelSkeletor';
 import { Ads } from './Ads';

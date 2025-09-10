@@ -2,7 +2,6 @@ import { createContext, PropsWithChildren, useState } from "react";
 
 interface InitialState {
     showOptions:boolean;
-
     toggleOptios: () => void;    
 }
 
@@ -17,5 +16,5 @@ export const OfferOptionsProvider = ({children}:PropsWithChildren) => {
         <OfferOptionsContext.Provider value={{showOptions, toggleOptios}}>
             {children}
         </OfferOptionsContext.Provider>
-    )
+    );
 }

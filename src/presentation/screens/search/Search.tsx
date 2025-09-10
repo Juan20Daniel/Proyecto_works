@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { InputSelect, BtnFooter, Container, HeaderApp, IlustrationSearch, ModalOfferOptions } from '../../components';
+import { useState } from 'react';
+import { Keyboard, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { globalColors } from '../../../config/global.styles';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
-import { SearchResultsModal } from '../../components/searchResultsModal/SearchResultsModal';
-import type { SelectOption } from '../../../infrestructure/interfaces/select-option';
 import { OfferOptionsProvider } from '../../context/OfferOptionsContext';
+import type { SelectOption } from '../../../infrestructure/interfaces/select-option';
+import { 
+    InputSelect, 
+    BtnFooter, 
+    Container, 
+    HeaderApp, 
+    IlustrationSearch, 
+    ModalOfferOptions, 
+    SearchResultsModal 
+} from '../../components';
 
 const availableJobs:SelectOption[] = [
     {id:1, name:'Camionero', isSelected: false},
     {id:2, name:'Asistente', isSelected: false},
     {id:3, name:'Montacargas', isSelected: false},
     {id:4, name:'Mesero', isSelected: false},
-    {id:5, name:'Cajero', isSelected: false}
+    {id:5, name:'Cajero', isSelected: false},
+    {id:6, name:'Repartidor', isSelected: false},
+    {id:7, name:'Albañil', isSelected: false},
+    {id:8, name:'Errero', isSelected: false},
+    {id:9, name:'Conductor', isSelected: false},
+    {id:10, name:'Bombero', isSelected: false},
+    {id:11, name:'Doctor', isSelected: false},
 ]
 const availableLocations:SelectOption[] = [
     {id:1, name:'Colima', isSelected: false},
@@ -28,16 +41,13 @@ const availableLocations:SelectOption[] = [
     {id:10, name:'Zapotitlan', isSelected: false},
 ]
 export const Search = () => {
-    const [ jobSelected, setJobSelected ] = useState('');
-    const [ locationSelected, setLocationSelected ] = useState('');
-    const [ showAvailableJob, setShowAvailableJob ] = useState(false);
-    const [ showAvailableLocations, setShowAvailableLocations ] = useState(false);
+    const [ jobSelected, setJobSelected ] = useState('');    
+    const [ isfocus, setIsFocus ] = useState(false);
     const [ showModalResults, setShowModalResults ] = useState(false); 
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const closeAll = () => {
-        if(!showAvailableJob && !showAvailableLocations) return;
-        setShowAvailableJob(false);
-        setShowAvailableLocations(false);
+        setIsFocus(false);
+        Keyboard.dismiss();
     }
     return (
         <OfferOptionsProvider>
@@ -54,17 +64,16 @@ export const Search = () => {
                             placeholder='Trabajos disponibles'
                             value={jobSelected}
                             setValue={setJobSelected}
-                            showIconLeft={true}
-                            iconName='search-outline'
-                            showOption={showAvailableJob}
+                            iconName='search-outline'     
+                            isfocus={isfocus}
+                            onFocus={() => setIsFocus(true)}                            
                             listOptions={availableJobs}
-                            toggleOptions={() => {
-                                setShowAvailableLocations(false);
-                                setShowAvailableJob(!showAvailableJob);
+                            closeListOptions={() => {
+                                setIsFocus(false);
                             }}
                         />
                         <View style={{width:'100%', height: 20}} />
-                        <InputSelect
+                        {/* <InputSelect
                             customStyles={{opacity: jobSelected !== '' ? 1 : 0}} 
                             label='Selecciona un lugar'
                             placeholder='Trabajos disponibles'
@@ -78,10 +87,10 @@ export const Search = () => {
                                 setShowAvailableJob(false);
                                 setShowAvailableLocations(!showAvailableLocations)
                             }}
-                        />
+                        /> */}
                         <IlustrationSearch />
                         <BtnFooter
-                            disable={!(jobSelected !== '' && locationSelected !== '')}
+                            disable={!(jobSelected !== '')}
                             value='Buscar'
                             iconName='search-outline'
                             height={80}
@@ -91,7 +100,7 @@ export const Search = () => {
                     </View>
                 </TouchableWithoutFeedback>
             </Container>
-            {(jobSelected !== '' && locationSelected !== '') &&
+            {(jobSelected !== '') &&
                 <>
                     <SearchResultsModal 
                         visible={showModalResults} 

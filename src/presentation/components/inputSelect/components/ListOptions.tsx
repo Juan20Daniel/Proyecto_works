@@ -1,63 +1,53 @@
-import { SetStateAction, useState, useEffect, memo } from 'react';
+import { SetStateAction, useState, useEffect } from 'react';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions } from 'react-native'
-import { globalColors, globalStyles } from '../../../../config/global.styles';
+import { globalColors } from '../../../../config/global.styles';
 import { SelectOption } from './SelectOption';
 import type { SelectOption as Option } from '../../../../infrestructure/interfaces/select-option';
 
 interface Props {
-    defaultOp:string;
+    inputValue:string;
     listOptions:Option[];
     setValue: React.Dispatch<SetStateAction<string>>;
     closeOptions:() => void;
 }
 
-export const ListOptions = ({defaultOp, listOptions:inicialState, setValue, closeOptions}:Props) => {
+export const ListOptions = ({inputValue, listOptions:inicialState, setValue, closeOptions}:Props) => {
     const [listOptions, setListOptions] = useState(inicialState);
     const height = useWindowDimensions().height;
+
     useEffect(() => {
-        if(defaultOp !== '') selectDefaultOption();
-    },[]);
-    const orderOptions = (options:Option[]):Option[] => {
-        const result = options.sort((a,b) => {
-            if(a.isSelected < b.isSelected) return 1
-            if(a.isSelected > b.isSelected) return -1
-            return 0
-        })
-        return result;
-    }
-    const selectDefaultOption = () => {
-        const listOptions_copy = [...listOptions];
-        const result = listOptions_copy.map(option => {
-            return option.name === defaultOp
-                ?   {...option, isSelected:true}
-                :   {...option, isSelected:false}
-        });
-        setListOptions(orderOptions(result));
-    }
-    const optionSelector = (id:number) => {
-        const listOptions_copy = [...listOptions];
-        const result = listOptions_copy.map(option => {
-            if(option.id === id) {
-                setValue(option.name);
-                return {...option, isSelected:true}
+        if(inputValue !== '') {
+            const listOptions_copy = inicialState;
+            const result = listOptions_copy.filter(option => {
+                return option.name.toLowerCase().startsWith(inputValue.toLowerCase())
+            });
+            if(result.length === 1) {
+                if(result[0].name === inputValue) setListOptions([]);
+                else setListOptions(result);
             } else {
-                return {...option, isSelected:false}
+                setListOptions(result);
             }
-        });
-        setTimeout(() => closeOptions(), 100);
-        setListOptions(result);
+        } else {
+            setListOptions(inicialState);
+        }
+    },[inputValue]);
+    const optionSelector = (name:string) => {
+        setValue(name);
+        closeOptions();
     }
     return (
-        <Pressable style={{...styles.container,maxHeight: height > 800 ? 410 : 250,}}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                {listOptions.map(option => (
-                    <SelectOption 
-                        key={option.id} {...option} 
-                        optionSelecter={optionSelector}
-                    />
-                ))}
-            </ScrollView>
-        </Pressable>
+        (listOptions.length >= 1) &&
+            <Pressable style={{...styles.container,maxHeight: height > 800 ? 410 : 250}}>
+                <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
+                    {listOptions.map(option => (
+                        <SelectOption 
+                            {...option} 
+                            key={option.id} 
+                            optionSelecter={optionSelector}
+                        />
+                    ))}
+                </ScrollView>
+            </Pressable>
     );
 }
 

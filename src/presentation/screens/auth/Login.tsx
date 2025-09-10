@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useReducer, useState } from 'react';
 import { Keyboard, View } from 'react-native';
+import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { AuthSwitchLink, BtnBasic, Input, SocialAuthButton } from '../../components';
 import { simpleFormReducer } from '../../reducers/simpleForm/simpleForm';
 import { AuthLayout } from '../../layouts';
-import { StackScreenProps } from '@react-navigation/stack';
 
 interface Props extends StackScreenProps<RootStackParamList, 'Login'>{}
 
@@ -120,7 +120,6 @@ export const Login = ({navigation}:Props) => {
                 image={require('../../../assets/auth/ImgFacebook.png')}
                 action={() => {}}
             />
-            {/* <View style={{width:'100%', height: 500, backgroundColor:'red'}} /> */}
         </AuthLayout>
     );
 }

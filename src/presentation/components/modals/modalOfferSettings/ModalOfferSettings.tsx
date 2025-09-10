@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import { OfferSettingsContext } from '../../context/OfferSettingsContext';
+import { OfferSettingsContext } from '../../../context/OfferSettingsContext';
 import { OfferAction } from './OfferAction';
-import { Switch } from '../switch/Switch';
-import { Ionicons } from '../icon/Ionicons';
+import { Switch } from '../../switch/Switch';
+import { Ionicons } from '../../icon/Ionicons';
 import { BoxModalBottom } from '../boxModalBottom/BoxModalBottom';
 
 export const ModalOfferSettings = () => {

@@ -1,4 +1,4 @@
-import { StyleProp, StyleSheet, useWindowDimensions, View, ViewStyle } from 'react-native';
+import { StyleProp, useWindowDimensions, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { globalColors } from '../../../config/global.styles';
 
@@ -15,7 +15,7 @@ export const Container = ({marginTop, children, customStyles}:Props) => {
     return (
         <View style={[
             {
-                ...styles.container, 
+                backgroundColor: globalColors.white,
                 width:width, 
                 height:height, 
                 paddingTop: marginTop??top,
@@ -26,9 +26,3 @@ export const Container = ({marginTop, children, customStyles}:Props) => {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: globalColors.white
-    }
-});

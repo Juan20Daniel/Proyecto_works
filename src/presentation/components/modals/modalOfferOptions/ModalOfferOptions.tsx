@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { OfferOptionsContext } from '../../context/OfferOptionsContext';
+import { OfferOptionsContext } from '../../../context/OfferOptionsContext';
 import { BoxModalBottom } from '../boxModalBottom/BoxModalBottom';
 import { BasicModalOption } from '../basicModalOption/BasicModalOption';
 
@@ -12,6 +12,7 @@ export const ModalOfferOptions = () => {
             visible={showOptions!}
             closeModal={toggleOptios}
         >
+            <BasicModalOption iconName='save-outline' text='Guardar esta oferta' />
             <BasicModalOption iconName='eye-off-outline' text='Ocultar esta oferta' />
             <BasicModalOption iconName='ban-outline' text='No mostrar ofertas como esta' />
             <BasicModalOption iconName='arrow-redo-outline' text='Compartir' />

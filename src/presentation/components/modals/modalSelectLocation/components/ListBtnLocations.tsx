@@ -1,5 +1,5 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { globalColors } from '../../../../config/global.styles';
+import { globalColors } from '../../../../../config/global.styles';
 import { BtnLocation } from './BtnLocation';
 
 export const ListBtnLocations = () => {

@@ -2,7 +2,6 @@ import { createContext, PropsWithChildren, useState } from "react";
 
 interface InitialState {
     showSettings: boolean;
-
     toggleSettings:() => void;
 }
 

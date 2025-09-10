@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, useWindowDimensions, View, Pressable } from 'react-native';
-import { globalColors, globalStyles } from '../../../../config/global.styles';
-import { Ionicons } from '../../icon/Ionicons';
+import { globalColors, globalStyles } from '../../../../../config/global.styles';
+import { Ionicons } from '../../../icon/Ionicons';
 
 interface Props {
     id: number;

@@ -1,13 +1,13 @@
 import { useRef } from "react";
 import { StyleSheet, View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../../navigators/StackNavigator";
-import { BtnClose, GoogleMap, OfferDetails, ModalOfferOptions, ModalOfferSettings } from "../../components";
-import { StackScreenProps } from "@react-navigation/stack";
-import { globalColors } from "../../../config/global.styles";
 import BottomSheet from "@gorhom/bottom-sheet";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "../../navigators/StackNavigator";
 import { OfferOptionsProvider } from "../../context/OfferOptionsContext";
 import { OfferSettingsProvider } from "../../context/OfferSettingsContext";
+import { globalColors } from "../../../config/global.styles";
+import { BtnClose, GoogleMap, OfferDetails, ModalOfferOptions, ModalOfferSettings } from "../../components";
 
 interface Props extends StackScreenProps<RootStackParamList, 'Offer'>{}
 

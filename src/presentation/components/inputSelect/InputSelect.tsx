@@ -1,36 +1,36 @@
+import { SetStateAction } from 'react';
 import { StyleSheet, View, Text, StyleProp, ViewStyle } from 'react-native';
 import { globalStyles } from '../../../config/global.styles';
-import { BtnShowOptions } from './components/BtnShowOptions';
+import { InputText } from './components/InputText';
 import { ListOptions } from './components/ListOptions';
 import { SelectOption } from '../../../infrestructure/interfaces/select-option';
-import { SetStateAction } from 'react';
 
 interface Props {
     label?:string;
     placeholder: string;
     value: string;
     customStyles?:StyleProp<ViewStyle>;
-    showIconLeft?:boolean;
     iconName:string;
     listOptions: SelectOption[];
-    showOption:boolean; 
     paddingHorizontal?:number,
+    isfocus:boolean;
     setValue: React.Dispatch<SetStateAction<string>>;
-    toggleOptions: () => void;
+    onFocus: () => void;
+    closeListOptions: () => void;
 }
 
 export const InputSelect = ({
-    showOption, 
     label, 
     placeholder, 
-    value,
-    showIconLeft, 
+    value, 
+    isfocus, 
     iconName,
     paddingHorizontal=10,
     listOptions,
     customStyles, 
+    onFocus,
     setValue,
-    toggleOptions
+    closeListOptions
 }:Props) => {
     return (
         <View 
@@ -39,19 +39,19 @@ export const InputSelect = ({
             {paddingHorizontal}, 
         ]}>
             {label && <Text style={styles.title}>{label}</Text>}
-            <BtnShowOptions 
-                showIconLeft={showIconLeft}
+            <InputText
+                onFocus={() => onFocus()}
                 iconName={iconName}
-                placeholder={placeholder}
+                placeholder={placeholder}  
                 value={value}
-                action={() => toggleOptions()} 
+                setValue={setValue}
             />
-            {showOption && 
+            {isfocus && 
                 <ListOptions
-                    defaultOp={value}
+                    inputValue={value}
                     listOptions={listOptions}
                     setValue={setValue}
-                    closeOptions={() => toggleOptions()}
+                    closeOptions={() => closeListOptions()}
                 />
             }
         </View>

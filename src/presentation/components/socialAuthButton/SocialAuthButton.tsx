@@ -1,5 +1,5 @@
 import { Image, ImageSourcePropType, Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
-import { globalColors, globalStyles } from "../../../config/global.styles";
+import { globalColors, globalStyles } from "@/config/global.styles";
 
 interface Props {
     value:string;

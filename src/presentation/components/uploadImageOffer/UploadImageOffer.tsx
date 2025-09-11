@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
+import { globalColors, globalStyles } from '@/config/global.styles';
 import { useIsTable } from '../../hooks/useIsTable';
 
 export const UploadImageOffer = () => {

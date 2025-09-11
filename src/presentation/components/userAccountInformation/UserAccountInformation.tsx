@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { globalColors } from '../../../config/global.styles';
 import { UserAvatar } from '../userAvatar/UserAvatar';
+import { globalColors } from '@/config/global.styles';
 
 interface Props {
     username: string;

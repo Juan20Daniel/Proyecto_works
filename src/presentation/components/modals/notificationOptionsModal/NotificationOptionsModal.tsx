@@ -1,4 +1,4 @@
-import { BoxModalBottom } from '../boxModalBottom/BoxModalBottom'
+import { BoxModalBottom } from '../boxModalBottom/BoxModalBottom';
 import { BasicModalOption } from '../basicModalOption/BasicModalOption';
 
 interface Props {

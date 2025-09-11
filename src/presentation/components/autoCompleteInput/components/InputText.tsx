@@ -1,25 +1,26 @@
 import { StyleSheet, View,TextInput } from 'react-native';
 import { Ionicons } from '../../icon/Ionicons';
 import { globalColors } from '../../../../config/global.styles';
-import { SetStateAction } from 'react';
 
 interface Props {
     placeholder: string;
     showIconLeft?: boolean;
+    name:string;
     value: string;
     iconName?:string;
-    maxWidth?:number,
-    onFocus:() => void;
-    setValue: React.Dispatch<SetStateAction<string>>;
+    maxWidth?:number;
+    onFocus:(field:string) => void;
+    setValue:(field:string, value:string) => void;
 }
 
 export const InputText = ({
     placeholder, 
     value,
     iconName='help-outline', 
-    maxWidth=500, 
+    name,
+    maxWidth=500,
     onFocus,
-    setValue
+    setValue,
 }:Props) => {
     return (
         <View
@@ -31,11 +32,13 @@ export const InputText = ({
             <TextInput 
                 style={styles.textInput}
                 placeholder={placeholder}
-                onFocus={() => onFocus()}
+                onFocus={() => {
+                    onFocus(name);
+                }}
                 value={value}
                 onChangeText={text => {
-                    onFocus();
-                    setValue(text);
+                    onFocus(name);
+                    setValue(name, text);
                 }}
             />
         </View>

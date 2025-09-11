@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../../config/global.styles';
+import { globalColors, globalStyles } from '@/config/global.styles';
 
 interface Props {
     title: string;

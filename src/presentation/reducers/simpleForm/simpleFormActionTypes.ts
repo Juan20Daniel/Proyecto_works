@@ -1,4 +1,4 @@
-import { SimpleForm } from "../../../infrestructure/interfaces/simple-form";
+import { SimpleForm } from "@/infrestructure/interfaces/simple-form";
 
 export type SimpleFormActionTypes = 
     | {type:"CHANGE_INPUT", field:string, value:string}

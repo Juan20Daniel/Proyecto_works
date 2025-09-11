@@ -1,6 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
 import { Ionicons } from '../../../icon/Ionicons';
-import { globalStyles } from '../../../../../config/global.styles';
+import { globalStyles } from '@/config/global.styles';
+
 
 export const BtnLocation = () => {
     return (

@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { globalColors } from '../../../../config/global.styles';
 import { ItemApp } from './ItemApp';
 import { Ionicons } from '../../icon/Ionicons';
+import { globalColors } from '@/config/global.styles';
 
 interface Props {
   typeUser: 'user'|'owner';

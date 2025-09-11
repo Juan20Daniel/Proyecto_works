@@ -1,8 +1,8 @@
 import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
 import { BtnIcon } from '../btns/btnIcon/BtnIcon';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
+import { globalColors, globalStyles } from '@/config/global.styles';
 interface Props {
     openNotificationOptions:() => void;
 }

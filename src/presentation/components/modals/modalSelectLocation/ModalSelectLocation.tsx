@@ -1,9 +1,10 @@
 import { Modal, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { HeaderApp } from '../../headerApp/HeaderApp';
-import { globalColors, globalStyles } from '../../../../config/global.styles';
+
 import { ItemLocation } from './components/ItemLocation';
 import { ListBtnLocations } from './components/ListBtnLocations';
 import { BtnFooter } from '../../btns/btnFooter/BtnFooter';
+import { globalColors, globalStyles } from '@/config/global.styles';
 
 interface Props {
     visible: boolean;

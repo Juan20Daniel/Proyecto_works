@@ -1,16 +1,7 @@
-import type { SimpleForm } from "../../../infrestructure/interfaces/simple-form";
-import { expretions } from "../../../shared/regex";
 import { SimpleFormActionTypes } from "./simpleFormActionTypes";
-
-const getFieldWithFocus = (state:SimpleForm):string|null => {
-    let lastFocus = null; 
-    for(let camp in state.values) {
-        if(state.values[camp].isFocus) {
-            lastFocus = camp;
-        }
-    }
-    return lastFocus;
-}
+import { expretions } from "../../../shared/regex";
+import { getFieldWithFocus } from "../../helpers/getFieldWithFocus";
+import type { SimpleForm } from "@/infrestructure/interfaces/simple-form";
 
 export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes) => {
     switch (action.type) {
@@ -31,7 +22,7 @@ export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes
                 }
             }
         case 'PUT_FOCUS_INPUT':
-            let lastFocus = getFieldWithFocus(state);
+            let lastFocus = getFieldWithFocus(state.values);
             if(lastFocus) {
                 return {
                     ...state,
@@ -50,7 +41,7 @@ export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes
                 }
             }
         case 'REMOVE_FOCUS_INPUT':
-           let actualFieldWithFocus = getFieldWithFocus(state);
+           let actualFieldWithFocus = getFieldWithFocus(state.values);
            if(!actualFieldWithFocus) return {...state};
             return {
                 ...state,

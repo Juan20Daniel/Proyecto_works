@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { globalColors } from '../../../config/global.styles';
+import { globalColors } from '@/config/global.styles';
 
 interface Props {
     state:boolean;

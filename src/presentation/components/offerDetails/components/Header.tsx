@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Image, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { BtnIcon } from '../../btns/btnIcon/BtnIcon';
-import { globalColors, globalStyles } from '../../../../config/global.styles';
 import { OfferOptionsContext } from '../../../context/OfferOptionsContext';
 import { OfferSettingsContext } from '../../../context/OfferSettingsContext';
+import { globalColors } from '@/config/global.styles';
 
 interface Props {
   typeUser: 'user'|'owner';

@@ -32,7 +32,7 @@ export const SearchResultsModal = ({visible, closeModal}:Props) => {
                             <BtnIcon iconName='options-outline' action={() => {}} />
                         </Pressable>
                     </View>
-                    <ActiveAlert />        
+                    <ActiveAlert />
                 </View>
                 <ScrollView style={styles.listOffers} showsVerticalScrollIndicator={false}>
                     <ListOffers />
@@ -52,12 +52,12 @@ const styles = StyleSheet.create({
     boxAling: {
         flexDirection: 'row', 
         alignItems:'center',
+        borderBottomWidth:1, 
+        borderBottomColor: globalColors.lightGray,  
         gap: 30, 
     },
     boxSubTitle: {
         paddingLeft: 10, 
-        borderBottomWidth:1, 
-        borderBottomColor: globalColors.lightGray,  
         height: 40,
         justifyContent:'center'
     },
@@ -67,6 +67,5 @@ const styles = StyleSheet.create({
     },
     listOffers: {
         flex: 1,
-        paddingTop:20,
     }
 });

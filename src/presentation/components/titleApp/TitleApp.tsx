@@ -1,6 +1,6 @@
 import React from 'react';
+import { globalColors } from '@/config/global.styles';
 import { Text } from 'react-native';
-import { globalColors } from '../../../config/global.styles';
 
 export const TitleApp = () => {
     

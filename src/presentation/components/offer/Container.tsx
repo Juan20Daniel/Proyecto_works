@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { DimensionValue, Pressable, StyleSheet, View } from 'react-native';
-import { globalColors } from '../../../config/global.styles';
 import { UserInfo } from './UserInfo';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
+import { globalColors } from '@/config/global.styles';
 
 interface Props {
     width?: DimensionValue; 

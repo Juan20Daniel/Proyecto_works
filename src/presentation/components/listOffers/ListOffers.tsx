@@ -1,17 +1,20 @@
-import { StyleSheet, useWindowDimensions, View } from 'react-native';
-import { globalColors } from '../../../config/global.styles';
+import { StyleSheet, View } from 'react-native';
 import { OfferInImg } from '../offer/OfferInImg';
 import { ListOffersSkeletor } from './ListOffersSkeletor';
 import { OfferPersonalized } from '../offer/OfferPersonalized';
+import { useIsTable } from '@/presentation/hooks/useIsTable';
+import { globalColors } from '@/config/global.styles';
+
+
 interface Props {
     isLoading?: boolean;
 }
 export const ListOffers = ({ isLoading=false }:Props) => {
-    const width = useWindowDimensions().width;
+    const isTable = useIsTable();
     if(isLoading) return <ListOffersSkeletor />
     return (
-        <View style={[styles.container, width > 500 && styles.containerTable]}>
-            {width > 500 
+        <View style={[styles.container, isTable && styles.containerTable]}>
+            {isTable 
                 ?
                     <>
                         <View style={{width:'50%'}}>

@@ -1,6 +1,7 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
-import { globalStyles } from '../../../config/global.styles';
+
 import { Skeletor } from '../skeletor/Skeletor';
+import { globalStyles } from '@/config/global.styles';
 export const OfferSkeletor = () => {
     const width = useWindowDimensions().width;
     const widthOfferSkeletor = width < 500 ? width : Math.floor(width/2-20);

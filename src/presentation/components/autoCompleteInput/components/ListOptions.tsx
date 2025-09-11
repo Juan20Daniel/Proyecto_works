@@ -1,4 +1,4 @@
-import { SetStateAction, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions } from 'react-native'
 import { globalColors } from '../../../../config/global.styles';
 import { SelectOption } from './SelectOption';
@@ -7,11 +7,12 @@ import type { SelectOption as Option } from '../../../../infrestructure/interfac
 interface Props {
     inputValue:string;
     listOptions:Option[];
-    setValue: React.Dispatch<SetStateAction<string>>;
+    name:string;
+    setValue:(field:string, value:string) => void;
     closeOptions:() => void;
 }
 
-export const ListOptions = ({inputValue, listOptions:inicialState, setValue, closeOptions}:Props) => {
+export const ListOptions = ({inputValue, listOptions:inicialState, name, setValue, closeOptions}:Props) => {
     const [listOptions, setListOptions] = useState(inicialState);
     const height = useWindowDimensions().height;
 
@@ -31,8 +32,8 @@ export const ListOptions = ({inputValue, listOptions:inicialState, setValue, clo
             setListOptions(inicialState);
         }
     },[inputValue]);
-    const optionSelector = (name:string) => {
-        setValue(name);
+    const optionSelector = (value:string) => {
+        setValue(name, value);
         closeOptions();
     }
     return (

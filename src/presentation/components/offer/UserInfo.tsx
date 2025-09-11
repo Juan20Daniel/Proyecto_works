@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
 import { UserAvatar } from '../userAvatar/UserAvatar';
 import { OfferOptionsContext } from '../../context/OfferOptionsContext';
 import { useContext } from 'react';
 import { BtnIcon } from '../btns/btnIcon/BtnIcon';
+import { globalColors, globalStyles } from '@/config/global.styles';
 
 export const UserInfo = () => {
   const toggleOptios = useContext(OfferOptionsContext)?.toggleOptios;
@@ -20,7 +20,6 @@ export const UserInfo = () => {
         <BtnIcon 
           iconName='ellipsis-vertical'
           iconColor='#767676'
-          borderColor={globalColors.lightGray}
           action={() => {
             toggleOptios && toggleOptios()
           }}

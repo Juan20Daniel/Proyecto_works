@@ -15,7 +15,7 @@ export { GoogleMap } from "./googleMap/GoogleMap";
 export { HeaderApp } from "./headerApp/HeaderApp";
 export { HorizontalPagination } from "./horizontalPagination/HorizontalPagination";
 export { Ionicons } from "./icon/Ionicons";
-export { InputSelect } from "./inputSelect/InputSelect";
+export { AutoCompleteInput } from "./autoCompleteInput/AutoCompleteInput";
 export { Input } from "./input/Input";
 export { IlustrationSearch } from "./ilustrationSearch/IlustrationSearch";
 export { ListOffers } from "./listOffers/ListOffers";

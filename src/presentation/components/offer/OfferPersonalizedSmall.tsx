@@ -1,12 +1,12 @@
+import { useContext } from 'react';
 import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { globalColors } from '../../../config/global.styles';
 import { BtnIcon } from '../btns/btnIcon/BtnIcon';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { Ionicons } from '../icon/Ionicons';
-import { useContext } from 'react';
 import { OfferSettingsContext } from '../../context/OfferSettingsContext';
 import { useIsTable } from '../../hooks/useIsTable';
+import { globalColors } from '@/config/global.styles';
 
 interface Props {
     hasSeen?:boolean;

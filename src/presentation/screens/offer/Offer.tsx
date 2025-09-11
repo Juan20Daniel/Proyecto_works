@@ -6,7 +6,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigators/StackNavigator";
 import { OfferOptionsProvider } from "../../context/OfferOptionsContext";
 import { OfferSettingsProvider } from "../../context/OfferSettingsContext";
-import { globalColors } from "../../../config/global.styles";
+import { globalColors } from "@/config/global.styles";
 import { BtnClose, GoogleMap, OfferDetails, ModalOfferOptions, ModalOfferSettings } from "../../components";
 
 interface Props extends StackScreenProps<RootStackParamList, 'Offer'>{}

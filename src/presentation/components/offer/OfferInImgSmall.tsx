@@ -1,9 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { globalColors } from '../../../config/global.styles';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { Ionicons } from '../icon/Ionicons';
 import { BtnIcon } from '../btns/btnIcon/BtnIcon';
+import { globalColors } from '@/config/global.styles';
 
 interface Props {
     hasSeen?:boolean;

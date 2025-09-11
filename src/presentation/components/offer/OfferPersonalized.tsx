@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
 import { Container } from './Container';
+import { globalColors, globalStyles } from '@/config/global.styles';
 
 interface Props {
     hasSeen?:boolean;

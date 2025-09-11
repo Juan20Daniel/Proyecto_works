@@ -1,4 +1,3 @@
-import { SetStateAction } from 'react';
 import { StyleSheet, View, Text, StyleProp, ViewStyle } from 'react-native';
 import { globalStyles } from '../../../config/global.styles';
 import { InputText } from './components/InputText';
@@ -11,24 +10,26 @@ interface Props {
     value: string;
     customStyles?:StyleProp<ViewStyle>;
     iconName:string;
+    name:string;
     listOptions: SelectOption[];
     paddingHorizontal?:number,
     isfocus:boolean;
-    setValue: React.Dispatch<SetStateAction<string>>;
-    onFocus: () => void;
+    onFocus:(field:string) => void;
+    setValue:(field:string, value:string) => void;
     closeListOptions: () => void;
 }
 
-export const InputSelect = ({
+export const AutoCompleteInput = ({
     label, 
     placeholder, 
     value, 
     isfocus, 
     iconName,
     paddingHorizontal=10,
+    name,
     listOptions,
-    customStyles, 
-    onFocus,
+    customStyles,
+    onFocus, 
     setValue,
     closeListOptions
 }:Props) => {
@@ -40,17 +41,20 @@ export const InputSelect = ({
         ]}>
             {label && <Text style={styles.title}>{label}</Text>}
             <InputText
-                onFocus={() => onFocus()}
                 iconName={iconName}
-                placeholder={placeholder}  
+                placeholder={placeholder} 
+                name={name} 
                 value={value}
+                onFocus={onFocus}
                 setValue={setValue}
             />
             {isfocus && 
                 <ListOptions
                     inputValue={value}
                     listOptions={listOptions}
+                    name={name}
                     setValue={setValue}
+                   
                     closeOptions={() => closeListOptions()}
                 />
             }

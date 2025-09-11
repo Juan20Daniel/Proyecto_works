@@ -1,8 +1,8 @@
 import { SetStateAction, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useIsTable } from "../../hooks/useIsTable";
-import { globalStyles } from "../../../config/global.styles";
 import { BtnBasic, ButtonsChangeForm, Switch } from "../../components";
+import { globalStyles } from "@/config/global.styles";
 
 interface Props {
     typeForm:boolean;

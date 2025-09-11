@@ -3,7 +3,8 @@ import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-na
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { OfferSettingsProvider } from '../../context/OfferSettingsContext';
-import { globalColors, globalStyles } from '../../../config/global.styles';
+import { globalColors, globalStyles } from '@/config/global.styles';
+import { useIsTable } from '../../hooks/useIsTable';
 import { 
   Container, 
   HorizontalPagination, 
@@ -15,7 +16,6 @@ import {
   SavedOfferOptionsModal,
   EmptyListOffers,
 } from '../../components';
-import { useIsTable } from '../../hooks/useIsTable';
 
 interface Props extends StackScreenProps<RootStackParamList, 'Profile'>{};
 

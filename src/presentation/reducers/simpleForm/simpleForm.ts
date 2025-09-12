@@ -1,5 +1,5 @@
 import { SimpleFormActionTypes } from "./simpleFormActionTypes";
-import { expretions } from "../../../shared/regex";
+import { expretions } from "@/shared/regex";
 import { getFieldWithFocus } from "../../helpers/getFieldWithFocus";
 import type { SimpleForm } from "@/infrestructure/interfaces/simple-form";
 

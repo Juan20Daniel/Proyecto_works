@@ -1,3 +1,3 @@
-import { InputValue } from "./simple-form";
+import { InputValue } from "./input";
 
 export type SearchForm = Record<string, InputValue>; 

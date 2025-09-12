@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text, StyleProp, ViewStyle } from 'react-native';
-import { globalStyles } from '../../../config/global.styles';
 import { InputText } from './components/InputText';
 import { ListOptions } from './components/ListOptions';
-import { SelectOption } from '../../../infrestructure/interfaces/select-option';
+import { globalStyles } from '@/config/global.styles';
+import { AutoCompleteOption } from '@/infrestructure/interfaces/auto-complete-option';
 
 interface Props {
     label?:string;
@@ -11,8 +11,7 @@ interface Props {
     customStyles?:StyleProp<ViewStyle>;
     iconName:string;
     name:string;
-    listOptions: SelectOption[];
-    paddingHorizontal?:number,
+    listOptions: AutoCompleteOption[];
     isfocus:boolean;
     onFocus:(field:string) => void;
     setValue:(field:string, value:string) => void;
@@ -25,7 +24,6 @@ export const AutoCompleteInput = ({
     value, 
     isfocus, 
     iconName,
-    paddingHorizontal=10,
     name,
     listOptions,
     customStyles,
@@ -34,27 +32,22 @@ export const AutoCompleteInput = ({
     closeListOptions
 }:Props) => {
     return (
-        <View 
-            style={[styles.container, 
-            customStyles,
-            {paddingHorizontal}, 
-        ]}>
+        <View style={[styles.container, customStyles]}>
             {label && <Text style={styles.title}>{label}</Text>}
             <InputText
                 iconName={iconName}
-                placeholder={placeholder} 
-                name={name} 
+                placeholder={placeholder}
+                name={name}
                 value={value}
                 onFocus={onFocus}
                 setValue={setValue}
             />
-            {isfocus && 
+            {isfocus &&
                 <ListOptions
                     inputValue={value}
                     listOptions={listOptions}
                     name={name}
                     setValue={setValue}
-                   
                     closeOptions={() => closeListOptions()}
                 />
             }

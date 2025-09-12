@@ -3,7 +3,10 @@ import { Keyboard, StyleSheet, TouchableWithoutFeedback, View } from 'react-nati
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { OfferOptionsProvider } from '../../context/OfferOptionsContext';
-
+import { searchReducer } from '../../reducers/search/search';
+import { globalColors } from '@/config/global.styles';
+import type { AutoCompleteOption } from '@/infrestructure/interfaces/auto-complete-option';
+import type { SearchForm } from '@/infrestructure/interfaces/search-form';
 import { 
     AutoCompleteInput, 
     BtnFooter, 
@@ -14,12 +17,7 @@ import {
     SearchResultsModal 
 } from '../../components';
 
-import { searchReducer } from '../../reducers/search/search';
-import { SelectOption } from '@/infrestructure/interfaces/select-option';
-import { globalColors } from '@/config/global.styles';
-import { SearchForm } from '@/infrestructure/interfaces/search-form';
-
-const availableJobs:SelectOption[] = [
+const availableJobs:AutoCompleteOption[] = [
     {id:1, name:'Camionero'},
     {id:2, name:'Asistente'},
     {id:3, name:'Montacargas'},
@@ -32,7 +30,7 @@ const availableJobs:SelectOption[] = [
     {id:10, name:'Bombero'},
     {id:11, name:'Doctor'},
 ]
-const availableLocations:SelectOption[] = [
+const availableLocations:AutoCompleteOption[] = [
     {id:1, name:'Colima'},
     {id:2, name:'Manzanillo'},
     {id:3, name:'Armeria'},

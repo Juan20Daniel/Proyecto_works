@@ -1,5 +1,5 @@
 import { View, Pressable, Text } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
+import { globalColors, globalStyles } from '@/config/global.styles';
 
 interface Props {
     textQuestion:string;

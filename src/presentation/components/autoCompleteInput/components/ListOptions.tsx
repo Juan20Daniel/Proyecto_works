@@ -1,38 +1,40 @@
-import { useState, useEffect } from 'react';
-import { Pressable, ScrollView, StyleSheet, useWindowDimensions } from 'react-native'
-import { globalColors } from '../../../../config/global.styles';
-import { SelectOption } from './SelectOption';
-import type { SelectOption as Option } from '../../../../infrestructure/interfaces/select-option';
+import { useState, useLayoutEffect } from 'react';
+import { Pressable, ScrollView, StyleSheet, useWindowDimensions } from 'react-native';
+import { Option } from './Option';
+import { globalColors } from '@/config/global.styles';
+import type { AutoCompleteOption } from '@/infrestructure/interfaces/auto-complete-option';
 
 interface Props {
     inputValue:string;
-    listOptions:Option[];
+    listOptions:AutoCompleteOption[];
     name:string;
     setValue:(field:string, value:string) => void;
     closeOptions:() => void;
 }
 
-export const ListOptions = ({inputValue, listOptions:inicialState, name, setValue, closeOptions}:Props) => {
+export const ListOptions = ({
+    inputValue,
+    listOptions:inicialState,
+    name,
+    setValue,
+    closeOptions
+}:Props) => {
     const [listOptions, setListOptions] = useState(inicialState);
     const height = useWindowDimensions().height;
-
-    useEffect(() => {
-        if(inputValue !== '') {
-            const listOptions_copy = inicialState;
-            const result = listOptions_copy.filter(option => {
-                return option.name.toLowerCase().startsWith(inputValue.toLowerCase())
-            });
-            if(result.length === 1) {
-                if(result[0].name === inputValue) setListOptions([]);
-                else setListOptions(result);
-            } else {
-                setListOptions(result);
-            }
-        } else {
-            setListOptions(inicialState);
-        }
+    useLayoutEffect(() => {
+        filterOptions();
     },[inputValue]);
-    const optionSelector = (value:string) => {
+    const filterOptions = () => {
+        if(inputValue === '') return setListOptions(inicialState);
+        const listOptions_copy = [...inicialState];
+        const result = listOptions_copy.filter(option => {
+            return option.name.toLowerCase().startsWith(inputValue.toLowerCase())
+        });
+        if(result.length > 1) return setListOptions(result);
+        if(result[0].name === inputValue) return setListOptions([]);
+        setListOptions(result);
+    }
+    const selectOption = (value:string) => {
         setValue(name, value);
         closeOptions();
     }
@@ -41,10 +43,10 @@ export const ListOptions = ({inputValue, listOptions:inicialState, name, setValu
             <Pressable style={{...styles.container,maxHeight: height > 800 ? 410 : 250}}>
                 <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
                     {listOptions.map(option => (
-                        <SelectOption 
+                        <Option 
                             {...option} 
                             key={option.id} 
-                            optionSelecter={optionSelector}
+                            select={selectOption}
                         />
                     ))}
                 </ScrollView>

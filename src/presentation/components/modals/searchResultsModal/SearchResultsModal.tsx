@@ -1,9 +1,9 @@
-import { Modal, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
+import { Modal, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { HeaderApp } from '../../headerApp/HeaderApp';
-import { globalColors, globalStyles } from '../../../../config/global.styles';
 import { ListOffers } from '../../listOffers/ListOffers';
 import { ActiveAlert } from '../../activeAlert/ActiveAlert';
 import { BtnIcon } from '../../btns/btnIcon/BtnIcon';
+import { globalColors, globalStyles } from '@/config/global.styles';
 
 interface Props {
     visible:boolean;
@@ -35,7 +35,7 @@ export const SearchResultsModal = ({visible, closeModal}:Props) => {
                     <ActiveAlert />
                 </View>
                 <ScrollView style={styles.listOffers} showsVerticalScrollIndicator={false}>
-                    <ListOffers />
+                    <ListOffers paddingTop={40} />
                 </ScrollView>
             </View>
         </Modal>

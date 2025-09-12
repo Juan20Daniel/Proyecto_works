@@ -18,7 +18,7 @@ import {
 } from '../../components';
 
 interface Props extends StackScreenProps<RootStackParamList, 'Profile'>{};
-
+const list = [1,2,3,4,5,6,7,8,9];
 export const Profile = ({navigation}:Props) => {
   const [ savedOfferOpModal, setSavedOfferOpModal ] = useState(false);
   const width = useWindowDimensions().width;
@@ -39,7 +39,7 @@ export const Profile = ({navigation}:Props) => {
         <View style={{paddingHorizontal: 20, height:isTable ? 40 : 30, justifyContent:'center'}}>
           <Text style={{fontSize:15}}>Ofertas guardadas</Text>
         </View>
-        <HorizontalPagination>
+        <HorizontalPagination list={list}>
           <OfferInImgSmall 
             openOptions={() => setSavedOfferOpModal(true)}
           />

@@ -1,6 +1,6 @@
 import { StyleSheet, View,TextInput } from 'react-native';
 import { Ionicons } from '../../icon/Ionicons';
-import { globalColors } from '../../../../config/global.styles';
+import { globalColors } from '@/config/global.styles';
 
 interface Props {
     placeholder: string;
@@ -23,18 +23,18 @@ export const InputText = ({
     setValue,
 }:Props) => {
     return (
-        <View
-            style={{...styles.container, maxWidth}}
-        >
+        <View style={{...styles.container, maxWidth}}>
             <View style={{marginLeft: 20}}>
-                <Ionicons name={iconName} color={globalColors.softGray} size={25} />
+                <Ionicons 
+                    name={iconName} 
+                    color={globalColors.softGray} 
+                    size={25} 
+                />
             </View>    
             <TextInput 
                 style={styles.textInput}
                 placeholder={placeholder}
-                onFocus={() => {
-                    onFocus(name);
-                }}
+                onFocus={() => onFocus(name)}
                 value={value}
                 onChangeText={text => {
                     onFocus(name);

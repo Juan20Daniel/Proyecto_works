@@ -11,7 +11,8 @@ module.exports = {
           "@": "./src",
           presentation: "./src/presentation",
           infrestructure: "./src/infrestructure",
-          assets: "./src/assets"
+          assets: "./src/assets",
+          regex: "./src/regex"
         },
       },
     ]

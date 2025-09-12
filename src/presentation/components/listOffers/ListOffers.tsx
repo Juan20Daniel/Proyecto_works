@@ -8,12 +8,13 @@ import { globalColors } from '@/config/global.styles';
 
 interface Props {
     isLoading?: boolean;
+    paddingTop?: number;
 }
-export const ListOffers = ({ isLoading=false }:Props) => {
+export const ListOffers = ({ isLoading=false, paddingTop }:Props) => {
     const isTable = useIsTable();
     if(isLoading) return <ListOffersSkeletor />
     return (
-        <View style={[styles.container, isTable && styles.containerTable]}>
+        <View style={[styles.container, isTable && styles.containerTable, {paddingTop:paddingTop??20}]}>
             {isTable 
                 ?
                     <>
@@ -56,8 +57,6 @@ const styles = StyleSheet.create({
         backgroundColor: 
         globalColors.lightGray, 
         // paddingTop: 60, 
-        paddingTop: 20, 
-        paddingBottom:50,  
     },
     containerTable: {
         flexDirection: 'row',

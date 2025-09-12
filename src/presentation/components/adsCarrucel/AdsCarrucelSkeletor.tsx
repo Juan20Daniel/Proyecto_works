@@ -1,6 +1,6 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
-import { globalStyles } from '../../../config/global.styles';
 import { Skeletor } from '../skeletor/Skeletor';
+import { globalStyles } from '@/config/global.styles';
 
 export const AdsCarrucelSkeletor = () => {
     const width = useWindowDimensions().width;

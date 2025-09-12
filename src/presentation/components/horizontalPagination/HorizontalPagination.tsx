@@ -1,39 +1,41 @@
+import { globalColors } from "@/config/global.styles";
+import { useState } from "react";
 import { 
-    DimensionValue, 
     FlatList, 
-    StyleProp, 
-    StyleSheet, 
-    useWindowDimensions, 
+    StyleProp,
     View, 
     ViewStyle, 
     NativeSyntheticEvent, 
-    NativeScrollEvent 
-} from "react-native"
-import { globalStyles } from "../../../config/global.styles";
-import { useState } from "react";
+    NativeScrollEvent, 
+    StyleSheet,
+    useWindowDimensions
+} from "react-native";
 
 interface Props {
-    list?: number[];
+    list: number[];
     customStyleContainer?:StyleProp<ViewStyle>;
+    customStyleBoxScroll?:StyleProp<ViewStyle>;
     children:React.ReactNode;
     pagingEnabled?:boolean;
+    showNavigation?:boolean;
 }
 
 export const HorizontalPagination = ({
-    list=[1,2,3,4,5,6,7,8,9], 
+    list, 
     customStyleContainer,
+    customStyleBoxScroll,
     children,
-    pagingEnabled=false
+    pagingEnabled=false,
+    showNavigation=false,
 }:Props) => {
     const [ index, setIndex ] = useState(0);
-    const width = useWindowDimensions().width;
     const onScroll = (event:NativeSyntheticEvent<NativeScrollEvent>) => {
         const { contentOffset, layoutMeasurement } = event.nativeEvent;
        setIndex(Math.floor(contentOffset.x / layoutMeasurement.width))
     }
     return (
         <View style={[{flex:1}, customStyleContainer]}>
-            <View style={{flex:1}}>
+            <View style={[{flex:1}, customStyleBoxScroll]}>
                 <FlatList 
                     data={list}
                     keyExtractor={(item) => item.toString()}
@@ -48,17 +50,35 @@ export const HorizontalPagination = ({
                     onScroll={onScroll}
                 />
             </View>
+            {showNavigation &&
+                <View style={styles.boxPoints}>
+                    {list.map(item => (
+                        <View 
+                            key={item}
+                            style={{
+                                ...styles.point, 
+                                backgroundColor:item===index+1
+                                    ? 'black' 
+                                    : globalColors.lightGray
+                            }} 
+                        />
+                    ))}
+                </View>
+            }
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    boxCounter: {
-        width: '100%', 
-        alignItems:'center',
+    
+    boxPoints: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: 10
     },
-    counter: {
-        fontSize: 20,
-        fontFamily: globalStyles.fontMonserratSemiBold
+    point: {
+        width: 17,
+        height: 17,
+        borderRadius: 10,
     }
-})
+});

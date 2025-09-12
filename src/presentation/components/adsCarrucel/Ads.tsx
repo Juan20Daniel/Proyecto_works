@@ -5,17 +5,14 @@ interface Props {
     action:() => void;
 }
 
-export const Ads = ({width, action}:Props) => {
-    
-    return (
-        <Pressable onPress={() => action()}>
-            <Image
-                source={require('../../../assets/home/imgRegister.jpg')} 
-                style={{...styles.img, width:width,}}
-            />
-        </Pressable>
-    );
-}
+export const Ads = ({width, action}:Props) => (
+    <Pressable onPress={() => action()}>
+        <Image
+            source={require('../../../assets/home/imgRegister.jpg')} 
+            style={{...styles.img, width:width,}}
+        />
+    </Pressable>
+);
 
 const styles = StyleSheet.create({
     img: {

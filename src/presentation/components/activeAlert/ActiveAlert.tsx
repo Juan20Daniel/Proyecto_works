@@ -1,8 +1,8 @@
 import { View, StyleSheet, Pressable, Text } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
 import { Switch } from '../switch/Switch';
 import { useState } from 'react';
 import { BtnIcon } from '../btns/btnIcon/BtnIcon';
+import { globalColors, globalStyles } from '@/config/global.styles';
 
 export const ActiveAlert = () => {
     const [ switchState, setSwitchState ] = useState(false);

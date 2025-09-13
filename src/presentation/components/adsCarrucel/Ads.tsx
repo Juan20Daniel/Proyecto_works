@@ -1,3 +1,4 @@
+import { useIsTable } from '@/presentation/hooks/useIsTable';
 import { Image, Pressable, StyleSheet } from 'react-native';
 
 interface Props {
@@ -5,18 +6,21 @@ interface Props {
     action:() => void;
 }
 
-export const Ads = ({width, action}:Props) => (
-    <Pressable onPress={() => action()}>
-        <Image
-            source={require('../../../assets/home/imgRegister.jpg')} 
-            style={{...styles.img, width:width,}}
-        />
-    </Pressable>
-);
+export const Ads = ({width, action}:Props) => {
+    const isTable = useIsTable();
+    return (
+        <Pressable onPress={() => action()}>
+            <Image
+                source={require('../../../assets/home/imgRegister.jpg')} 
+                style={{...styles.img, width:width, height:(width/2)+(isTable?100:50)}}
+            />
+        </Pressable>
+    );
+}
 
 const styles = StyleSheet.create({
     img: {
-        height: '100%',
+        height: 250,
         objectFit:'contain',
     },
 });

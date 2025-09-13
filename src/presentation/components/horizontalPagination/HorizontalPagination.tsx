@@ -7,8 +7,7 @@ import {
     ViewStyle, 
     NativeSyntheticEvent, 
     NativeScrollEvent, 
-    StyleSheet,
-    useWindowDimensions
+    StyleSheet
 } from "react-native";
 
 interface Props {
@@ -70,7 +69,6 @@ export const HorizontalPagination = ({
 }
 
 const styles = StyleSheet.create({
-    
     boxPoints: {
         flexDirection: 'row',
         justifyContent: 'center',

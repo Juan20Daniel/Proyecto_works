@@ -1,6 +1,5 @@
-import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { globalColors, globalStyles } from '../../../../config/global.styles'
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { globalColors, globalStyles } from '@/config/global.styles';
 
 export const BtnSelectLogo = () => {
     return (
@@ -10,7 +9,7 @@ export const BtnSelectLogo = () => {
                 <Text style={styles.textBtn}>Seleccionar logo</Text>
             </Pressable>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
         height: 65,
         borderRadius: 20,
         borderWidth: 1,
-        paddingLeft: 23,
+        paddingHorizontal: 23,
         borderColor: globalColors.softGray,
         justifyContent: 'center',
     },
@@ -40,4 +39,4 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontFamily: globalStyles.fontMonserratMedium
     }  
-})
+});

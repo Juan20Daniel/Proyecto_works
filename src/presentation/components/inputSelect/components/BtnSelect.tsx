@@ -5,19 +5,22 @@ interface Props {
     name:string;
     placeholder: string;
     isFocus:boolean;
+    value: string;
     onFocus:(field:string) => void;
 }
 
-export const BtnSelect = ({name, placeholder, isFocus, onFocus}:Props) => {
+export const BtnSelect = ({name, placeholder, isFocus, value, onFocus}:Props) => {
     return (
         <Pressable 
             style={{
-                ...styles.container, 
+                ...styles.container,
                 borderColor:isFocus ? globalColors.azureBlue : globalColors.softGray
             }}
             onPress={() => onFocus(name)}
         >
-            <Text style={styles.textBtn}>{placeholder}</Text>
+            <Text style={styles.textBtn}>
+                {value === '' ? placeholder : value}
+            </Text>
         </Pressable>
     );
 }
@@ -25,7 +28,6 @@ export const BtnSelect = ({name, placeholder, isFocus, onFocus}:Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         height: 65,
         borderRadius: 20,
         borderWidth: 1,

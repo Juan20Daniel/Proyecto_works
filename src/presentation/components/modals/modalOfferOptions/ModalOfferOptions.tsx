@@ -1,11 +1,9 @@
-import { useContext } from 'react';
-import { OfferOptionsContext } from '../../../context/OfferOptionsContext';
+import { useOfferOptions } from '@/presentation/context/OfferOptionsContext';
 import { BoxModalBottom } from '../boxModalBottom/BoxModalBottom';
 import { BasicModalOption } from '../basicModalOption/BasicModalOption';
 
 export const ModalOfferOptions = () => {
-    const showOptions = useContext(OfferOptionsContext)?.showOptions;
-    const toggleOptios = useContext(OfferOptionsContext)?.toggleOptios;
+    const { showOptions, toggleOptios } = useOfferOptions();
     return (
         <BoxModalBottom 
             title='Opriones'

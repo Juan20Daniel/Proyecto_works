@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import { globalColors } from "../../../../config/global.styles";
 import { Ionicons } from "../../icon/Ionicons";
+import { globalColors } from "@/config/global.styles";
 
 interface Props {
     iconName:string;

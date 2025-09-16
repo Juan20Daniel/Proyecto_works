@@ -1,14 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { useIsTable } from "../../hooks/useIsTable";
 import { BtnSelectLogo } from "../btns/btnSelectLogo/BtnSelectLogo";
-import { SimpleForm } from "@/infrestructure/interfaces/simple-form";
 import { InputSelect } from "../inputSelect/InputSelect";
 import { InputSelectOption } from "@/infrestructure/interfaces/input-select-option";
-
-interface Props {
-    form:SimpleForm;
-    putFocus:(field:string) => void;
-}
+import { useCreateOffer } from "@/presentation/context/CreateOfferContext";
 
 const availableJobs:InputSelectOption[] = [
     {id:1, name:'Camionero', isSelected:false},
@@ -24,20 +19,36 @@ const availableJobs:InputSelectOption[] = [
     {id:11, name:'Doctor', isSelected:false},
 ]
 
-export const CreateCustomOffer = ({form, putFocus}:Props) => {
+export const CreateCustomOffer = () => {
+    const { form, putFocus, handleChange, removeFocus } = useCreateOffer();
     const isTable = useIsTable();
     return (
         <>
-            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column'}}>
+            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column', gap: isTable ? 0 : 25}}>
                 <BtnSelectLogo />
-                <InputSelect 
+                <InputSelect
                     label="Tipo de trabajo" 
                     placeholder="Selecciona una opción" 
                     name='typeWork'
                     listOptions={availableJobs}
                     isFocus={form.values.typeWork.isFocus}
+                    value={form.values.typeWork.value}
                     onFocus={putFocus}
+                    handleChange={handleChange}
+                    closeFocus={removeFocus}
                 />
+            </View>
+            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column', gap: isTable ? 0 : 25}}>
+                <BtnSelectLogo />
+                <BtnSelectLogo />
+            </View>
+            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column', gap: isTable ? 0 : 25}}>
+                <BtnSelectLogo />
+                <BtnSelectLogo />
+            </View>
+            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column', gap: isTable ? 0 : 25}}>
+                <BtnSelectLogo />
+                <BtnSelectLogo />
             </View>
         </>
     );
@@ -45,8 +56,7 @@ export const CreateCustomOffer = ({form, putFocus}:Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 30,
+        marginTop: 25,
         width: '100%',
-        gap: 20
     }
-})
+});

@@ -1,63 +1,52 @@
-import { useReducer, useState } from 'react';
 import { ScrollView, TouchableWithoutFeedback, useWindowDimensions, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { globalColors } from '@/config/global.styles';
 import { CreateCustomOffer, HeaderApp, UploadImageOffer } from '../../components';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { CreateOffertLayout } from '../../layouts/createOfferLayout/CreateOffertLayout';
-import { simpleFormReducer } from '@/presentation/reducers/simpleForm/simpleForm';
+import { CreateOfferProvider, useCreateOffer } from '@/presentation/context/CreateOfferContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface Props extends StackScreenProps<RootStackParamList, 'CreateOffer'>{}
 
-export const initialStateSimpleForm = {
-    values: {
-        logoCompany: { value:'', isFocus:false },
-        typeWork: { value:'', isFocus:true },
-    },
-    errors: {
-        logoCompany: { status:null, valid:null },
-        typeWork: { status:null, valid:null },
-    }
+export const CreateOffer = (props:Props) => {
+   return (
+        <CreateOfferProvider>
+            <ScreenContent {...props} />
+        </CreateOfferProvider>
+    );
 }
 
-export const CreateOffer = ({navigation}:Props) => {
-    const [ form, dispatch ] = useReducer(simpleFormReducer, initialStateSimpleForm);
+export const ScreenContent = ({navigation}:Props) => {
+    const { removeFocus, createCustomOffer } = useCreateOffer();
+    const { top } = useSafeAreaInsets();
     const width = useWindowDimensions().width;
-    const height = useWindowDimensions().height;
-    const [ createCustomOffer, setCreateCustomOffer ] = useState(false);
-    const putFocus = (field:string) => {
-        dispatch({
-            type:'PUT_FOCUS_INPUT',
-            field:field
-        })
-    }
-    const closeAll = () => {
-        dispatch({
-            type:'REMOVE_FOCUS_INPUT'
-        });
-    }
+    
     return (
-        <TouchableWithoutFeedback onPress={closeAll}>
-            <View style={{width, height, backgroundColor:globalColors.white}}>
-                <HeaderApp 
-                    subText='Crear oferta'
-                    actionBtnClose={() => navigation.goBack()}
-                />
-                <ScrollView style={{flex: 1, marginTop:15, marginBottom: 50}}>
-                    <CreateOffertLayout
-                        typeForm={createCustomOffer}
-                        changeForm={setCreateCustomOffer}
-                    >
+        <ScrollView 
+            style={{flex: 1, backgroundColor: globalColors.white}} 
+            nestedScrollEnabled={true}
+            keyboardShouldPersistTaps='handled'
+            showsVerticalScrollIndicator={false}
+            stickyHeaderIndices={[0]}
+        >
+            <HeaderApp
+                subText='Crear oferta'
+                paddingTop={top+20}
+                actionBtnClose={() => navigation.goBack()}
+                actionBox={removeFocus}
+            />
+            <TouchableWithoutFeedback accessible={false} onPress={removeFocus}>
+                <View style={{width, backgroundColor:globalColors.white}}>
+                    <CreateOffertLayout>
                         {createCustomOffer
-                            ?   <CreateCustomOffer 
-                                    form={form} 
-                                    putFocus={putFocus}
-                                />
+                            ?   <CreateCustomOffer />
                             :   <UploadImageOffer />
                         }     
                     </CreateOffertLayout>
-                </ScrollView>
-            </View>
-        </TouchableWithoutFeedback>
+                    <View style={{width:'100%', height:30}} />
+                </View>
+            </TouchableWithoutFeedback>
+        </ScrollView>
     );
 }

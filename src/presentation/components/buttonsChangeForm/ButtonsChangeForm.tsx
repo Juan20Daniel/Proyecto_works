@@ -1,36 +1,32 @@
-import { SetStateAction } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { useIsTable } from '../../hooks/useIsTable';
+import { useCreateOffer } from '@/presentation/context/CreateOfferContext';
 
-interface Props {
-    typeForm:boolean;
-    changeForm:React.Dispatch<SetStateAction<boolean>>;
-}
-
-export const ButtonsChangeForm = ({typeForm, changeForm}:Props) => {
+export const ButtonsChangeForm = () => {
+    const {createCustomOffer, setCreateCustomOffer} = useCreateOffer();
     const isTable = useIsTable();
     return (
         <View style={styles.boxBtns}>
             <Pressable
-                onPress={() => changeForm(false)}
+                onPress={() => setCreateCustomOffer(false)}
                 style={[
                     {...styles.btn, ...styles.btnLeft, width:isTable ? 300 : '50%', height: 45},
-                    !typeForm && { backgroundColor: globalColors.black }
+                    !createCustomOffer && { backgroundColor: globalColors.black }
                 ]}
             >
-                <Text style={[styles.textBtn, !typeForm && { color: globalColors.white }]}>
+                <Text style={[styles.textBtn, !createCustomOffer && { color: globalColors.white }]}>
                     Vacante en imagen
                 </Text>
             </Pressable>
             <Pressable 
-                onPress={() => changeForm(true)}
+                onPress={() => setCreateCustomOffer(true)}
                 style={[
                     {...styles.btn, ...styles.btnRight, width:isTable ? 250 : '50%', height: 45},
-                    typeForm && { backgroundColor: globalColors.black }
+                    createCustomOffer && { backgroundColor: globalColors.black }
                 ]}
             >
-                <Text style={[styles.textBtn, typeForm && { color: globalColors.white }]}>
+                <Text style={[styles.textBtn, createCustomOffer && { color: globalColors.white }]}>
                     Personalizada
                 </Text>
             </Pressable>
@@ -41,6 +37,7 @@ export const ButtonsChangeForm = ({typeForm, changeForm}:Props) => {
 const styles = StyleSheet.create({
     boxBtns: {
         marginTop: 30,
+        paddingHorizontal: 10,
         flexDirection: 'row',
         justifyContent:'center'
     },

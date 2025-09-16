@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 interface InitialState {
     showOptions:boolean;
@@ -10,11 +10,19 @@ export const OfferOptionsContext = createContext<InitialState|null>(null);
 export const OfferOptionsProvider = ({children}:PropsWithChildren) => {
     const [ showOptions, setShowOptions ] = useState(false);
     const toggleOptios = () => {
-        setShowOptions(!showOptions)
+        setShowOptions(!showOptions);
     }
     return (
         <OfferOptionsContext.Provider value={{showOptions, toggleOptios}}>
             {children}
         </OfferOptionsContext.Provider>
     );
+}
+
+export const useOfferOptions = () => {
+    const context = useContext(OfferOptionsContext);
+    if(!context) {
+        throw new Error("Error al usar useOfferOptions");
+    }
+    return context;
 }

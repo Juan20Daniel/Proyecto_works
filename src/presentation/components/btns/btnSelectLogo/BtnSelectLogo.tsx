@@ -1,21 +1,22 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { globalColors, globalStyles } from '@/config/global.styles';
+import { useIsTable } from '@/presentation/hooks/useIsTable';
 
 export const BtnSelectLogo = () => {
+    const isTable = useIsTable();
     return (
-        <View style={styles.container}>
-            <Text style={styles.label}>Logo de la empresa</Text>
-            <Pressable style={styles.btnSelectLogo}>
-                <Text style={styles.textBtn}>Seleccionar logo</Text>
-            </Pressable>
+        <View style={{width:isTable ? '50%' : '100%', paddingHorizontal:10,}}>
+            <View style={{flex:1}}>
+                <Text style={styles.label}>Logo de la empresa</Text>
+                <Pressable style={styles.btnSelectLogo}>
+                    <Text style={styles.textBtn}>Seleccionar logo</Text>
+                </Pressable>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-       flex:1,
-    },
     label: {
         backgroundColor: globalColors.white,
         paddingHorizontal: 3,
@@ -25,7 +26,6 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     btnSelectLogo: {
-        flex: 1,
         height: 65,
         borderRadius: 20,
         borderWidth: 1,

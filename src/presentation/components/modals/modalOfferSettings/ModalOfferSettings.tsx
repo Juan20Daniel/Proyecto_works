@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { OfferSettingsContext } from '../../../context/OfferSettingsContext';
+import { useState } from 'react';
+import { useOfferSettings } from '@/presentation/context/OfferSettingsContext';
 import { OfferAction } from './OfferAction';
 import { Switch } from '../../switch/Switch';
 import { Ionicons } from '../../icon/Ionicons';
@@ -7,9 +7,8 @@ import { BoxModalBottom } from '../boxModalBottom/BoxModalBottom';
 
 export const ModalOfferSettings = () => {
     const [switchState, setSwitchState] = useState(false);
-    const showSettings = useContext(OfferSettingsContext)?.showSettings;
-    const toggleSettings = useContext(OfferSettingsContext)?.toggleSettings;
-   
+    const { showSettings, toggleSettings } = useOfferSettings();
+
     return (    
         <BoxModalBottom title='Configuración' visible={showSettings!} closeModal={toggleSettings}>
             <OfferAction 

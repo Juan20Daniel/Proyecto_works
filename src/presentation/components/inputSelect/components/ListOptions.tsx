@@ -1,66 +1,32 @@
 import { globalColors } from '@/config/global.styles';
 import { InputSelectOption } from '@/infrestructure/interfaces/input-select-option';
-import { FlatList, Pressable, ScrollView, StyleSheet, Text } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
 import { Option } from './Option';
 
 interface Props {
     listOptions:InputSelectOption[];
+    selectOption:(optionName:string) => void;
 }
 
-export const ListOptions = ({listOptions}:Props) => {
+export const ListOptions = ({listOptions, selectOption}:Props) => {
     return (
-        <Pressable style={styles.container}>
-            {/* <FlatList 
-                data={listOptions}
-                keyExtractor={option => option.id.toString()}
-                showsVerticalScrollIndicator={false}
-                renderItem={({item}) => (
-                    <Option key={item.id} value={item.name} />
-                )}
-            /> */}
-            <ScrollView>
-                {/* {listOptions.map(option => (
-                    <Option key={option.id} value={option.name} />
-                ))} */}
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-                <Text>rrrrrrrrrrrrrr</Text>
-            </ScrollView>
-        </Pressable>
+        <TouchableNativeFeedback accessible={false}>
+            <View style={styles.container}>
+                <ScrollView 
+                    showsVerticalScrollIndicator={false} 
+                    nestedScrollEnabled={true}
+                    keyboardShouldPersistTaps='handled'
+                >
+                    {listOptions.map(option => (
+                        <Option 
+                            key={option.id} 
+                            value={option.name}
+                            selectOption={selectOption}
+                        />
+                    ))}
+                </ScrollView>
+            </View>
+        </TouchableNativeFeedback>
     );
 }
 

@@ -1,38 +1,35 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useIsTable } from "../../hooks/useIsTable";
 import { BtnBasic, ButtonsChangeForm, Switch } from "../../components";
 import { globalStyles } from "@/config/global.styles";
+import { useCreateOffer } from "@/presentation/context/CreateOfferContext";
 
 interface Props {
-    typeForm:boolean;
     children:React.ReactNode;
-    changeForm:React.Dispatch<SetStateAction<boolean>>;
 }
 
-export const CreateOffertLayout = ({typeForm, children, changeForm}:Props) => {
+export const CreateOffertLayout = ({children}:Props) => {
     const [ publishUponCompletion, setPublishUponCompletion ] = useState(false);
+    const { createCustomOffer } = useCreateOffer();
     const isTable = useIsTable();
     return (
-        <View style={styles.container}>
+        <>
             <Text style={{...styles.title, fontSize: isTable ? 30 : 20}}>
-                {typeForm
+                {createCustomOffer
                     ?   'Vacante personalizada'
                     :   'Publicar una imagen'
                 }
             </Text>
             <Text style={{...styles.description, fontSize:isTable?16:14}}>
-                {typeForm
+                {createCustomOffer
                     ?   'Esta opción, te permitirá crear la vacante a tu gusto.'
                     :   'Esta opción, te permite simplemente cargar la foto de la vacante si cuentas con alguna.'    
                 }
             </Text>
-            <ButtonsChangeForm 
-                typeForm={typeForm}
-                changeForm={changeForm}
-            />
+            <ButtonsChangeForm />
             {children}
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop:20}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop:20, paddingHorizontal:10}}>
                 <Text style={{fontSize: 15, fontFamily:globalStyles.fontMonserratMedium}}>
                     Publicar la vacante al terminar
                 </Text>
@@ -43,22 +40,21 @@ export const CreateOffertLayout = ({typeForm, children, changeForm}:Props) => {
             <BtnBasic 
                 value="Crear"
                 action={() => {}}
-                customStylesBox={{marginTop: 20, marginBottom: 50}}
+                customStylesBox={{marginTop: 20, marginBottom: 50, paddingHorizontal:10,}}
             />
-        </View>
+        </>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 10,
-    },
     title: {
         fontFamily: globalStyles.fontMonserratSemiBold,
+        paddingHorizontal: 10,
     },
     description: {
         maxWidth: 500,
         paddingTop: 10,
+        paddingHorizontal: 10,
         fontFamily: globalStyles.fontMonserratMedium,
     }
 });

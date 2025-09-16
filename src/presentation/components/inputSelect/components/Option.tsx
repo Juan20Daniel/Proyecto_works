@@ -1,22 +1,24 @@
+import React from 'react';
 import { globalColors } from '@/config/global.styles';
-import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 interface Props {
     value:string;
+    selectOption:(optionName:string) => void;
 }
 
-export const Option = ({value}:Props) => {
+export const Option = ({value, selectOption}:Props) => {
     return (
         <View style={styles.container}>
-            {/* <Pressable 
+            <Pressable
+                onPress={() => selectOption(value)}
                 style={({pressed}) => [
                     styles.btn, 
                     {backgroundColor: pressed ? globalColors.lightGray : undefined}
                 ]}
-            > */}
+            >
                 <Text>{value}</Text>
-            {/* </Pressable> */}
+            </Pressable>
         </View>
     );
 }
@@ -30,4 +32,4 @@ const styles = StyleSheet.create({
         paddingLeft: 23,
         paddingVertical: 5,
     }
-})
+});

@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 interface InitialState {
     showSettings: boolean;
@@ -15,4 +15,12 @@ export const OfferSettingsProvider = ({children}:PropsWithChildren) => {
             {children}
         </OfferSettingsContext.Provider>
     );
+}
+
+export const useOfferSettings = () => {
+    const context = useContext(OfferSettingsContext);
+    if(!context) {
+        throw new Error("Error al usar useOfferSettings");
+    }
+    return context;
 }

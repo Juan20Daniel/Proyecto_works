@@ -2,7 +2,7 @@ import { useCallback, useEffect, useReducer, useState } from 'react';
 import { Keyboard, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../navigators/StackNavigator';
-import { AuthSwitchLink, BtnBasic, Input, SocialAuthButton } from '../../components';
+import { AuthSwitchLink, BtnBasic, InputTextAnimate, SocialAuthButton } from '../../components';
 import { simpleFormReducer } from '../../reducers/simpleForm/simpleForm';
 import { AuthLayout } from '../../layouts';
 
@@ -78,7 +78,7 @@ export const Register = ({navigation}:Props) => {
             subTitle='Crea una cuenta en nuestra app con tus datos personales'
         >
             <View style={{width:'100%', height: 40}} />
-            <Input
+            <InputTextAnimate
                 label='Nombre'
                 placeholder='Ingresa tu nombre'
                 name='firstname'
@@ -93,7 +93,7 @@ export const Register = ({navigation}:Props) => {
                 onFocus={(field:string) => putFocusInput(field)}
                 clearInput={inputClear}
             />
-            <Input
+            <InputTextAnimate
                 label='Apellido'
                 placeholder='Ingresa tu apellido'
                 name='lastname'
@@ -108,7 +108,7 @@ export const Register = ({navigation}:Props) => {
                 onFocus={(field:string) => putFocusInput(field)}
                 clearInput={inputClear}
             />
-            <Input
+            <InputTextAnimate
                 label='Teléfono'
                 placeholder='Ingresa tu teléfono'
                 name='phone'
@@ -123,7 +123,7 @@ export const Register = ({navigation}:Props) => {
                 onFocus={(field:string) => putFocusInput(field)}
                 clearInput={inputClear}
             />
-            <Input
+            <InputTextAnimate
                 label='Correo electrónico'
                 placeholder='Ingresa tu correo electrónico'
                 name='email'
@@ -138,7 +138,7 @@ export const Register = ({navigation}:Props) => {
                 onFocus={(field:string) => putFocusInput(field)}
                 clearInput={inputClear}
             />
-            <Input
+            <InputTextAnimate
                 label='Contraseña'
                 placeholder='Ingresa tu contraseña'
                 name='password'

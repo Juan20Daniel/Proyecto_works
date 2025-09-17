@@ -1,6 +1,6 @@
 import { StyleSheet, View,TextInput } from 'react-native';
-import { Ionicons } from '../../icon/Ionicons';
 import { globalColors } from '@/config/global.styles';
+import { Ionicons } from '@/presentation/components/icon/Ionicons';
 
 interface Props {
     placeholder: string;
@@ -25,7 +25,7 @@ export const InputText = ({
     return (
         <View style={{...styles.container, maxWidth}}>
             <View style={{marginLeft: 20}}>
-                <Ionicons 
+                <Ionicons
                     name={iconName} 
                     color={globalColors.softGray} 
                     size={25} 

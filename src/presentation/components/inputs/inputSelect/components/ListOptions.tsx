@@ -1,14 +1,16 @@
 import { globalColors } from '@/config/global.styles';
 import { InputSelectOption } from '@/infrestructure/interfaces/input-select-option';
-import { Pressable, ScrollView, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
+import { ScrollView, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
 import { Option } from './Option';
 
 interface Props {
+    opSelectedDefault:string;
     listOptions:InputSelectOption[];
     selectOption:(optionName:string) => void;
 }
 
-export const ListOptions = ({listOptions, selectOption}:Props) => {
+export const ListOptions = ({opSelectedDefault, listOptions, selectOption}:Props) => {
+    
     return (
         <TouchableNativeFeedback accessible={false}>
             <View style={styles.container}>
@@ -18,8 +20,9 @@ export const ListOptions = ({listOptions, selectOption}:Props) => {
                     keyboardShouldPersistTaps='handled'
                 >
                     {listOptions.map(option => (
-                        <Option 
+                        <Option
                             key={option.id} 
+                            opSelectedDefault={opSelectedDefault}
                             value={option.name}
                             selectOption={selectOption}
                         />

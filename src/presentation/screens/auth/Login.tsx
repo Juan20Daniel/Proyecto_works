@@ -2,7 +2,7 @@ import { useCallback, useEffect, useReducer, useState } from 'react';
 import { Keyboard, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../navigators/StackNavigator';
-import { AuthSwitchLink, BtnBasic, Input, SocialAuthButton } from '../../components';
+import { AuthSwitchLink, BtnBasic, InputTextAnimate, SocialAuthButton } from '../../components';
 import { simpleFormReducer } from '../../reducers/simpleForm/simpleForm';
 import { AuthLayout } from '../../layouts';
 
@@ -67,7 +67,7 @@ export const Login = ({navigation}:Props) => {
             subTitle='Inicia sesión con tu cuenta o crea una'
         >
             <View style={{width:'100%', height: 40}} />
-            <Input
+            <InputTextAnimate
                 label='Correo electrónico'
                 placeholder='Ingresa tu correo electrónico'
                 name='email'
@@ -82,7 +82,7 @@ export const Login = ({navigation}:Props) => {
                 onFocus={(field:string) => putFocusInput(field)}
                 clearInput={inputClear}
             />
-            <Input
+            <InputTextAnimate
                 label='Contraseña'
                 placeholder='Ingresa tu contraseña'
                 name='password'

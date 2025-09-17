@@ -1,4 +1,4 @@
-import { StyleProp, StyleSheet, Text, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { TitleApp } from '../titleApp/TitleApp';
 import { globalColors, globalStyles } from '../../../config/global.styles';
 import { BtnClose } from '../btns/btnClose/BtnClose';
@@ -25,7 +25,11 @@ export const HeaderApp = ({alignTitle='flex-start', subText, paddingTop, actionB
                         <Text style={styles.subText}>{subText}</Text>
                     </>
                 }
-                <BtnClose backTo={() => actionBtnClose()} />
+                <BtnClose backTo={() => {
+                    console.log('exce')
+                    actionBtnClose()
+                    
+                }} />
             </View>
         </TouchableWithoutFeedback>
     );

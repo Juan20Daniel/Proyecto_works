@@ -11,7 +11,7 @@ export const BtnClose = ({top,backTo}:Props) => {
                 styles.container,
                 {opacity: pressed ? 0.5 : 1, top:top??'auto'}
             ]} 
-            onPress={() => backTo()}
+            onPressOut={() => backTo()}
         >
             <Ionicons name='close-outline' size={30} color='white' />
         </Pressable>
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
-        zIndex:2,
+        zIndex:7,
     }
 })

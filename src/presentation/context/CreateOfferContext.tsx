@@ -1,6 +1,7 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useReducer, useState } from "react";
 import { simpleFormReducer } from "../reducers/simpleForm/simpleForm";
 import { SimpleForm } from "@/infrestructure/interfaces/simple-form";
+import { Keyboard } from "react-native";
 
 interface InitialState {
     form:SimpleForm;
@@ -9,16 +10,23 @@ interface InitialState {
     handleChange:(field:string, value:string) => void;
     putFocus:(field:string) => void;
     removeFocus:() => void;
+    clearInput:(field:string) => void;
 }
 
 export const initialStateSimpleForm = {
     values: {
         logoCompany: { value:'', isFocus:false },
         typeWork: { value:'', isFocus:false },
+        companyName: { value:'', isFocus:false },
+        salary: { value:'', isFocus:false },
+        schedule: { value:'', isFocus:false },
     },
     errors: {
         logoCompany: { status:null, valid:null },
         typeWork: { status:null, valid:null },
+        companyName: { status:null, valid:null },
+        salary: { status:null, valid:null },
+        schedule: { status:null, valid:null },
     }
 }
 
@@ -40,10 +48,17 @@ export const CreateOfferProvider = ({children}:PropsWithChildren) => {
             field:field
         });
     }
+    const clearInput = (field:string) => {
+        dispatch({
+            type:'CLEAR_INPUT',
+            field:field
+        });
+    }
     const removeFocus = () => {
         dispatch({
             type:'REMOVE_FOCUS_INPUT'
         });
+        Keyboard.dismiss();
     }
     return (
         <CreateOfferContext.Provider 
@@ -53,7 +68,8 @@ export const CreateOfferProvider = ({children}:PropsWithChildren) => {
                 setCreateCustomOffer,
                 handleChange,
                 putFocus,
-                removeFocus
+                removeFocus,
+                clearInput
             }}
         >
             {children}

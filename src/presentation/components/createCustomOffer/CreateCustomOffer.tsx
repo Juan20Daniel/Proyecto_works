@@ -1,9 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { Keyboard, View } from "react-native";
 import { useIsTable } from "../../hooks/useIsTable";
 import { BtnSelectLogo } from "../btns/btnSelectLogo/BtnSelectLogo";
-import { InputSelect } from "../inputSelect/InputSelect";
 import { InputSelectOption } from "@/infrestructure/interfaces/input-select-option";
 import { useCreateOffer } from "@/presentation/context/CreateOfferContext";
+import { InputTextBasic } from "../inputs/InputTextBasic/InputTextBasic";
+import { InputSelect } from "../inputs/inputSelect/InputSelect";
+import { InputSelectSchedule } from "../inputs/inputSelectSchedule/InputSelectSchedule";
 
 const availableJobs:InputSelectOption[] = [
     {id:1, name:'Camionero', isSelected:false},
@@ -20,12 +22,23 @@ const availableJobs:InputSelectOption[] = [
 ]
 
 export const CreateCustomOffer = () => {
-    const { form, putFocus, handleChange, removeFocus } = useCreateOffer();
+    const { form, putFocus, handleChange, removeFocus, clearInput } = useCreateOffer();
     const isTable = useIsTable();
     return (
         <>
-            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column', gap: isTable ? 0 : 25}}>
-                <BtnSelectLogo />
+            <Row>
+                <InputTextBasic 
+                    label="Nombre de la empresa"
+                    placeholder="Ingresa el nombre de la empresa"
+                    value={form.values.companyName.value}
+                    type="default"
+                    name="companyName"
+                    isFocus={form.values.companyName.isFocus}
+                    statusError={form.errors.companyName.status}
+                    onChange={handleChange}
+                    onFocus={putFocus}
+                    clearInput={clearInput}
+                />
                 <InputSelect
                     label="Tipo de trabajo" 
                     placeholder="Selecciona una opción" 
@@ -33,30 +46,60 @@ export const CreateCustomOffer = () => {
                     listOptions={availableJobs}
                     isFocus={form.values.typeWork.isFocus}
                     value={form.values.typeWork.value}
-                    onFocus={putFocus}
+                    onFocus={(field:string) => {
+                        Keyboard.dismiss();
+                        putFocus(field)}
+                    }
                     handleChange={handleChange}
                     closeFocus={removeFocus}
                 />
-            </View>
-            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column', gap: isTable ? 0 : 25}}>
+            </Row>
+            <Row>
+                <InputSelectSchedule 
+                    name='schedule'
+                    value={form.values.schedule.value}
+                    isFocus={form.values.schedule.isFocus}
+                    onFocus={putFocus}
+                />
+                <InputTextBasic 
+                    label="Sueldo"
+                    placeholder="Ingresa el sueldo"
+                    value={form.values.salary.value}
+                    type="numeric"
+                    name="salary"
+                    isFocus={form.values.salary.isFocus}
+                    statusError={form.errors.salary.status}
+                    onChange={handleChange}
+                    onFocus={putFocus}
+                    clearInput={clearInput}
+                />
+            </Row>
+            <Row>
                 <BtnSelectLogo />
                 <BtnSelectLogo />
-            </View>
-            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column', gap: isTable ? 0 : 25}}>
+            </Row>
+            <Row>
                 <BtnSelectLogo />
                 <BtnSelectLogo />
-            </View>
-            <View style={{...styles.container, flexDirection:isTable ? 'row' : 'column', gap: isTable ? 0 : 25}}>
-                <BtnSelectLogo />
-                <BtnSelectLogo />
-            </View>
+            </Row>
         </>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 25,
-        width: '100%',
-    }
-});
+interface Row {
+    children:React.ReactNode
+}
+
+const Row = ({children}:Row) => {
+    const isTable = useIsTable();
+    return (
+        <View style={{
+            marginTop: 25,
+            width: '100%',
+            flexDirection:isTable ? 'row' : 'column',
+            gap: isTable ? 0 : 25
+        }}>
+            {children}
+        </View>
+    );
+}

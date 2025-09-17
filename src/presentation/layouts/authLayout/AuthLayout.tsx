@@ -14,14 +14,13 @@ interface Props {
 }
 
 export const AuthLayout = ({navigation, subTitle, children}:Props) => {
-    
     const { top } = useSafeAreaInsets();
     const width = useWindowDimensions().width;
     const height = useWindowDimensions().height;
     const isTable = width>500;
     return (
         <Container>
-            <ScrollView keyboardShouldPersistTaps='handled'>
+            <ScrollView keyboardShouldPersistTaps='handled' showsVerticalScrollIndicator={false}>
                 <View style={{...styles.container, minHeight:height-top}}>
                     <View style={{...styles.content,  padding:isTable ? 30:10}}>
                         <BtnClose backTo={() => navigation.replace('Home', {animationType:'fade'})} top={20} />

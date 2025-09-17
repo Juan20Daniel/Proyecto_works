@@ -3,18 +3,22 @@ import { globalColors } from '@/config/global.styles';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 interface Props {
+    opSelectedDefault:string;
     value:string;
     selectOption:(optionName:string) => void;
 }
 
-export const Option = ({value, selectOption}:Props) => {
+export const Option = ({opSelectedDefault, value, selectOption}:Props) => {
     return (
         <View style={styles.container}>
             <Pressable
                 onPress={() => selectOption(value)}
                 style={({pressed}) => [
                     styles.btn, 
-                    {backgroundColor: pressed ? globalColors.lightGray : undefined}
+                    {backgroundColor: value === opSelectedDefault
+                        ?   globalColors.lightGray
+                        :   pressed ? globalColors.lightGray : undefined
+                    }
                 ]}
             >
                 <Text>{value}</Text>

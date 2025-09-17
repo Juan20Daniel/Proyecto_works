@@ -1,7 +1,7 @@
 import { KeyboardTypeOptions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { globalColors, globalStyles } from '../../../config/global.styles';
-import { Ionicons } from '../icon/Ionicons';
-import { InputStatus } from '../../../infrestructure/interfaces/simple-form';
+import { InputStatus } from '@/infrestructure/interfaces/input';
+import { globalColors, globalStyles } from '@/config/global.styles';
+import { Ionicons } from '../../icon/Ionicons';
 
 interface Props {
     label: string;
@@ -21,7 +21,7 @@ interface Props {
     togglePasswordVisibility?: () => void;
 }
 
-export const Input = ({
+export const InputTextAnimate = ({
     label, 
     placeholder, 
     name, 
@@ -87,7 +87,7 @@ export const Input = ({
                         togglePasswordVisibility && togglePasswordVisibility();
                     }}
                 >
-                    <Ionicons 
+                    <Ionicons
                         name={secureTextEntry? 'eye-off-outline' : 'eye-outline'} 
                         color={globalColors.gray} 
                         size={26}

@@ -1,18 +1,16 @@
-import { Modal, StyleSheet, Text, useWindowDimensions, View, NativeSyntheticEvent, NativeScrollEvent } from "react-native";
+import { useRef, useState } from "react";
+import { Modal, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { globalColors } from "@/config/global.styles";
 import { BtnIcon } from "@/presentation/components/btns/btnIcon/BtnIcon";
 import { useIsTable } from "@/presentation/hooks/useIsTable";
-import { ScrollView } from "react-native-gesture-handler";
-import { useState } from "react";
+import { SelectScrollItem } from "@/infrestructure/interfaces/select-scroll";
+import { SelectScroll } from "./SelectScroll";
 interface Props {
     visible: boolean;
     closeModal: () => void;
 }
-interface Day {
-    id:number;
-    name:string
-}
-const days:Day[] = [
+
+const days:SelectScrollItem[] = [
     {id:0, name:'Lunes'},
     {id:1, name:'Martes'},
     {id:2, name:'Miercoles'},
@@ -21,14 +19,49 @@ const days:Day[] = [
     {id:5, name:'Sábado'},
     {id:6, name:'Domingo'},
 ]
+const hours:SelectScrollItem[] = [
+    {id:0, name:'1'},
+    {id:1, name:'2'},
+    {id:2, name:'3'},
+    {id:3, name:'4'},
+    {id:4, name:'5'},
+    {id:5, name:'6'},
+    {id:6, name:'7'},
+    {id:7, name:'8'},
+    {id:8, name:'9'},
+    {id:9, name:'10'},
+    {id:10, name:'11'},
+    {id:11, name:'12'},
+]
+const minutes = ():SelectScrollItem[] => {
+    // return Array(59).map((_, index) => ({id:index, name:`${index}`}))
+}
+// const minutes:SelectScrollItem[] = [
+//     {id:0, name:'00'},
+//     {id:1, name:'1'},
+//     {id:2, name:'2'},
+//     {id:3, name:'3'},
+//     {id:4, name:'4'},
+//     {id:5, name:'5'},
+//     {id:6, name:'6'},
+//     {id:7, name:'7'},
+//     {id:8, name:'8'},
+//     {id:9, name:'9'},
+//     {id:10, name:'10'},
+//     {id:11, name:'11'},
+// ]
 export const BoxModal = ({visible, closeModal}:Props) => {
-    const [ centerScroll, setCenterScroll ] = useState(0);
+    const [ from, setFrom ] = useState(0);
+    const [ to, setTo ] = useState(0);
+    const [ hourStart, setHourStart ] = useState(0);
+    const [ hourFinish, setHourFinish ] = useState(0);
+    const fromRef = useRef<number|null>(null);
+    const toRef = useRef<number|null>(null);
+    const hourStartRef = useRef<number|null>(null);
+    const hourFinishRef = useRef<number|null>(null);
     const isTable = useIsTable();
     const width = useWindowDimensions().width;
-    const handleScroll = (event:NativeSyntheticEvent<NativeScrollEvent>) => {
-        const {contentOffset} = event.nativeEvent;
-        setCenterScroll(Math.floor(Math.ceil(contentOffset.y) / 40));
-    }
+    console.log(minutes());
     return (
         <Modal visible={visible} animationType='fade' transparent>
             <View style={styles.container}>
@@ -39,38 +72,43 @@ export const BoxModal = ({visible, closeModal}:Props) => {
                             iconName="close-outline"
                             action={() => {
                                 closeModal();
-                                setCenterScroll(0)
+                                fromRef.current = null;
+                                toRef.current = null;
+                                hourStartRef.current = null;
+                                setFrom(0);
+                                setTo(0);
+                                setHourStart(0);
+                                setHourFinish(0);
                             }}
                         />
                     </View>
-                    <View style={styles.boxDeys}>
-                        <ScrollView 
-                            pagingEnabled 
-                            snapToInterval={40} 
-                            onScroll={handleScroll}
-                            showsVerticalScrollIndicator={false}
-                        >
-                            <View style={styles.boxItem}/>
-                            <View style={styles.boxItem}/>
-                            {days.map((day, index) => (
-                                <View style={styles.boxItem} key={index}>
-                                    <Text 
-                                        style={{
-                                            ...styles.items, 
-                                            fontSize:day.id === centerScroll ? 20 : 15,
-                                            color:day.id === centerScroll
-                                                ?   globalColors.black 
-                                                :   (day.id+1 === centerScroll || day.id-1 === centerScroll)
-                                                    ?   globalColors.softGray
-                                                    :   globalColors.lightGray 
-                                        }}>
-                                        {day.name}
-                                    </Text>
-                                </View>
-                            ))}
-                            <View style={styles.boxItem}/>
-                            <View style={styles.boxItem}/>
-                        </ScrollView>
+                    <View style={{flexDirection:'row'}}>
+                        <SelectScroll 
+                            indexCenter={from}
+                            list={days}
+                            lastIndex={fromRef}
+                            setIndexCenter={setFrom}
+                        />
+                        <SelectScroll 
+                            indexCenter={to}
+                            list={days}
+                            lastIndex={toRef}
+                            setIndexCenter={setTo}
+                        />
+                        <SelectScroll
+                            indexCenter={hourStart}
+                            list={hours}
+                            lastIndex={hourStartRef}
+                            width={50}
+                            setIndexCenter={setHourStart}
+                        />
+                        <SelectScroll
+                            indexCenter={hourFinish}
+                            list={minutes()}
+                            lastIndex={hourFinishRef}
+                            width={50}
+                            setIndexCenter={setHourFinish}
+                        />
                     </View>
                 </View>
             </View>

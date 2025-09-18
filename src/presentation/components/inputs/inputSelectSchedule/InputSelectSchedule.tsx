@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { globalColors, globalStyles } from '@/config/global.styles';
 import { useIsTable } from '@/presentation/hooks/useIsTable';
 import { BtnSelect } from '../../btns/btnSelect.tsx/BtnSelect';
 import { Label } from '../../label/Label';
 import { BoxModal } from './components/Modal';
-import { useState } from 'react';
 
 interface Props {
     name: string;

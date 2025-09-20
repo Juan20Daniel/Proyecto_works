@@ -43,7 +43,6 @@ export const BtnSelect = ({
     );
 }
 
-
 const styles = StyleSheet.create({
     container: {
         position: 'relative',

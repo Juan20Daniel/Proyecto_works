@@ -10,7 +10,6 @@ interface Props {
 
 export const EmptyListOffers = ({message, valueBtn, action}:Props) => {
     const width = useWindowDimensions().width;
-    console.log(width);
     const isTable = useIsTable();
     return (
         <View style={styles.container}>

@@ -1,46 +1,57 @@
 import { Dispatch, SetStateAction } from 'react';
-import { DimensionValue, NativeScrollEvent, NativeSyntheticEvent, ScrollView, StyleSheet, Text, Vibration, View } from 'react-native';
+import { DimensionValue, FlexAlignType, NativeScrollEvent, NativeSyntheticEvent, ScrollView, StyleSheet, Text, Vibration, View } from 'react-native';
 import { globalColors } from '@/config/global.styles';
 import { SelectScrollItem } from '@/infrestructure/interfaces/select-scroll';
 
 interface Props {
-    indexCenter:number;
+    indexCenterElement:{index:number, name:string};
     list:SelectScrollItem[];
-    lastIndex: React.RefObject<number|null>;
+    lastIndexCenterElement: React.RefObject<number|null>;
     width?:DimensionValue;
-    setIndexCenter: Dispatch<SetStateAction<number>>;
+    backgroundColor?:string;
+    alignItems?:FlexAlignType;
+    initiallySelectedOption?:number;
+    setIndexCenterElement: Dispatch<SetStateAction<{index:number, name:string}>>;
 }
 
-export const SelectScroll = ({indexCenter, list, lastIndex, width, setIndexCenter}:Props) => {
+export const SelectonScroll = ({
+    indexCenterElement, 
+    list, 
+    lastIndexCenterElement, 
+    width, 
+    backgroundColor,
+    initiallySelectedOption=3, 
+    alignItems,
+    setIndexCenterElement
+}:Props) => {
     const handleScroll = (event:NativeSyntheticEvent<NativeScrollEvent>) => {
         const {contentOffset} = event.nativeEvent;
         const index = Math.max(0, Math.floor(Math.ceil(contentOffset.y) / 40));
-        if(lastIndex.current !== null){
-            if(lastIndex.current !== index) Vibration.vibrate(100);
+        if(lastIndexCenterElement.current !== null){
+            if(lastIndexCenterElement.current !== index) Vibration.vibrate(100);
         }
-        setIndexCenter(index);
-        lastIndex.current = index;
+        setIndexCenterElement({index:index, name:list[index].name});
+        lastIndexCenterElement.current = index;
     }
     return (
-        <View style={{...styles.boxDeys, width:width??100}}>
+        <View style={{height: 200, width:width??100, backgroundColor:backgroundColor??undefined}}>
             <ScrollView 
                 pagingEnabled 
                 snapToInterval={40}
-                contentOffset={{x:0, y:120}}
+                contentOffset={{x:0, y:40*initiallySelectedOption}}
                 onScroll={handleScroll}
                 showsVerticalScrollIndicator={false}
             >
                 <View style={styles.boxItem}/>
                 <View style={styles.boxItem}/>
                 {list.map((item, index) => (
-                    <View style={styles.boxItem} key={index}>
+                    <View style={{...styles.boxItem, alignItems:alignItems??'flex-start'}} key={index}>
                         <Text 
                             style={{
-                                ...styles.items, 
-                                fontSize:item.id === indexCenter ? 20 : 15,
-                                color:item.id === indexCenter
+                                fontSize:item.id === indexCenterElement.index ? 18 : 14,
+                                color:item.id === indexCenterElement.index
                                     ?   globalColors.black 
-                                    :   (item.id+1 === indexCenter || item.id-1 === indexCenter)
+                                    :   (item.id+1 === indexCenterElement.index || item.id-1 === indexCenterElement.index)
                                         ?   globalColors.softGray
                                         :   globalColors.lightGray 
                             }}>
@@ -56,16 +67,9 @@ export const SelectScroll = ({indexCenter, list, lastIndex, width, setIndexCente
 }
 
 const styles = StyleSheet.create({
-    boxDeys: {
-        height: 200,
-    },
     boxItem: {
         height: 40, 
-        width: '100%', 
-      
+        width: '100%',     
         justifyContent: 'center'
-    },
-    items: {
-        fontSize: 20,
     }
 });

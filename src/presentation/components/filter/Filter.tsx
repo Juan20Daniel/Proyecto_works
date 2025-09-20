@@ -1,15 +1,16 @@
 import { Dispatch, SetStateAction } from "react";
 import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { BtnLocationSelecter } from "../locationSelecters/BtnLocationSelecter";
-import { globalColors, globalStyles } from "../../../config/global.styles";
+import { globalColors, globalStyles } from "@/config/global.styles";
+import { useIsTable } from "@/presentation/hooks/useIsTable";
+
 
 interface Props {
     setListLocationModal: Dispatch<SetStateAction<boolean>>;
 }
 
 export const Filter = ({setListLocationModal}:Props) => {
-    const width = useWindowDimensions().width;
-    const isTable = width > 500;
+    const isTable = useIsTable();
     return (
         <>
             <View style={{...styles.container, height:isTable? 120 : 90,}}>

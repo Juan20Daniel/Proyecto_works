@@ -60,6 +60,8 @@ export const CreateCustomOffer = () => {
                     value={form.values.schedule.value}
                     isFocus={form.values.schedule.isFocus}
                     onFocus={putFocus}
+                    handleChange={handleChange}
+                    closeFocus={removeFocus}
                 />
                 <InputTextBasic 
                     label="Sueldo"

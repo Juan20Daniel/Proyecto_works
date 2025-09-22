@@ -1,19 +1,24 @@
-import React, { SetStateAction } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SelectonScroll } from './SelectonScroll';
 import { SelectScrollItem } from '@/infrestructure/interfaces/select-scroll';
 
 interface Props {
+    hourName: string;
     hour: {index:number, name:string};
-    hourRef: React.RefObject<number|null>;
-    setHour: React.Dispatch<SetStateAction<{index:number, name:string}>>; 
+    hourRef: React.RefObject<number|null>; 
+    initiallyHourSelectedOption?:number;
+    
+    minuteName:string;
     minute: {index:number, name:string};
-    minuteRef: React.RefObject<number|null>;
-    setMinute: React.Dispatch<SetStateAction<{index:number, name:string}>>; 
+    minuteRef: React.RefObject<number|null>; 
+    initiallyMinuteSelectedOption?:number;
+    
+    timeName:string;
     time: {index:number, name:string};
-    timeRef: React.RefObject<number|null>;
-    setTime: React.Dispatch<SetStateAction<{index:number, name:string}>>; 
-    initiallySelectedOption?:number;
+    timeRef: React.RefObject<number|null>; 
+    initiallyTimeSelectedOption?:number;
+
+    handleChange:(field:string, name:string, index:number) => void;
 }
 
 const hours:SelectScrollItem[] = [
@@ -38,43 +43,53 @@ const minutes = ():SelectScrollItem[] => {
 }
 
 export const HourSelector = ({
+    hourName,
     hour, 
-    hourRef, 
-    setHour,
+    hourRef,
+
+    minuteName,
     minute,
     minuteRef,
-    setMinute,
+
+    timeName,
     time,
     timeRef,
-    setTime,
-    initiallySelectedOption=0
+
+    initiallyHourSelectedOption=5,
+    initiallyMinuteSelectedOption=30,
+    initiallyTimeSelectedOption=0,
+
+    handleChange,
 }:Props) => {
     return (
         <View style={{...styles.row, width:110}}>
             <SelectonScroll
+                name={hourName}
                 list={hours}
                 indexCenterElement={hour}
                 lastIndexCenterElement={hourRef}
-                setIndexCenterElement={setHour}
+                setIndexCenterElement={handleChange}
                 alignItems="flex-end"
-                initiallySelectedOption={5}
+                initiallySelectedOption={initiallyHourSelectedOption}
                 width={25}
-                />
+            />
             <Text style={{fontSize:18}}>:</Text>
             <SelectonScroll
+                name={minuteName}
                 list={minutes()}
                 indexCenterElement={minute}
                 lastIndexCenterElement={minuteRef}
-                setIndexCenterElement={setMinute}
-                initiallySelectedOption={30}
+                setIndexCenterElement={handleChange}
+                initiallySelectedOption={initiallyMinuteSelectedOption}
                 width={25}
             />
             <SelectonScroll
+                name={timeName}
                 list={[{id:0, name:'A.M'},{id:1, name:'P.M'}]}
                 indexCenterElement={time}
                 lastIndexCenterElement={timeRef}
-                setIndexCenterElement={setTime}
-                initiallySelectedOption={initiallySelectedOption}
+                setIndexCenterElement={handleChange}
+                initiallySelectedOption={initiallyTimeSelectedOption}
                 width={35}
             />
         </View>

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { globalColors, globalStyles } from '@/config/global.styles';
+import { View } from 'react-native';
 import { useIsTable } from '@/presentation/hooks/useIsTable';
 import { BtnSelect } from '../../btns/btnSelect.tsx/BtnSelect';
 import { Label } from '../../label/Label';
@@ -11,22 +10,35 @@ interface Props {
     value: string;
     isFocus:boolean;
     onFocus:(field:string) => void;
-    onChange?:(value:string, field:string) => void;
+    handleChange:(field:string, value:string) => void;
+    closeFocus:() => void;
 }
 
-export const InputSelectSchedule = ({name, value, isFocus, onFocus}:Props) => {
+export const InputSelectSchedule = ({name, value, isFocus, onFocus, handleChange, closeFocus}:Props) => {
     const [ showModal, setShowModal ] = useState(false);
-    const [schedule, setSchedule] = useState({
-        startDay:{index:0, name:''},
-        startHour:{index:0, name:''},
-        startMinute:{index:0, name:''},
-        startTime:{index:0, name:''},
-        finisDay:{index:0, name:''},
-        finishHour:{index:0, name:''},
-        finishMinute:{index:0, name:''},
-        finishTime:{index:0, name:''},
+    const [ schedule, setSchedule ] = useState<Record<string, {index:number, name:string}>>({
+        startDay:{index:3, name:''},
+        startHour:{index:5, name:''},
+        startMinute:{index:30, name:''},
+        startTime:{index:0, name:'A.M'},
+        finishDay:{index:3, name:''},
+        finishHour:{index:5, name:''},
+        finishMinute:{index:30, name:''},
+        finishTime:{index:1, name:''},
     });
     const isTable = useIsTable();
+    const onChange = (field:string, name:string, index:number) => {
+        setSchedule(preState => ({
+            ...preState,
+            [field]:{index:index, name:name}
+        }));
+    }
+    const handleValue = () => {
+        const {startDay, finishDay, finishHour, startHour, startMinute, startTime, finishMinute, finishTime} = schedule;
+        const value = `De ${startDay.name} a ${finishDay.name} de ${startHour.name}:${startMinute.name} ${startTime.name} a ${finishHour.name}:${finishMinute.name} ${finishTime.name}`;
+        handleChange(name, value);
+        closeFocus();
+    }
     return (
         <>
             <View style={{width:isTable ? '50%' : '100%', paddingHorizontal:10}}>
@@ -49,23 +61,16 @@ export const InputSelectSchedule = ({name, value, isFocus, onFocus}:Props) => {
                 </View>
             </View>
             <BoxModal 
+                schedule={schedule}
                 visible={showModal}
+                handleChange={onChange}
+                handleValue={handleValue}
                 closeModal={() => {
                     setShowModal(false);
                     onFocus(name);
+                    closeFocus();
                 }}
             />
         </>
     );
 }
-
-const styles = StyleSheet.create({
-    label: {
-        backgroundColor: globalColors.white,
-        paddingHorizontal: 3,
-        fontSize: 15,
-        fontFamily: globalStyles.fontMonserratMedium,
-        paddingLeft: 23,
-        marginBottom: 10
-    }
-});

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
 import { globalColors } from "@/config/global.styles";
 import { useIsTable } from "@/presentation/hooks/useIsTable";
@@ -8,8 +8,11 @@ import { BtnSave } from "./BtnSave";
 import { SelectonScroll } from "./SelectonScroll";
 import { HourSelector } from "./HourSelector";
 interface Props {
+    schedule:Record<string, {index:number, name:string}>;
     visible: boolean;
     closeModal: () => void;
+    handleChange:(field:string, name:string, index:number) => void;
+    handleValue: () => void;
 }
 const days:SelectScrollItem[] = [
     {id:0, name:'Lunes'},
@@ -21,37 +24,18 @@ const days:SelectScrollItem[] = [
     {id:6, name:'Domingo'},
 ]
 
-export const BoxModal = ({visible, closeModal}:Props) => {
-    const [ startDay, setStartDay ] = useState({index:0, name:''});
-    const [ startHour, setStartHour ] = useState({index:0, name:''});
-    const [ startMinute, setStartMinute ] = useState({index:0, name:''});
-    const [ startTime, setStartTime ] = useState({index:0, name:'A.M'});
-    
-    const [ finisDay, setFinisDay ] = useState({index:0, name:''});
-    const [ finishHour, setFinishHour ] = useState({index:0, name:''});
-    const [ finisMinute, setFinishMinute ] = useState({index:0, name:''});
-    const [ finishTime, setFinishTime ] = useState({index:0, name:''});
-    
+export const BoxModal = ({schedule, visible, closeModal, handleChange, handleValue}:Props) => {
     const startDayRef = useRef<number|null>(null);
     const startHourRef = useRef<number|null>(null);
     const startMinuteRef = useRef<number|null>(null);
     const startTimeRef = useRef<number|null>(null);
-    
     const finishDayRef = useRef<number|null>(null);
     const finishHourRef = useRef<number|null>(null);
     const finishMinuteRef = useRef<number|null>(null);
     const finishTimeRef = useRef<number|null>(null);
-
     const isTable = useIsTable();
+
     const clear = () => {
-        setStartDay({index:0, name:''});
-        setStartHour({index:0, name:''});
-        setStartMinute({index:0, name:''});
-        setStartTime({index:0, name:'A.M'});
-        setFinisDay({index:0, name:''});
-        setFinishHour({index:0, name:''});
-        setFinishMinute({index:0, name:''});
-        setFinishTime({index:0, name:''});
         startDayRef.current = null;
         startHourRef.current = null;
         startMinuteRef.current = null;
@@ -59,20 +43,9 @@ export const BoxModal = ({visible, closeModal}:Props) => {
         finishDayRef.current = null;
         finishHourRef.current = null;
         finishMinuteRef.current = null;
+        finishTimeRef.current = null;
     }
-    const values = () => {
-        const data = {
-            startDay,
-            startHour,
-            startMinute,
-            startTime,
-            finisDay,
-            finishHour,
-            finisMinute,
-            finishTime,
-        }
-        console.log(data);
-    }
+
     return (
         <Modal visible={visible} animationType='fade' transparent>
             <View style={styles.container}>
@@ -86,53 +59,68 @@ export const BoxModal = ({visible, closeModal}:Props) => {
                         <View style={styles.row}>
                             {!isTable && <Text style={{fontSize:18}}>de</Text>}
                             <SelectonScroll
+                                name='startDay'
                                 list={days}
-                                indexCenterElement={startDay}
+                                indexCenterElement={schedule.startDay}
                                 lastIndexCenterElement={startDayRef}
-                                setIndexCenterElement={setStartDay}
+                                initiallySelectedOption={schedule.startDay.index}
                                 width={90}
+                                setIndexCenterElement={handleChange}
                             />
                             <Text style={{fontSize:18, paddingRight:10}}>a</Text>
                             <SelectonScroll
+                                name='finishDay'
                                 list={days}
-                                indexCenterElement={finisDay}
+                                indexCenterElement={schedule.finishDay}
                                 lastIndexCenterElement={finishDayRef}
-                                setIndexCenterElement={setFinisDay}
+                                initiallySelectedOption={schedule.finishDay.index}
                                 width={90}
+                                setIndexCenterElement={handleChange}
                             />
                         </View>
                         <View style={styles.row}>
                             <Text style={{fontSize:18}}>de</Text>
-                            <HourSelector 
-                                hour={startHour}
+                            <HourSelector
+                                hourName='startHour'
+                                hour={schedule.startHour}
                                 hourRef={startHourRef}
-                                setHour={setStartHour}
-                                minute={startMinute}
+                                initiallyHourSelectedOption={schedule.startHour.index}
+
+                                minuteName='startMinute'
+                                minute={schedule.startMinute}
                                 minuteRef={startMinuteRef}
-                                setMinute={setStartMinute}
-                                time={startTime}
+                                initiallyMinuteSelectedOption={schedule.startMinute.index}
+
+                                timeName='startTime'
+                                time={schedule.startTime}
                                 timeRef={startTimeRef}
-                                setTime={setStartTime}
-                                initiallySelectedOption={0}
+                                initiallyTimeSelectedOption={schedule.startTime.index}
+                                handleChange={handleChange}
                             />
                             <Text style={{fontSize:18}}>a</Text>
                             <HourSelector 
-                                hour={finishHour}
+                                hourName='finishHour'
+                                hour={schedule.finishHour}
                                 hourRef={finishHourRef}
-                                setHour={setFinishHour}
-                                minute={finisMinute}
+                                initiallyHourSelectedOption={schedule.finishHour.index}
+
+                                minuteName='finishMinute'
+                                minute={schedule.finishMinute}
                                 minuteRef={finishMinuteRef}
-                                setMinute={setFinishMinute}
-                                time={finishTime}
+                                initiallyMinuteSelectedOption={schedule.finishMinute.index}
+                                
+                                timeName='finishTime'
+                                time={schedule.finishTime}
                                 timeRef={finishTimeRef}
-                                setTime={setFinishTime}
-                                initiallySelectedOption={1}
+                                initiallyTimeSelectedOption={schedule.finishTime.index}
+                                handleChange={handleChange}
                             />
                         </View>
                     </View>
                     <BtnSave action={() => {
+                        clear();
                         closeModal();
-                        values();
+                        handleValue();
                     }} />
                 </View>
             </View>
@@ -146,7 +134,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.1)',
         justifyContent: 'center',
         alignItems: 'center',
-        
     },
     content: {
         minHeight: 100,

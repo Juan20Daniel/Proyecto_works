@@ -4,21 +4,32 @@ import { globalColors, globalStyles } from "../../../../config/global.styles";
 interface Props {
     value:string;
     customStylesBox?: StyleProp<ViewStyle>;
+    customStylesBtn?: StyleProp<ViewStyle>;
     disable?:boolean;
+    backgroundColor?: string;
     action:() => void;
 }
 
-export const BtnBasic = ({value, customStylesBox, disable=false, action}:Props) => {
+export const BtnBasic = ({
+    value, 
+    customStylesBox, 
+    customStylesBtn,
+    disable=false,
+    backgroundColor, 
+    action
+}:Props) => {
     return (
         <View style={[styles.container, customStylesBox]}>
             <Pressable 
                 style={({pressed}) => [
                     styles.btn,
                     {
+                        backgroundColor:backgroundColor??globalColors.azureBlue,
                         opacity: disable 
                             ?   0.4
                             :   pressed ? 0.7 : 1,
-                    }
+                    },
+                    customStylesBtn
                 ]} 
                 onPress={() => action()}
             >
@@ -38,7 +49,6 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor:globalColors.azureBlue,
         borderRadius: 15,
     },
     textValue: {

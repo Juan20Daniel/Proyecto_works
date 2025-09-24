@@ -1,4 +1,4 @@
-import { KeyboardTypeOptions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { DimensionValue, KeyboardTypeOptions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { InputStatus } from '@/infrestructure/interfaces/input';
 import { globalColors, globalStyles } from '@/config/global.styles';
 import { Ionicons } from '../../icon/Ionicons';
@@ -15,6 +15,8 @@ interface Props {
     errorFieldEmpty?: string;
     errorFieldInvalid?: string;
     statusError?: InputStatus;
+    multiline?:boolean;
+    boxWidth?: DimensionValue;
     onChange:(value:string, field:string) => void;
     onFocus:(field:string) => void;
     clearInput:(field:string) => void;
@@ -30,13 +32,20 @@ export const InputTextBasic = ({
     errorFieldEmpty,
     errorFieldInvalid,
     statusError,
+    multiline=false,
+    boxWidth,
     onChange,
     onFocus,
     clearInput
 }:Props) => {
     const isTable = useIsTable();
     return (
-        <View style={{...styles.container, width:isTable ? '50%' : '100%'}}>
+        <View style={{
+            ...styles.container, 
+            width:boxWidth 
+                ?   boxWidth
+                :   isTable ? '50%' : '100%'
+        }}>
             <Label 
                 text={label}
                 isFocus={isFocus}
@@ -47,6 +56,8 @@ export const InputTextBasic = ({
                 value={value}
                 onChangeText={textValue => onChange(name, textValue)}
                 placeholder={placeholder}
+                multiline={multiline}
+                numberOfLines={10}
                 onFocus={() => onFocus(name)}
                 placeholderTextColor={isFocus ? globalColors.azureBlue : globalColors.black}
                 style={{
@@ -83,7 +94,7 @@ const styles = StyleSheet.create({
     textInput: {
         borderWidth: 1,
         borderRadius: 20,
-        height: 65,
+        minHeight: 65,
         paddingRight: 50,
         paddingLeft: 23,
         fontFamily: globalStyles.fontMonserratMedium,
@@ -96,7 +107,7 @@ const styles = StyleSheet.create({
         backgroundColor: globalColors.lightGray,
         borderRadius: 15,
         right: 20,
-        bottom: 20
+        top: 53
     },
     btnShowPassword: {
         backgroundColor: globalColors.white,

@@ -6,6 +6,7 @@ import { useCreateOffer } from "@/presentation/context/CreateOfferContext";
 import { InputTextBasic } from "../inputs/InputTextBasic/InputTextBasic";
 import { InputSelect } from "../inputs/inputSelect/InputSelect";
 import { InputSelectSchedule } from "../inputs/inputSelectSchedule/InputSelectSchedule";
+import { InputListManager } from "../inputs/inputListManager/InputListManager";
 
 const availableJobs:InputSelectOption[] = [
     {id:1, name:'Camionero', isSelected:false},
@@ -27,6 +28,7 @@ export const CreateCustomOffer = () => {
     return (
         <>
             <Row>
+                <BtnSelectLogo />
                 <InputTextBasic 
                     label="Nombre de la empresa"
                     placeholder="Ingresa el nombre de la empresa"
@@ -39,6 +41,24 @@ export const CreateCustomOffer = () => {
                     onFocus={putFocus}
                     clearInput={clearInput}
                 />
+            </Row>
+            <Row>
+                <InputTextBasic 
+                    label="Acerca de la empresa"
+                    placeholder="Descripción de la empresa"
+                    value={form.values.companyDesc.value}
+                    type="default"
+                    name="companyDesc"
+                    multiline
+                    isFocus={form.values.companyDesc.isFocus}
+                    statusError={form.errors.companyDesc.status}
+                    boxWidth={isTable ? '100%' : '50%'}
+                    onChange={handleChange}
+                    onFocus={putFocus}
+                    clearInput={clearInput}
+                />
+            </Row>
+            <Row>
                 <InputSelect
                     label="Tipo de trabajo" 
                     placeholder="Selecciona una opción" 
@@ -53,8 +73,6 @@ export const CreateCustomOffer = () => {
                     handleChange={handleChange}
                     closeFocus={removeFocus}
                 />
-            </Row>
-            <Row>
                 <InputSelectSchedule 
                     name='schedule'
                     value={form.values.schedule.value}
@@ -63,26 +81,72 @@ export const CreateCustomOffer = () => {
                     handleChange={handleChange}
                     closeFocus={removeFocus}
                 />
+            </Row>
+            <Row>
                 <InputTextBasic 
-                    label="Sueldo"
+                    label="Sueldo mínimo"
                     placeholder="Ingresa el sueldo"
-                    value={form.values.salary.value}
+                    value={form.values.minimumWage.value}
                     type="numeric"
-                    name="salary"
-                    isFocus={form.values.salary.isFocus}
-                    statusError={form.errors.salary.status}
+                    name="minimumWage"
+                    isFocus={form.values.minimumWage.isFocus}
+                    statusError={form.errors.minimumWage.status}
+                    onChange={handleChange}
+                    onFocus={putFocus}
+                    clearInput={clearInput}
+                />
+                <InputTextBasic 
+                    label="Sueldo máximo"
+                    placeholder="Ingresa el sueldo"
+                    value={form.values.maximumWage.value}
+                    type="numeric"
+                    name="maximumWage"
+                    isFocus={form.values.maximumWage.isFocus}
+                    statusError={form.errors.maximumWage.status}
                     onChange={handleChange}
                     onFocus={putFocus}
                     clearInput={clearInput}
                 />
             </Row>
             <Row>
-                <BtnSelectLogo />
-                <BtnSelectLogo />
+                <InputTextBasic 
+                    label="Descrición del empleo"
+                    placeholder="Ingresa la descrición del empleo"
+                    value={form.values.description.value}
+                    type="default"
+                    name="description"
+                    multiline
+                    isFocus={form.values.description.isFocus}
+                    statusError={form.errors.description.status}
+                    boxWidth={isTable ? '100%' : '50%'}
+                    onChange={handleChange}
+                    onFocus={putFocus}
+                    clearInput={clearInput}
+                />
             </Row>
             <Row>
-                <BtnSelectLogo />
-                <BtnSelectLogo />
+                <InputListManager
+                    title="Lista de requisitos"
+                    name="requirements"
+                    label="Requisitos"
+                    placeholder="Agrega un requisito"
+                    value={form.values.requirements.value}
+                    isFocus={form.values.requirements.isFocus}
+                    onChange={handleChange}
+                    onFocus={putFocus}
+                    clearInput={clearInput}
+                />
+                <InputListManager
+                    title="Lista de lo que ofrecemos"
+                    name="benefits"
+                    label="Lo que ofrecemos"
+                    placeholder="Agrega un beneficio"
+                    value={form.values.benefits.value}
+                    isFocus={form.values.benefits.isFocus}
+                    onChange={handleChange}
+                    onFocus={putFocus}
+                    clearInput={clearInput}
+                />
             </Row>
         </>
     );

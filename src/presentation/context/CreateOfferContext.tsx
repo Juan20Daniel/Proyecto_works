@@ -18,15 +18,25 @@ export const initialStateSimpleForm = {
         logoCompany: { value:'', isFocus:false },
         typeWork: { value:'', isFocus:false },
         companyName: { value:'', isFocus:false },
-        salary: { value:'', isFocus:false },
+        minimumWage: { value:'', isFocus:false },
+        maximumWage: { value:'', isFocus:false },
         schedule: { value:'', isFocus:false },
+        description: { value:'', isFocus:false },
+        companyDesc: { value:'', isFocus:false },
+        requirements: { value:'', isFocus:false },
+        benefits: { value:'', isFocus:false },
     },
     errors: {
         logoCompany: { status:null, valid:null },
         typeWork: { status:null, valid:null },
         companyName: { status:null, valid:null },
-        salary: { status:null, valid:null },
+        minimumWage: { status:null, valid:null },
+        maximumWage: { status:null, valid:null },
         schedule: { status:null, valid:null },
+        description: { status:null, valid:null },
+        companyDesc: { status:null, valid:null },
+        requirements: { status:null, valid:null },
+        benefits: { status:null, valid:null },
     }
 }
 

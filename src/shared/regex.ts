@@ -3,6 +3,11 @@ export const expretions:Record<string, RegExp> = {
     password: /^.{8,}$/,
     typeWork: /^.{3,}$/,
     companyName: /^.{8,}$/,
-    salary: /^.{8,}$/,
+    minimumWage: /^.{8,}$/,
+    maximumWage: /^.{8,}$/,
     schedule: /^.{8,}$/,
+    description: /^.{8,}$/,
+    companyDesc: /^.{8,}$/,
+    requirements: /^.{8,}$/,
+    benefits: /^.{8,}$/,
 }

@@ -9,8 +9,8 @@ interface Props {
     name: string;
     value: string;
     isFocus:boolean;
-    onFocus:(field:string) => void;
     handleChange:(field:string, value:string) => void;
+    onFocus:(field:string) => void;
     closeFocus:() => void;
 }
 

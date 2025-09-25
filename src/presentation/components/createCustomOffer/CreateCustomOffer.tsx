@@ -7,6 +7,7 @@ import { InputTextBasic } from "../inputs/InputTextBasic/InputTextBasic";
 import { InputSelect } from "../inputs/inputSelect/InputSelect";
 import { InputSelectSchedule } from "../inputs/inputSelectSchedule/InputSelectSchedule";
 import { InputListManager } from "../inputs/inputListManager/InputListManager";
+import { BtnSelectCoords } from "../btns/btnSelectCoords/BtnSelectCoords";
 
 const availableJobs:InputSelectOption[] = [
     {id:1, name:'Camionero', isSelected:false},
@@ -24,7 +25,6 @@ const availableJobs:InputSelectOption[] = [
 
 export const CreateCustomOffer = () => {
     const { form, putFocus, handleChange, removeFocus, clearInput } = useCreateOffer();
-    const isTable = useIsTable();
     return (
         <>
             <Row>
@@ -52,7 +52,7 @@ export const CreateCustomOffer = () => {
                     multiline
                     isFocus={form.values.companyDesc.isFocus}
                     statusError={form.errors.companyDesc.status}
-                    boxWidth={isTable ? '100%' : '50%'}
+                    boxWidth='100%'
                     onChange={handleChange}
                     onFocus={putFocus}
                     clearInput={clearInput}
@@ -66,12 +66,12 @@ export const CreateCustomOffer = () => {
                     listOptions={availableJobs}
                     isFocus={form.values.typeWork.isFocus}
                     value={form.values.typeWork.value}
+                    handleChange={handleChange}
+                    closeFocus={removeFocus}
                     onFocus={(field:string) => {
                         Keyboard.dismiss();
                         putFocus(field)}
                     }
-                    handleChange={handleChange}
-                    closeFocus={removeFocus}
                 />
                 <InputSelectSchedule 
                     name='schedule'
@@ -118,7 +118,7 @@ export const CreateCustomOffer = () => {
                     multiline
                     isFocus={form.values.description.isFocus}
                     statusError={form.errors.description.status}
-                    boxWidth={isTable ? '100%' : '50%'}
+                    boxWidth='100%'
                     onChange={handleChange}
                     onFocus={putFocus}
                     clearInput={clearInput}
@@ -148,12 +148,15 @@ export const CreateCustomOffer = () => {
                     clearInput={clearInput}
                 />
             </Row>
+            <Row>
+                <BtnSelectCoords />
+            </Row>
         </>
     );
 }
 
 interface Row {
-    children:React.ReactNode
+    children:React.ReactNode;
 }
 
 const Row = ({children}:Row) => {

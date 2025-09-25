@@ -28,8 +28,8 @@ export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes
                     ...state,
                     values: {
                         ...state.values,
-                        [action.field]:{...state.values[action.field], isFocus:true},
-                        [lastFocus]:{...state.values[lastFocus], isFocus:false}
+                        [lastFocus]:{...state.values[lastFocus], isFocus:false},
+                        [action.field]:{...state.values[action.field], isFocus:true}
                     }
                 }
             }
@@ -74,7 +74,6 @@ export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes
                     errors[camp] = {...errors[camp], status:'valid'}
                 }
             }
-            console.log(errors);
             return {...state ,...errors}
         default:
             return state;

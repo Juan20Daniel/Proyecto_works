@@ -1,5 +1,5 @@
 import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
-import { globalColors, globalStyles } from "../../../../config/global.styles";
+import { globalColors, globalStyles } from "@/config/global.styles";
 
 interface Props {
     value:string;
@@ -31,7 +31,9 @@ export const BtnBasic = ({
                     },
                     customStylesBtn
                 ]} 
-                onPress={() => action()}
+                onPress={() => {
+                   !disable && action()
+                }}
             >
                 <Text style={styles.textValue}>{value}</Text>
             </Pressable>

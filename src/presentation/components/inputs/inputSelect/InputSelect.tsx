@@ -12,8 +12,8 @@ interface Props {
     listOptions:InputSelectOption[];
     isFocus:boolean;
     value:string;
-    onFocus:(field:string) => void;
     handleChange:(field:string, value:string) => void;
+    onFocus:(field:string) => void;
     closeFocus:() => void;
 }
 

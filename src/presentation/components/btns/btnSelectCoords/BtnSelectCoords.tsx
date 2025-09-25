@@ -1,12 +1,12 @@
 import { BtnSelect } from '../btnSelect.tsx/BtnSelect';
 import { BoxBtnSelect } from '../boxBtnSelect/BoxBtnSelect';
 
-export const BtnSelectLogo = () => {
+export const BtnSelectCoords = () => {
     return (
-        <BoxBtnSelect label='Logo de la empresa'>
+        <BoxBtnSelect label='Ubicación de la empresa' width='100%'>
             <BtnSelect
                 name='btnSelect'
-                placeholder='Seleccionar logo'
+                placeholder='Seleccionar ubicación en google maps'
                 isFocus={false}
                 value=''
                 pressable

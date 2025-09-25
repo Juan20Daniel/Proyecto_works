@@ -1,8 +1,8 @@
 import { DimensionValue, KeyboardTypeOptions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { InputStatus } from '@/infrestructure/interfaces/input';
 import { globalColors, globalStyles } from '@/config/global.styles';
-import { Ionicons } from '../../icon/Ionicons';
 import { useIsTable } from '@/presentation/hooks/useIsTable';
+import { Ionicons } from '../../icon/Ionicons';
 import { Label } from '../../label/Label';
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
     statusError?: InputStatus;
     multiline?:boolean;
     boxWidth?: DimensionValue;
-    onChange:(value:string, field:string) => void;
+    onChange:(field:string, value:string) => void;
     onFocus:(field:string) => void;
     clearInput:(field:string) => void;
 }

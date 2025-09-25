@@ -9,6 +9,7 @@ interface Props {
     value: string;
     showIconRight?: boolean;
     iconName?: string;
+    pressable?: boolean;
     onPress:(field:string) => void;
 }
 
@@ -19,14 +20,20 @@ export const BtnSelect = ({
     value, 
     showIconRight=false, 
     iconName='help-outline', 
+    pressable=false,
     onPress
 }:Props) => {
     return (
         <Pressable 
-            style={{
-                ...styles.container,
-                borderColor:isFocus ? globalColors.azureBlue : globalColors.softGray
-            }}
+            style={({pressed}) => [
+                {
+                    ...styles.container,
+                    borderColor:isFocus ? globalColors.azureBlue : globalColors.softGray,
+                },
+                pressable 
+                    ?   { backgroundColor:pressed ? globalColors.softGray : globalColors.white }
+                    :   { backgroundColor: globalColors.white }
+            ]}
             onPress={() => onPress(name)}
         >
             <Text style={styles.textBtn}>

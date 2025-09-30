@@ -3,7 +3,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { globalColors } from '@/config/global.styles';
 import { CreateOfferProvider, useCreateOffer } from '@/presentation/context/CreateOfferContext';
-import { CreateCustomOffer, HeaderApp, UploadImageOffer } from '../../components';
+import { CreateCustomOffer, HeaderApp, CreateOfferWithImage } from '../../components';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { CreateOffertLayout } from '../../layouts/createOfferLayout/CreateOffertLayout';
 import { useEffect, useState } from 'react';
@@ -56,7 +56,7 @@ export const ScreenContent = ({navigation}:Props) => {
                     <CreateOffertLayout>
                         {createCustomOffer
                             ?   <CreateCustomOffer />
-                            :   <UploadImageOffer />
+                            :   <CreateOfferWithImage />
                         }     
                     </CreateOffertLayout>
                     <View style={{

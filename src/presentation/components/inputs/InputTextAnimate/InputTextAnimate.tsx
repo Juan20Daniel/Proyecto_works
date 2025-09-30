@@ -2,6 +2,7 @@ import { KeyboardTypeOptions, Pressable, StyleSheet, Text, TextInput, View } fro
 import { InputStatus } from '@/infrestructure/interfaces/input';
 import { globalColors, globalStyles } from '@/config/global.styles';
 import { Ionicons } from '../../icon/Ionicons';
+import { BtnClearInput } from '../../btns/btnClearInput/BtnClearInput';
 
 interface Props {
     label: string;
@@ -95,12 +96,10 @@ export const InputTextAnimate = ({
                 </Pressable>
             }
             {value !== '' &&
-                <Pressable 
-                    style={{...styles.btnRight, ...styles.btnClear }} 
-                    onPress={() => clearInput(name)}
-                >
-                    <Ionicons name='close-outline' color={globalColors.gray}/>
-                </Pressable>
+                <BtnClearInput 
+                    name={name}
+                    action={(name) => clearInput(name)}
+                />
             }
             {(statusError !== null && statusError !== 'valid') &&
                 <View style={styles.boxMessageError}>
@@ -148,11 +147,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         padding: 2,
         zIndex: 1,
-    },
-    btnClear: {
-        backgroundColor: globalColors.lightGray,
-        borderRadius: 15,
-        right: 15,
     },
     btnShowPassword: {
         backgroundColor: globalColors.white,

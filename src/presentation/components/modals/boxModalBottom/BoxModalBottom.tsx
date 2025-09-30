@@ -1,6 +1,6 @@
-import { Modal, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { BtnIcon } from '../../btns/btnIcon/BtnIcon';
+import { Modal, Pressable, StyleSheet, Text, useWindowDimensions } from 'react-native';
 import { globalColors } from '@/config/global.styles';
+import { ModalHeader } from '../modalHeader/ModalHeader';
 
 interface Props {
     title: string;
@@ -25,15 +25,10 @@ export const BoxModalBottom = ({title, visible, children, closeModal}:Props) => 
                     width:isTable ? width - 140 : width-20, 
                     marginHorizontal:isTable ? 70 : 10
                 }}>
-                    <View style={styles.header}>
-                        <Text style={styles.title}>{title}</Text>  
-                        <BtnIcon
-                            iconName='close-outline' 
-                            action={() => {
-                                closeModal && closeModal();
-                            }}
-                        />
-                    </View>
+                    <ModalHeader 
+                        title={title}
+                        action={() => closeModal && closeModal()}
+                    />
                     {children}
                 </Pressable>
             </Pressable>
@@ -53,16 +48,5 @@ const styles = StyleSheet.create({
         paddingVertical: 30,
         borderRadius: 30,
         backgroundColor: globalColors.white,
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 30,
-        paddingBottom: 20,
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold'
     }
 });

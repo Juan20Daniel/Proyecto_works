@@ -21,12 +21,12 @@ export const Offer = ({route}:Props) => {
       <OfferOptionsProvider>
         <View style={styles.container}>
           <BtnClose top={40}  backTo={() => navigation.goBack()} />
-          <GoogleMap 
+          <GoogleMap
             location={{
               latitude: 19.0906368,
-              longitude: -104.2972672 
+              longitude: -104.2972672
             }}
-            height='70%' 
+            height='70%'
           />
           <BottomSheet
             ref={sheetRef}

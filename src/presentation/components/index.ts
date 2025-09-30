@@ -37,4 +37,4 @@ export { Switch } from "./switch/Switch";
 export { TitleApp } from "./titleApp/TitleApp";
 export { UserAvatar } from "./userAvatar/UserAvatar";
 export { UserAccountInformation } from "./userAccountInformation/UserAccountInformation";
-export { UploadImageOffer } from "./uploadImageOffer/UploadImageOffer";
+export { CreateOfferWithImage } from "./createOfferWithImage/CreateOfferWithImage";

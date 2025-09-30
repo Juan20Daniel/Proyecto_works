@@ -1,9 +1,9 @@
-import { DimensionValue, KeyboardTypeOptions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { DimensionValue, KeyboardTypeOptions, StyleSheet, Text, TextInput, View } from 'react-native';
 import { InputStatus } from '@/infrestructure/interfaces/input';
 import { globalColors, globalStyles } from '@/config/global.styles';
 import { useIsTable } from '@/presentation/hooks/useIsTable';
-import { Ionicons } from '../../icon/Ionicons';
 import { Label } from '../../label/Label';
+import { BtnClearInput } from '../../btns/btnClearInput/BtnClearInput';
 
 interface Props {
     label: string;
@@ -66,12 +66,11 @@ export const InputTextBasic = ({
                 }}
             />
             {value !== '' &&
-                <Pressable 
-                    style={styles.btnClear} 
-                    onPress={() => clearInput(name)}
-                >
-                    <Ionicons name='close-outline' color={globalColors.gray}/>
-                </Pressable>
+                <BtnClearInput 
+                    name={name}
+                    top={53}
+                    action={(name) => clearInput(name)}
+                />
             }
             {(statusError !== null && statusError !== 'valid') &&
                 <View style={styles.boxMessageError}>
@@ -99,15 +98,6 @@ const styles = StyleSheet.create({
         paddingLeft: 23,
         fontFamily: globalStyles.fontMonserratMedium,
         fontSize: 15,
-    },
-    btnClear: {
-        position: 'absolute',
-        padding: 2,
-        zIndex: 1,
-        backgroundColor: globalColors.lightGray,
-        borderRadius: 15,
-        right: 20,
-        top: 53
     },
     btnShowPassword: {
         backgroundColor: globalColors.white,

@@ -28,7 +28,11 @@ export const CreateCustomOffer = () => {
     return (
         <>
             <Row>
-                <BtnSelectLogo />
+                <BtnSelectLogo 
+                    name="logoCompany"
+                    value={form.values.logoCompany.value}
+                    onChange={handleChange}
+                />
                 <InputTextBasic 
                     label="Nombre de la empresa"
                     placeholder="Ingresa el nombre de la empresa"

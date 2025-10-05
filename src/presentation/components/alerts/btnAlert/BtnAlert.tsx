@@ -1,4 +1,4 @@
-import { globalStyles } from "@/config/global.styles";
+import { globalStyles } from "@/presentation/globalStyles/global.styles";
 import { Pressable, StyleSheet, Text } from "react-native";
 
 interface Props {

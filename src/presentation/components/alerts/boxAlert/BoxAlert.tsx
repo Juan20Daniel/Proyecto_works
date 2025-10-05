@@ -1,6 +1,6 @@
 import { Modal, StyleSheet, View } from 'react-native';
-import { globalColors } from '@/config/global.styles';
-import { useIsTable } from '@/presentation/hooks/useIsTable';
+import { globalColors } from '@/presentation/globalStyles/global.styles';
+import { useIsTablet } from '@/presentation/hooks/useIsTablet';
 
 interface Props {
     visible: boolean;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const BoxAlert = ({visible, children}:Props) => {
-    const isTable = useIsTable();
+    const isTable = useIsTablet();
     return (
         <Modal visible={visible} transparent animationType='fade'>
             <View style={styles.container}>

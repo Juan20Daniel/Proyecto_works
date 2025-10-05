@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
+import { globalColors, globalStyles } from '@/presentation/globalStyles/global.styles';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { OfferSettingsProvider } from '../../context/OfferSettingsContext';
-import { globalColors, globalStyles } from '@/config/global.styles';
-import { useIsTable } from '../../hooks/useIsTable';
+import { useIsTablet } from '../../hooks/useIsTablet';
 import { 
   Container, 
   HorizontalPagination, 
@@ -22,7 +22,7 @@ const list = [1,2,3,4,5,6,7,8,9];
 export const Profile = ({navigation}:Props) => {
   const [ savedOfferOpModal, setSavedOfferOpModal ] = useState(false);
   const width = useWindowDimensions().width;
-  const isTable = useIsTable();
+  const isTable = useIsTablet();
   return (
     <OfferSettingsProvider>
       <Container>

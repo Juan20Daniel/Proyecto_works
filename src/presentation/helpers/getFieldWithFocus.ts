@@ -1,4 +1,4 @@
-import { InputValue } from "@/infrestructure/interfaces/input";
+import { InputValue } from "../types/input";
 
 export const getFieldWithFocus = (state:Record<string, InputValue>):string => {
     let lastFocus; 

@@ -1,12 +1,10 @@
 import { useReducer, useState } from 'react';
 import { Keyboard, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { globalColors } from '@/presentation/globalStyles/global.styles';
 import { RootStackParamList } from '../../navigators/StackNavigator';
 import { OfferOptionsProvider } from '../../context/OfferOptionsContext';
 import { searchReducer } from '../../reducers/search/search';
-import { globalColors } from '@/config/global.styles';
-import type { AutoCompleteOption } from '@/infrestructure/interfaces/auto-complete-option';
-import type { SearchForm } from '@/infrestructure/interfaces/search-form';
 import { 
     AutoCompleteInput, 
     BtnFooter, 
@@ -16,6 +14,8 @@ import {
     ModalOfferOptions, 
     SearchResultsModal 
 } from '../../components';
+import type { AutoCompleteOption } from '@/presentation/types/auto-complete-option';
+import type { SearchForm } from '@/presentation/types/search-form';
 
 const availableJobs:AutoCompleteOption[] = [
     {id:1, name:'Camionero'},

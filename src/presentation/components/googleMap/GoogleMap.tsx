@@ -1,25 +1,41 @@
-import { useRef, useState } from 'react';
+import { SetStateAction, useRef, useState } from 'react';
 import { DimensionValue, StyleSheet, View} from 'react-native';
 import MapView, { MapPressEvent, Marker, PROVIDER_GOOGLE, Region } from 'react-native-maps';
-import { Location } from '@/infrestructure/interfaces/Location';
-import type { Coords } from '@/infrestructure/interfaces/google-map';
-import { BtnFloat } from '../btns/btnFloat/BtnFloat';
-const zoom = 18;
+import { BtnFloat } from '../ui/btnFloat/BtnFloat';
+import type { Location } from '@/presentation/types/Location';
+import type { Coords } from '@/presentation/types/google-map';
+
+const zoom = 15;
 interface Props {
   initialLocation: Location;
+  mapAction?: 'showLocation' | 'selectLocatin';
   height?: DimensionValue;
+  markerCoords?: Coords | null | undefined;
+  rotateEnabled?:boolean;
+  setMarkerCoords?: React.Dispatch<SetStateAction<Coords | null | undefined>>;
+  onPressMap?: (lat:number, lon:number) => void;
 }
 
-export const GoogleMap = ({initialLocation, height}:Props) => {
+export const GoogleMap = ({
+  initialLocation, 
+  height, 
+  markerCoords,
+  mapAction='showLocation',
+  rotateEnabled=true, 
+  setMarkerCoords, 
+  onPressMap
+}:Props) => {
   const [ markerIsVisible, setMarkerIsVisible ] = useState(true);
-  const [ markerCoords, setMarkerCoords ] = useState<Coords | null>(null);
+
   const mapRef = useRef<MapView>(null);
   const showCoords = (event:MapPressEvent) => {
+    if(!setMarkerCoords || mapAction==='showLocation') return;
     const { coordinate } = event.nativeEvent
     setMarkerCoords(coordinate);
+    if(onPressMap) onPressMap(coordinate.latitude, coordinate.longitude);
   }
   const onRegionChange = (region:Region) => {
-    if(!markerCoords) return;
+    if(!markerCoords || mapAction === 'selectLocatin') return;
     const latMin = region.latitude - region.latitudeDelta / 2;
     const latMax = region.latitude + region.latitudeDelta / 2;
     const lonMin = region.longitude - region.longitudeDelta / 2;
@@ -47,7 +63,7 @@ export const GoogleMap = ({initialLocation, height}:Props) => {
   }
   return (
     <View style={{position: 'relative', height: height??"100%", paddingBottom: 10}}>
-      <View style={{...styles.contentMap, height: height??"100%"}}>
+      <View style={{...styles.contentMap, height: "100%"}}>
         <MapView
           ref={mapRef}
           provider={PROVIDER_GOOGLE}
@@ -55,6 +71,7 @@ export const GoogleMap = ({initialLocation, height}:Props) => {
           onPress={showCoords}
           onRegionChange={onRegionChange}
           toolbarEnabled={false}
+          rotateEnabled={rotateEnabled}
           initialCamera={{
             center: {
               latitude: initialLocation.latitude,

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { BoxAlert } from '../boxAlert/BoxAlert';
 import { BtnAlert } from '../btnAlert/BtnAlert';
-import { globalColors, globalStyles } from '@/config/global.styles';
+import { globalColors, globalStyles } from '@/presentation/globalStyles/global.styles';
 
 interface AlertState {
     visible: boolean;

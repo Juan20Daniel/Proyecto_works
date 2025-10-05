@@ -1,6 +1,6 @@
-import { SearchForm } from "@/infrestructure/interfaces/search-form";
-import { getFieldWithFocus } from "../../helpers/getFieldWithFocus";
+import { SearchForm } from "@/presentation/types/search-form";
 import { SearchActionType } from "./searchActionTypes";
+import { getFieldWithFocus } from "../../helpers/getFieldWithFocus";
 
 export const searchReducer = (state:SearchForm, action:SearchActionType) => {
     switch (action.type) {

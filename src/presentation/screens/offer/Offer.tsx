@@ -3,10 +3,10 @@ import { StyleSheet, View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { StackScreenProps } from "@react-navigation/stack";
+import { globalColors } from "@/presentation/globalStyles/global.styles";
 import { RootStackParamList } from "../../navigators/StackNavigator";
 import { OfferOptionsProvider } from "../../context/OfferOptionsContext";
 import { OfferSettingsProvider } from "../../context/OfferSettingsContext";
-import { globalColors } from "@/config/global.styles";
 import { BtnClose, GoogleMap, OfferDetails, ModalOfferOptions, ModalOfferSettings } from "../../components";
 
 interface Props extends StackScreenProps<RootStackParamList, 'Offer'>{}
@@ -22,11 +22,13 @@ export const Offer = ({route}:Props) => {
         <View style={styles.container}>
           <BtnClose top={40}  backTo={() => navigation.goBack()} />
           <GoogleMap
-            location={{
+            initialLocation={{
               latitude: 19.0906368,
               longitude: -104.2972672
             }}
             height='70%'
+            markerCoords={{latitude:19.0906368, longitude:-104.2972672}}
+            rotateEnabled={false}
           />
           <BottomSheet
             ref={sheetRef}

@@ -1,7 +1,8 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useReducer, useState } from "react";
 import { simpleFormReducer } from "../reducers/simpleForm/simpleForm";
-import { SimpleForm } from "@/infrestructure/interfaces/simple-form";
+
 import { Keyboard } from "react-native";
+import { SimpleForm } from "../types/simple-form";
 
 interface InitialState {
     form:SimpleForm;

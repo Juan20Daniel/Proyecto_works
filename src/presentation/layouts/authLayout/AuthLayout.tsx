@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import { DimensionValue, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { BtnClose, Container } from '../../components';
-import { RootStackParamList } from '../../navigators/StackNavigator';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { globalStyles } from '@/config/global.styles';
+import { globalStyles } from '@/presentation/globalStyles/global.styles';
+import { BtnClose, Container } from '../../components';
+import { RootStackParamList } from '../../navigators/StackNavigator';
 
 interface Props {
     navigation: StackNavigationProp<RootStackParamList>;

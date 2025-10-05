@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useIsTable } from "../../hooks/useIsTable";
-import { BtnBasic, ButtonsChangeForm, Switch } from "../../components";
-import { globalStyles } from "@/config/global.styles";
+import { globalStyles } from "@/presentation/globalStyles/global.styles";
 import { useCreateOffer } from "@/presentation/context/CreateOfferContext";
+import { BtnBasic, ButtonsChangeForm, Switch } from "../../components";
+import { useIsTablet } from "../../hooks/useIsTablet";
 
 interface Props {
     children:React.ReactNode;
@@ -12,7 +12,7 @@ interface Props {
 export const CreateOffertLayout = ({children}:Props) => {
     const [ publishUponCompletion, setPublishUponCompletion ] = useState(false);
     const { createCustomOffer } = useCreateOffer();
-    const isTable = useIsTable();
+    const isTable = useIsTablet();
     return (
         <>
             <Text style={{...styles.title, fontSize: isTable ? 30 : 20}}>

@@ -1,13 +1,13 @@
+import { useEffect, useState } from 'react';
 import { Keyboard, ScrollView, TouchableWithoutFeedback, useWindowDimensions, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { globalColors } from '@/config/global.styles';
+import { globalColors } from '@/presentation/globalStyles/global.styles';
 import { CreateOfferProvider, useCreateOffer } from '@/presentation/context/CreateOfferContext';
+import { useIsTablet } from '@/presentation/hooks/useIsTablet';
 import { CreateCustomOffer, HeaderApp, CreateOfferWithImage } from '../../components';
 import { RootStackParamList } from '../../navigators/StackNavigator';
-import { CreateOffertLayout } from '../../layouts/createOfferLayout/CreateOffertLayout';
-import { useEffect, useState } from 'react';
-import { useIsTable } from '@/presentation/hooks/useIsTable';
+import { CreateOffertLayout } from '../../layouts';
 
 interface Props extends StackScreenProps<RootStackParamList, 'CreateOffer'>{}
 
@@ -24,7 +24,7 @@ export const ScreenContent = ({navigation}:Props) => {
     const { removeFocus, createCustomOffer } = useCreateOffer();
     const { top } = useSafeAreaInsets();
     const width = useWindowDimensions().width;
-    const isTable = useIsTable();
+    const isTable = useIsTablet();
     useEffect(() => {
         const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
             setKeyboardIsShow(true);

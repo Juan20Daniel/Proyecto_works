@@ -1,7 +1,7 @@
 import { SimpleFormActionTypes } from "./simpleFormActionTypes";
 import { expretions } from "@/shared/regex";
+import { SimpleForm } from "@/presentation/types/simple-form";
 import { getFieldWithFocus } from "../../helpers/getFieldWithFocus";
-import type { SimpleForm } from "@/infrestructure/interfaces/simple-form";
 
 export const simpleFormReducer = (state:SimpleForm, action:SimpleFormActionTypes) => {
     switch (action.type) {

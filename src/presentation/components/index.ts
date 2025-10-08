@@ -10,6 +10,7 @@ export { InputSelectSchedule } from "./ui/inputs/inputSelectSchedule/InputSelect
 export { ButtonsChangeForm } from "./ui/buttonsChangeForm/ButtonsChangeForm";
 export { Container } from "./ui/container/Container";
 export { CreateCustomOffer } from "./offer/createCustomOffer/CreateCustomOffer";
+export { CreateOfferWithImage } from "./offer/createOfferWithImage/CreateOfferWithImage";
 export { EmptyListOffers } from "./offer/emptyListOffers/EmptyListOffers";
 export { FilterOffers } from "./offer/filterOffers/FilterOffers";
 export { GoogleMap } from "./googleMap/GoogleMap";
@@ -37,4 +38,3 @@ export { Switch } from "./ui/switch/Switch";
 export { TitleApp } from "./ui/titleApp/TitleApp";
 export { UserAvatar } from "./ui/userAvatar/UserAvatar";
 export { UserAccountInformation } from './ui/userAccountInformation/UserAccountInformation';
-export { CreateOfferWithImage } from "./offer/createOfferWithImage/CreateOfferWithImage";

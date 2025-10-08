@@ -10,7 +10,7 @@ export const OfferInImg = ({hasSeen=false}:Props) => {
     return (
         <Container>
             <Image
-                source={require('../../../assets/publications/imgOffer.jpg')}
+                source={require('../../../../../assets/publications/imgOffer.jpg')}
                 style={{...styles.imgOffer, opacity: hasSeen ? 0.4 : 1}}
             />
             <View style={styles.marker}>

@@ -4,7 +4,7 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { SearchInputMap } from './SearchInputMap';
 import { Coords } from '@/presentation/types/google-map';
 import { AlertState } from '@/presentation/types/alerts';
-import { ConfirmationAlert } from '@/presentation/components/alerts/confirmationAlert/ConfirmationAlert';
+import { ConfirmationAlert } from '@/presentation/components/ui/alerts/confirmationAlert/ConfirmationAlert';
 import { BtnClose } from '@/presentation/components/ui/btnClose/BtnClose';
 import { GoogleMap } from '@/presentation/components/googleMap/GoogleMap';
 
@@ -56,7 +56,7 @@ export const ModalMap = ({visible, closeModal}:Props) => {
           onPressMap={getCoords}
         />
         <BottomSheet
-          snapPoints={[180]}
+          snapPoints={[150]}
           enableDynamicSizing={false}
           handleIndicatorStyle={{backgroundColor:'white'}}
         >

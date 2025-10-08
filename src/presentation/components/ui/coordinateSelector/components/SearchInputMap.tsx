@@ -1,20 +1,32 @@
-import { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState, useEffect, useRef } from 'react';
+import { Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { globalColors } from '@/presentation/globalStyles/global.styles';
+import { useIsTablet } from '@/presentation/hooks/useIsTablet';
 import { Ionicons } from '../../icon/Ionicons';
 import { BtnClearInput } from '../../btnClearInput/BtnClearInput';
-import { useIsTablet } from '@/presentation/hooks/useIsTablet';
 
 export const SearchInputMap = () => {
     const [ valueToSearch, setValueToSearch ] = useState('');
+    const inputRef = useRef<TextInput>(null);
     const isTable = useIsTablet();
+    useEffect(() => {
+        const hideKeyboard = Keyboard.addListener('keyboardDidHide', () => {
+            if(!inputRef.current) return;
+            inputRef.current.blur();
+        });
+
+        return () => {
+            hideKeyboard.remove();
+        }
+    },[]);
     return (
         <View style={{paddingHorizontal: isTable ? 30 : 10}}>
             <View style={styles.boxInput}>
                 <View style={{...styles.boxIconSearch, width:isTable ? 80 : 50,}}>
                     <Ionicons name='search-outline'size={30} color={globalColors.gray} />
                 </View>
-                <TextInput 
+                <TextInput
+                    ref={inputRef}
                     placeholder='Ingresa una dirección'
                     style={{...styles.inputText, paddingLeft: isTable ? 80 : 50,}}
                     value={valueToSearch}

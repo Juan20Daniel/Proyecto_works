@@ -4,8 +4,8 @@ import { globalColors } from '@/presentation/globalStyles/global.styles';
 import { RootStackParamList } from '@/presentation/navigators/StackNavigator';
 import { useOfferSettings } from '@/presentation/context/OfferSettingsContext';
 import { useIsTablet } from '@/presentation/hooks/useIsTablet';
-import { BtnIcon } from '@/presentation/components/btns/btnIcon/BtnIcon';
 import { Ionicons } from '@/presentation/components/ui/icon/Ionicons';
+import { BtnIcon } from '@/presentation/components/ui/btnIcon/BtnIcon';
 
 interface Props {
     hasSeen?:boolean;
@@ -29,7 +29,7 @@ export const OfferPersonalizedSmall = ({hasSeen=false}:Props) => {
             >
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                     <Image 
-                        source={require('../../../assets/publications/logo2.jpg')}
+                        source={require('../../../../../assets/publications/logo2.jpg')}
                         style={{...styles.logoCompany, width:isTable? 120 : 100, height:isTable? 90 : 70,}}
                     />
                     <BtnIcon iconName='ellipsis-vertical' action={() => {

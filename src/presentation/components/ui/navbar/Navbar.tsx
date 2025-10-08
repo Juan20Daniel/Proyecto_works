@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { TitleApp } from '../ui/titleApp/TitleApp';
-import { NavLink } from './NavLink';
 import { globalColors, globalStyles } from '@/presentation/globalStyles/global.styles';
+import { NavLink } from './NavLink';
+import { TitleApp } from '../titleApp/TitleApp';
 
 export const Navbar = () => {
     const {top} = useSafeAreaInsets();

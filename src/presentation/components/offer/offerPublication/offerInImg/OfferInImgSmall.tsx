@@ -3,7 +3,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { globalColors } from '@/presentation/globalStyles/global.styles';
 import { RootStackParamList } from '@/presentation/navigators/StackNavigator';
 import { Ionicons } from '@/presentation/components/ui/icon/Ionicons';
-import { BtnIcon } from '@/presentation/components/btns/btnIcon/BtnIcon';
+import { BtnIcon } from '@/presentation/components/ui/btnIcon/BtnIcon';
+
 
 interface Props {
     hasSeen?:boolean;
@@ -28,7 +29,7 @@ export const OfferInImgSmall = ({hasSeen=false, openOptions}:Props) => {
                 ]}
             >
                 <Image
-                    source={require('../../../assets/publications/imgOffer.jpg')}
+                    source={require('../../../../../assets/publications/imgOffer.jpg')}
                     style={{
                         ...styles.imgOffer, 
                         opacity: hasSeen ? 0.4 : 1, objectFit:'cover',

@@ -11,7 +11,7 @@ export const OfferPersonalized = ({hasSeen=false}:Props) => {
        <Container>
             <View style={{...styles.boxOffer, opacity:hasSeen ? 0.7 : 1,}}>
                 <Image 
-                    source={require('../../../assets/publications/logoIndustry.png')}
+                    source={require('../../../../../assets/publications/logoIndustry.png')}
                     style={{...styles.companyLogo, opacity:hasSeen ? 0.1 : 1}}
                 />
                 <Text style={styles.titleJop}>Chofer de camión</Text>

@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
-import { UserAvatar } from '../ui/userAvatar/UserAvatar';
 import { BtnEdith } from './components/BtnEdith';
 import { AcountInformation } from './components/AcountInformation';
+import { UserAvatar } from '../userAvatar/UserAvatar';
 
 interface Props {
     username: string;

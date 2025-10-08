@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 import { PictureAdapter } from '@/config/adapters/picture-adapter';
 import { useIsTablet } from '@/presentation/hooks/useIsTablet';
-import { AlertMessage } from '@/presentation/components/alerts/alertMessage/AlertMessage';
+import { AlertMessage } from '@/presentation/components/ui/alerts/alertMessage/AlertMessage';
 import { Placeholder } from './Placeholder';
 
 export const UploadImageOffer = () => {

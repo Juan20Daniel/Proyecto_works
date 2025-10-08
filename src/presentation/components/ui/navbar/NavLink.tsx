@@ -1,8 +1,8 @@
 import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '@/presentation/navigators/StackNavigator';
 import { Ionicons } from '../icon/Ionicons';
-import { RootStackParamList } from '../../navigators/StackNavigator';
 
 interface Props {
     iconName: string;

@@ -17,7 +17,7 @@ export const UserAvatar = ({username, userImage}:Props) => {
         }}>
             {userImage 
                 ?   <Image
-                        source={require('../../../assets/user/userImg.jpg')}
+                        source={require('../../../../assets/user/userImg.jpg')}
                         style={styles.img}
                     />
                 :   <Text style={{...styles.text, fontSize:isTable ? 50 : 35}}>

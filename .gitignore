@@ -4,7 +4,7 @@
 
 android/app/src/main/AndroidManifest.xml
 android/app/src/main/res/values/styles.xml
-
+.env
 # Xcode
 #
 build/

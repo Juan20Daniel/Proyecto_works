@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { globalColors } from '@/presentation/globalStyles/global.styles';
-import { InputTextBasic } from '../InputTextBasic/InputTextBasic';
-import { BtnBasic } from '../../btns/btnBasic.tsx/BtnBasic';
-import { ItemList } from '@/infrestructure/interfaces/input-list-manager';
-import { ListItems } from './components/ListItems';
 import { useIsTablet } from '@/presentation/hooks/useIsTablet';
+import { ItemList } from '@/presentation/types/input-list-manager';
+import { ListItems } from './components/ListItems';
+import { InputTextBasic } from '../InputTextBasic/InputTextBasic';
+import { BtnBasic } from '../../btnBasic.tsx/BtnBasic';
 
 interface Props {
     title: string;

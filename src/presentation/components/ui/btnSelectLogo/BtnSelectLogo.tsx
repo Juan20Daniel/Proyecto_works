@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { PictureAdapter } from '@/config/adapters/picture-adapter';
 import { BtnSelect } from '../btnSelect.tsx/BtnSelect';
 import { BoxBtnSelect } from '../boxBtnSelect/BoxBtnSelect';
-import { AlertMessage } from '../../alerts/alertMessage/AlertMessage';
+import { AlertMessage } from '../alerts/alertMessage/AlertMessage';
 
 interface Props {
     name:string;

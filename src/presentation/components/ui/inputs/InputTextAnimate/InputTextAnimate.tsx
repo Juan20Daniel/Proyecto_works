@@ -1,8 +1,9 @@
 import { KeyboardTypeOptions, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { InputStatus } from '@/infrestructure/interfaces/input';
 import { globalColors, globalStyles } from '@/presentation/globalStyles/global.styles';
+import { InputStatus } from '@/presentation/types/input';
 import { Ionicons } from '../../icon/Ionicons';
-import { BtnClearInput } from '../../btns/btnClearInput/BtnClearInput';
+import { BtnClearInput } from '../../btnClearInput/BtnClearInput';
+
 
 interface Props {
     label: string;

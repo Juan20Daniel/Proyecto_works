@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useIsTablet } from '@/presentation/hooks/useIsTablet';
-import { BtnSelect } from '../../btns/btnSelect.tsx/BtnSelect';
-import { Label } from '../../ui/label/Label';
 import { BoxModal } from './components/Modal';
+import { Label } from '../../label/Label';
+import { BtnSelect } from '../../btnSelect.tsx/BtnSelect';
 
 interface Props {
     name: string;

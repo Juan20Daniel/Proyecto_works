@@ -2,9 +2,9 @@ import { StyleSheet, View } from 'react-native';
 import { useOfferSettings } from '@/presentation/context/OfferSettingsContext';
 import { useOfferOptions } from '@/presentation/context/OfferOptionsContext';
 import { useIsTablet } from '@/presentation/hooks/useIsTablet';
-import { BtnIcon } from '../../../../btns/btnIcon/BtnIcon';
-import { LogoCompany } from './components/LogoCompany';
+import { BtnIcon } from '@/presentation/components/ui/btnIcon/BtnIcon';
 import { CompanyNameAndDate } from './components/CompanyNameAndDate';
+import { LogoCompany } from './components/LogoCompany';
 
 interface Props {
   typeUser: 'user'|'owner';
@@ -25,7 +25,7 @@ export const Header = ({typeUser}:Props) => {
         <CompanyNameAndDate />
       </View>
       {typeUser === 'user' 
-        ? <BtnIcon 
+        ? <BtnIcon
             iconName='ellipsis-vertical' 
             marginRight={isTablet ? 10 : 5} action={() => {
               toggleOptios && toggleOptios()

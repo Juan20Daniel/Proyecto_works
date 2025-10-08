@@ -1,9 +1,10 @@
 import { View } from 'react-native';
-import { InputSelectOption } from '@/infrestructure/interfaces/input-select-option';
-import { ListOptions } from './components/ListOptions';
 import { useIsTablet } from '@/presentation/hooks/useIsTablet';
-import { Label } from '../../ui/label/Label';
-import { BtnSelect } from '../../btns/btnSelect.tsx/BtnSelect';
+import { InputSelectOption } from '@/presentation/types/input-select-option';
+import { ListOptions } from './components/ListOptions';
+import { Label } from '../../label/Label';
+import { BtnSelect } from '../../btnSelect.tsx/BtnSelect';
+
 
 interface Props {
     label:string;
@@ -36,7 +37,7 @@ export const InputSelect = ({
     return (
         <View style={{width: isTable ? '50%' : '100%', paddingHorizontal:10}}>
             <View style={{position: 'relative', flex:1}}>
-                <Label 
+                <Label
                     text={label}
                     isFocus={isFocus}
                     statusError={null}

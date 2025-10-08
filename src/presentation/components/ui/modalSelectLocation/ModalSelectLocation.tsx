@@ -4,7 +4,8 @@ import { useIsTablet } from '@/presentation/hooks/useIsTablet';
 import { HeaderApp } from '../headerApp/HeaderApp';
 import { ItemLocation } from './components/ItemLocation';
 import { ListBtnLocations } from './components/ListBtnLocations';
-import { BtnFooter } from '../../btns/btnFooter/BtnFooter';
+import { BtnFooter } from '../btnFooter/BtnFooter';
+
 
 interface Props {
     visible: boolean;
@@ -38,7 +39,7 @@ export const ModalSelectLocation = ({visible, closeModal}:Props) => {
                     <ItemLocation id={10} state='Jalisco' city='Mazatlan' />
                     <View style={{width:'100%', height: 100}} />
                 </ScrollView>
-                <BtnFooter 
+                <BtnFooter
                     value='Filtrar'
                     iconName='funnel-outline'
                     action={() => {}}

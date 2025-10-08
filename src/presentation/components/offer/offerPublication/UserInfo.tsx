@@ -2,7 +2,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { globalColors, globalStyles } from '@/presentation/globalStyles/global.styles';
 import { useOfferOptions } from '@/presentation/context/OfferOptionsContext';
 import { UserAvatar } from '../../ui/userAvatar/UserAvatar';
-import { BtnIcon } from '../../btns/btnIcon/BtnIcon';
+import { BtnIcon } from '../../ui/btnIcon/BtnIcon';
+
 
 export const UserInfo = () => {
   const {toggleOptios} = useOfferOptions();
@@ -16,7 +17,7 @@ export const UserInfo = () => {
           </Text>
           <Text style={styles.textDate}>Fecha de publicación: 02/09/2023</Text>
         </View>
-        <BtnIcon 
+        <BtnIcon
           iconName='ellipsis-vertical'
           iconColor='#767676'
           action={() => {

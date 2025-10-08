@@ -1,6 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import { globalColors, globalStyles } from '../../globalStyles/global.styles';
-import { useIsTablet } from '../../hooks/useIsTablet';
+import { useIsTablet } from '@/presentation/hooks/useIsTablet';
+import { globalColors, globalStyles } from '@/presentation/globalStyles/global.styles';
+
 
 interface Props {
     message: string;
@@ -15,7 +16,7 @@ export const EmptyListOffers = ({message, valueBtn, action}:Props) => {
         <View style={styles.container}>
             <View style={{...styles.content, borderRadius:isTable?40:20}}>
                 <Image 
-                    source={require('../../../assets/notData.png')}
+                    source={require('../../../../assets/notData.png')}
                     style={{...styles.image, width:isTable ? 250 : 140, height: isTable ? 150 : 90}}
                 />
                 <Text style={styles.message}>{message}</Text>

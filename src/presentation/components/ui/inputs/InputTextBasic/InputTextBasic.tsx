@@ -1,9 +1,10 @@
 import { DimensionValue, KeyboardTypeOptions, StyleSheet, Text, TextInput, View } from 'react-native';
-import { InputStatus } from '@/infrestructure/interfaces/input';
 import { globalColors, globalStyles } from '@/presentation/globalStyles/global.styles';
 import { useIsTablet } from '@/presentation/hooks/useIsTablet';
-import { Label } from '../../ui/label/Label';
-import { BtnClearInput } from '../../btns/btnClearInput/BtnClearInput';
+import { InputStatus } from '@/presentation/types/input';
+import { Label } from '../../label/Label';
+import { BtnClearInput } from '../../btnClearInput/BtnClearInput';
+
 
 interface Props {
     label: string;
@@ -46,7 +47,7 @@ export const InputTextBasic = ({
                 ?   boxWidth
                 :   isTable ? '50%' : '100%'
         }}>
-            <Label 
+            <Label
                 text={label}
                 isFocus={isFocus}
                 statusError={statusError}
@@ -66,7 +67,7 @@ export const InputTextBasic = ({
                 }}
             />
             {value !== '' &&
-                <BtnClearInput 
+                <BtnClearInput
                     name={name}
                     top={53}
                     action={(name) => clearInput(name)}

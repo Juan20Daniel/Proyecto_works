@@ -8,11 +8,15 @@ import {
     ListOffers,
     ModalSelectLocation,
     ModalOfferOptions,
-    Filter
+    FilterOffers,
+    
 } from '../../components';
+
+import { GOOGLE_MAP_KEY } from '@env';
 
 export const Home = () => {
     const [ listLocationsModal, setListLocationModal ] = useState(false);
+    console.log(GOOGLE_MAP_KEY);
     return (
         <OfferOptionsProvider>
             <Container marginTop={0}>
@@ -23,7 +27,7 @@ export const Home = () => {
                     showsVerticalScrollIndicator={false}
                 >
                     <AdsCarrucel />
-                    <Filter setListLocationModal={setListLocationModal} />
+                    <FilterOffers setListLocationModal={setListLocationModal} />
                     <ListOffers />
                 </ScrollView>
             </Container>

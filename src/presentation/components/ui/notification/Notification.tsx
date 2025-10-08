@@ -1,14 +1,16 @@
-import { Image, Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { globalColors } from '@/presentation/globalStyles/global.styles';
 import { RootStackParamList } from '@/presentation/navigators/StackNavigator';
-import { BtnIcon } from '../../btns/btnIcon/BtnIcon';
 import { Info } from './components/Info';
 import { useIsTablet } from '@/presentation/hooks/useIsTablet';
 import { ImgCompany } from './components/ImgCompany';
+import { BtnIcon } from '../btnIcon/BtnIcon';
+
 interface Props {
     openNotificationOptions:() => void;
 }
+
 export const Notification = ({openNotificationOptions}:Props) => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const isTablet = useIsTablet();

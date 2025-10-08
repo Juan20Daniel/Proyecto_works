@@ -8,15 +8,11 @@ import {
     ListOffers,
     ModalSelectLocation,
     ModalOfferOptions,
-    FilterOffers,
-    
+    FilterOffers
 } from '../../components';
-
-import { GOOGLE_MAP_KEY } from '@env';
 
 export const Home = () => {
     const [ listLocationsModal, setListLocationModal ] = useState(false);
-    console.log(GOOGLE_MAP_KEY);
     return (
         <OfferOptionsProvider>
             <Container marginTop={0}>

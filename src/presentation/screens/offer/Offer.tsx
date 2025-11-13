@@ -8,19 +8,21 @@ import { RootStackParamList } from "../../navigators/StackNavigator";
 import { OfferOptionsProvider } from "../../context/OfferOptionsContext";
 import { OfferSettingsProvider } from "../../context/OfferSettingsContext";
 import { BtnClose, GoogleMap, OfferDetails, ModalOfferOptions, ModalOfferSettings } from "../../components";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface Props extends StackScreenProps<RootStackParamList, 'Offer'>{}
 
 export const Offer = ({route}:Props) => {
   const { typeUser } = route.params;
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { top } = useSafeAreaInsets();
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = ['40%', '85%'];
   return (
     <OfferSettingsProvider>
       <OfferOptionsProvider>
         <View style={styles.container}>
-          <BtnClose top={40}  backTo={() => navigation.goBack()} />
+          <BtnClose top={top}  backTo={() => navigation.goBack()} />
           <GoogleMap
             initialLocation={{
               latitude: 19.0906368,

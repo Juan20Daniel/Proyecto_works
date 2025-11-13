@@ -5,6 +5,7 @@ import { HeaderApp } from '../headerApp/HeaderApp';
 import { ItemLocation } from './components/ItemLocation';
 import { ListBtnLocations } from './components/ListBtnLocations';
 import { BtnFooter } from '../btnFooter/BtnFooter';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 interface Props {
@@ -13,10 +14,11 @@ interface Props {
 }
 
 export const ModalSelectLocation = ({visible, closeModal}:Props) => {
+    const { top } = useSafeAreaInsets();
     const isTablet = useIsTablet();
     return (
         <Modal visible={visible} transparent={false} animationType='slide'>
-            <View style={styles.container}>
+            <View style={{...styles.container, marginTop: top}}>
                 <HeaderApp 
                     subText='Ubicaciónes'
                     actionBtnClose={() => closeModal()} 

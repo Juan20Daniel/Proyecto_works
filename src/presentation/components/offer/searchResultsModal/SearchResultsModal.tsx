@@ -4,6 +4,7 @@ import { HeaderApp } from '../../ui/headerApp/HeaderApp';
 import { ListOffers } from '../listOffers/ListOffers';
 import { ActiveAlert } from '../../ui/activeAlert/ActiveAlert';
 import { BtnIcon } from '../../ui/btnIcon/BtnIcon';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface Props {
     visible:boolean;
@@ -11,11 +12,12 @@ interface Props {
 }
 
 export const SearchResultsModal = ({visible, closeModal}:Props) => {
+    const { top } = useSafeAreaInsets();
     const width = useWindowDimensions().width;
     const isTable = width>500;
     return (
         <Modal visible={visible} transparent={false} animationType='slide'>
-            <View style={styles.container}>
+            <View style={{...styles.container, marginTop: top}}>
                 <HeaderApp
                     alignTitle='flex-start'
                     subText='Chofer en tecoman' 

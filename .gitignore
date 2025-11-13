@@ -1,7 +1,7 @@
 # OSX
 #
 .DS_Store
-
+ios/works/AppDelegate.swift
 android/app/src/main/AndroidManifest.xml
 android/app/src/main/res/values/styles.xml
 .env
